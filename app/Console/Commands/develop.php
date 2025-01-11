@@ -2,8 +2,12 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Category;
+use App\Models\Product;
+use App\Models\Profile;
 use Illuminate\Console\Command;
 use App\Models\User;
+use GuzzleHttp\Promise\Create;
 
 class develop extends Command
 {
@@ -27,14 +31,15 @@ class develop extends Command
     public function handle()
     {
 
-        $new_user = User::create([
+        // $someuser = User::find(2)->profile;
+        // $someprofile = Profile::find(3)->user;
+        $category = Product::find(43)->category;
 
-            'name' =>'TestUser2',
-            'email'=>'testuser2@mail.com',
-            'password'=>'1234',
-        ]);
+        dump($category->toArray());
 
-        dump(User::find(1)->toArray());
-        //
+    
+    // Product::factory()->count(50)->create();
+
     }
+
 }

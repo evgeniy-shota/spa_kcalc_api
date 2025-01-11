@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Events\User\CreatedEvent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -10,6 +12,13 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+
+    protected static function booted()
+    {
+        static::created(function($model){
+            event(new CreatedEvent($model));
+        });
+    }
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
@@ -51,6 +60,6 @@ class User extends Authenticatable
 
     public function profile():HasOne
     {
-        return $this->hasOne(User::class);
+        return $this->hasOne(Profile::class);
     }
 }
