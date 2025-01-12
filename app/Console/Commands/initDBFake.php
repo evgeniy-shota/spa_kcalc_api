@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Activity;
 use Illuminate\Console\Command;
 
 use App\Models\User;
@@ -34,5 +35,7 @@ class initDBFake extends Command
         Category::factory()->has(
             Product::factory()->count(10)
         )->count(5)->create();
+
+        Activity::factory()->count(10)->create();
     }
 }

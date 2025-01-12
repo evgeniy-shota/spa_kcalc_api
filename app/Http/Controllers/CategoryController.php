@@ -20,7 +20,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // return $request;
     }
 
     /**
@@ -28,7 +28,7 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return response()->json(Category::find($id)->products);
     }
 
     /**

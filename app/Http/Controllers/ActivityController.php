@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
+use App\Models\Activity;
 use Illuminate\Http\Request;
+use Illuminate\Notifications\Action;
 
-class ProductController extends Controller
+class ActivityController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,7 @@ class ProductController extends Controller
     public function index()
     {
         return response()->json(
-            Product::all()
+            Activity::all()
         );
     }
 
@@ -31,7 +32,7 @@ class ProductController extends Controller
     public function show(string $id)
     {
         return response()->json(
-            Product::find($id)
+            Activity::find($id)
         );
     }
 
