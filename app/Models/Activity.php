@@ -7,13 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Activity extends Model
 {
-    protected $fillible =[
+    protected $fillable =[
         'name',
         'description',
         'type_of_load',
         'load_from_duration',
         'load_from_quantity',
         'energy_cost',
+    ];
+
+    protected $hidden =[
+        'created_at',
+        'updated_at',
     ];
     /** @use HasFactory<\Database\Factories\ActivityFactory> */
     use HasFactory;

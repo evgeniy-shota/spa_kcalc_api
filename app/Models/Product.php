@@ -9,17 +9,22 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Product extends Model
 {
 
-    protected $fillible =[
+    protected $fillable =[
         'category_id',
         'name',
         'product_composition',
         'description',
         'calory',
-        'protein',
+        'proteins',
         'carbohydrates',
-        'fat',
+        'fats',
         'nutrients_and_vitamins',
         'is_visible',
+    ];
+
+    protected $hidden =[
+        'created_at',
+        'updated_at',
     ];
     /** @use HasFactory<\Database\Factories\ProductFactory> */
     use HasFactory;

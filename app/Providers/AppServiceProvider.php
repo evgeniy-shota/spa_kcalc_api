@@ -7,6 +7,7 @@ use Illuminate\Support\ServiceProvider;
 
 use App\Events\User\CreatedEvent;
 use App\Listeners\User\CreateProfileListener;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,5 +28,7 @@ class AppServiceProvider extends ServiceProvider
             CreatedEvent::class,
             CreateProfileListener::class,
         );
+
+        // JsonResource::withoutWrapping();
     }
 }

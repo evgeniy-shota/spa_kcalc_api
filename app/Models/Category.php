@@ -9,9 +9,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Category extends Model
 {
 
-    protected $fillinle = [
+    protected $fillable = [
         'name',
         'is_visible',
+    ];
+
+    protected $hidden =[
+        'created_at',
+        'updated_at',
     ];
 
     /** @use HasFactory<\Database\Factories\CategoryFactory> */

@@ -17,10 +17,10 @@ return new class extends Migration
             $table->string('name');
             $table->json('product_composition')->nullable();
             $table->string('description')->nullable();
-            $table->float('calory');
-            $table->float('proteins');
-            $table->float('carbohydrates');
-            $table->float('fats');
+            $table->float('calory')->default(0);
+            $table->float('proteins')->default(0);
+            $table->float('carbohydrates')->default(0);
+            $table->float('fats')->default(0);
             $table->json('nutrients_and_vitamins')->nullable();
             $table->boolean('is_visible')->default(true);
 
