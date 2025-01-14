@@ -33,13 +33,14 @@ class develop extends Command
 
         // $someuser = User::find(2)->profile;
         // $someprofile = Profile::find(3)->user;
-        $category = Product::find(43)->category;
+        User::create([
+            'name'=> 'TestUser',
+            'email'=> 'tuser@mail.com',
+            'password'=> 'qwerty',
+        ]);
 
-        dump($category->toArray());
 
-    
-    // Product::factory()->count(50)->create();
+        // Product::factory()->count(50)->create();
 
     }
-
 }
