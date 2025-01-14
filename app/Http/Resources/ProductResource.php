@@ -22,10 +22,10 @@ class ProductResource extends JsonResource
             'product_composition' => $this->product_composition,
             'description' => $this->description,
             'calory' => $this->calory,
-            'protein' => $this->protein,
+            'proteins' => $this->proteins,
             'carbohydrates' => $this->carbohydrates,
-            'fat' => $this->fat,
-            'nutrients_and_vitamins' => $this->nutrients_and_vitamins,
+            'fats' => $this->fats,
+            'nutrients_and_vitamins' => json_decode($this->nutrients_and_vitamins),
             'is_visible' => $this->is_visible,
         ];
     }
