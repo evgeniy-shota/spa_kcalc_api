@@ -10,7 +10,7 @@ class LoginController extends Controller
 {
     public function authentificate(Request $request): RedirectResponse
     {
-        dump($request);
+        echo "shiet";
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
