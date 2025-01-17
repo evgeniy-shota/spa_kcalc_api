@@ -30,12 +30,12 @@ class initDBFake extends Command
      */
     public function handle()
     {
-        User::factory()->count(5)->create();
+        // User::factory()->count(5)->create();
 
-        Category::factory()->has(
-            Product::factory()->count(10)
-        )->count(5)->create();
+        // Category::factory()->has(
+        //     Product::factory()->count(10)
+        // )->count(5)->create();
 
-        Activity::factory()->count(10)->create();
+        Activity::factory()->count(20)->create();
     }
 }

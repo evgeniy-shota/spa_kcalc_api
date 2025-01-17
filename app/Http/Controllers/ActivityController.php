@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ActivityCollection;
 use App\Models\Activity;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Action;
@@ -13,9 +14,7 @@ class ActivityController extends Controller
      */
     public function index()
     {
-        return response()->json(
-            Activity::all()
-        );
+        return new ActivityCollection(Activity::all());
     }
 
     /**
@@ -31,9 +30,7 @@ class ActivityController extends Controller
      */
     public function show(string $id)
     {
-        return response()->json(
-            Activity::find($id)
-        );
+        return new ActivityCollection(Activity::find($id));
     }
 
     /**

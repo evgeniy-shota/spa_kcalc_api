@@ -6,7 +6,7 @@ use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 // Route::apiResource('/api/categories/{id}', CategoryController::class);
-Route::apiResource('/api/categories', CategoryController::class);
+Route::apiResource('/api/categories', CategoryController::class)->middleware('auth:sanctum');;
 // ->middleware('auth:sanctum');
 // Route::apiResource('/api/categories', [CategoryController::class, 'index']);
 
