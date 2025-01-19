@@ -7,6 +7,7 @@ use Illuminate\Console\Command;
 
 use App\Models\User;
 use App\Models\Category;
+use App\Models\Diet;
 use App\Models\Product;
 
 class initDBFake extends Command
@@ -36,6 +37,11 @@ class initDBFake extends Command
         //     Product::factory()->count(10)
         // )->count(5)->create();
 
-        Activity::factory()->count(20)->create();
+        // Activity::factory()->count(20)->create();
+
+        $users = User::all();
+        for ($i = 0, $size = count($users); $i < $size; $i++) {
+            Diet::factory()->count(5)->for($users[$i])->create();
+        }
     }
 }

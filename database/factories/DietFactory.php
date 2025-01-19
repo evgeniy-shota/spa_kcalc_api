@@ -17,7 +17,15 @@ class DietFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'user_id' => fake(),
+            'name' => fake()->text(20),
+            'description' => fake()->text(64),
+            'products' => (function () {
+                return json_encode(['key1' => 'val1', 'key2' => 'val2', 'key3' => 'val3']);
+            }),
+            'summ_val' => (function () {
+                return json_encode(['key1' => 'val1', 'key2' => 'val2', 'key3' => 'val3']);
+            }),
         ];
     }
 }

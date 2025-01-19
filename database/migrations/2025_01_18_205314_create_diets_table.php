@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('diets', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->index()->constrained('users');
+            $table->string('name');
+            $table->string('description');
+            $table->json('products');
+            $table->json('summ_val');
             $table->timestamps();
         });
     }
