@@ -22,7 +22,11 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request;
+        $newCategory = Category::create([
+            'name' => $request->str('name'),
+            'is_visible' => $request->boolean('is_visible'),
+        ]);
+        return response()->json([$newCategory], 201);
     }
 
     /**
@@ -39,7 +43,12 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $updatedCategory = Category::updateOrCreate(
+            ['id' => '$id'],
+            ['name' => $request->name, 'is_vilible' => $request->is_visible]
+        );
+
+        return response()->json($updatedCategory, 201);
     }
 
     /**
@@ -47,6 +56,6 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        return response()->json(Category::destroy($id), 200);
     }
 }

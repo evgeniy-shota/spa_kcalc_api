@@ -18,8 +18,8 @@ class DietResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
-            'products' => $this->products,
-            'summ_val' => $this->summ_val,
+            'products' => json_decode($this->products),
+            'summ_val' => json_decode($this->summ_val),
         ];
     }
 }

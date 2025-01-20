@@ -21,10 +21,10 @@ class DietFactory extends Factory
             'name' => fake()->text(20),
             'description' => fake()->text(64),
             'products' => (function () {
-                return json_encode(['key1' => 'val1', 'key2' => 'val2', 'key3' => 'val3']);
+                return json_encode([fake()->word(3, true) => fake()->numberBetween(0, 300), fake()->word(3, true) => fake()->numberBetween(0, 300), fake()->word(3, true) => fake()->numberBetween(0, 300)]);
             }),
             'summ_val' => (function () {
-                return json_encode(['key1' => 'val1', 'key2' => 'val2', 'key3' => 'val3']);
+                return json_encode(['kcal' => fake()->numberBetween(0, 500), 'prot' => fake()->numberBetween(0, 30), 'carb' => fake()->numberBetween(0, 70), 'fats' => fake()->numberBetween(0, 50)]);
             }),
         ];
     }

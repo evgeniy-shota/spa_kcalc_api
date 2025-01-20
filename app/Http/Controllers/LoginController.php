@@ -17,16 +17,16 @@ class LoginController extends Controller
         ]);
 
         if (Auth::attempt($credentials)){
-            $request->session()->regenerate();
+            //при запросе в postman, по какой-то причине, ошибка 'Session store not set on request'
+            // $request->session()->regenerate();
+            session()->regenerate();
 
-            return response()->json([
-                $credentials
-            ]);
+            return new UserResource(Auth::user());
         }
 
         return response()->json([
-            'fuckinh laravel'
-        ]);
+            'error'=>"Incorrect email or password"
+        ], 401);
     }
 
     // public function authentificate(Request $request): RedirectResponse
