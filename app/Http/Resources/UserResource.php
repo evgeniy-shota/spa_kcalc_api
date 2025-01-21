@@ -19,6 +19,7 @@ class UserResource extends JsonResource
         return [
             'email' => $this->email,
             'name' => $this->name,
+            'is_banned' => $this->is_banned,
             'created_at' => $this->created_at,
         ];
     }
