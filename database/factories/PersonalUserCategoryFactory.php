@@ -2,12 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Activity>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\PersonalUserCategory>
  */
-class ActivityFactory extends Factory
+class PersonalUserCategoryFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,9 +18,8 @@ class ActivityFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->text(20),
-            'description' => fake()->text(40),
-            'energy_cost' => fake()->numberBetween(10, 100)
+            'name' => fake()->text(15),
+            'description' => fake()->text(50),
         ];
     }
 }

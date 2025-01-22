@@ -17,7 +17,7 @@ class User extends Authenticatable
 
     protected static function booted()
     {
-        static::created(function($model){
+        static::created(function ($model) {
             event(new CreatedEvent($model));
         });
     }
@@ -61,12 +61,23 @@ class User extends Authenticatable
         ];
     }
 
-    public function profile():HasOne
+    public function profile(): HasOne
     {
         return $this->hasOne(Profile::class);
     }
 
-    public function diets():HasMany{
+    public function diets(): HasMany
+    {
         return $this->hasMany(Diet::class);
+    }
+
+    public function personalCategories(): HasMany
+    {
+        return $this->hasMany(PersonalUserCategory::class);
+    }
+
+    public function personalProducts(): HasMany
+    {
+        return $this->hasMany(PersonalUserProduct::class);
     }
 }

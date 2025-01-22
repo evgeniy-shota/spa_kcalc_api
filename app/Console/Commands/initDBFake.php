@@ -31,17 +31,11 @@ class initDBFake extends Command
      */
     public function handle()
     {
-        // User::factory()->count(5)->create();
 
         // Category::factory()->has(
         //     Product::factory()->count(10)
         // )->count(5)->create();
 
-        // Activity::factory()->count(20)->create();
-
-        $users = User::all();
-        for ($i = 0, $size = count($users); $i < $size; $i++) {
-            Diet::factory()->count(5)->for($users[$i])->create();
-        }
+        // 
     }
 }
