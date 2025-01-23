@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Diet extends Model
 {
@@ -15,9 +16,19 @@ class Diet extends Model
     ];
     // protected $hiddden = [];
     /** @use HasFactory<\Database\Factories\DietFactory> */
-    use HasFactory;
+    use HasFactory, Searchable;
 
-    public function user(){
+    public function toSearchableArray(): array
+    {
+        $array = [
+            'name' => $this->name,
+        ];
+
+        return $array;
+    }
+
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 }

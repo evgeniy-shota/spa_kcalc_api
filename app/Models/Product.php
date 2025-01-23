@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Laravel\Scout\Searchable;
 
 class Product extends Model
 {
 
-    protected $fillable =[
+    protected $fillable = [
         'category_id',
         'name',
         'product_composition',
@@ -22,14 +23,23 @@ class Product extends Model
         'is_visible',
     ];
 
-    protected $hidden =[
+    protected $hidden = [
         'created_at',
         'updated_at',
     ];
     /** @use HasFactory<\Database\Factories\ProductFactory> */
-    use HasFactory;
+    use HasFactory, Searchable;
 
-    public function category():BelongsTo
+    public function toSearchableArray(): array
+    {
+        $array = [
+            'name' => $this->name
+        ];
+
+        return $array;
+    }
+
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }

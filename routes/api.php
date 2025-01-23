@@ -7,6 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -24,8 +25,10 @@ Route::apiResource('/diets', DietController::class)->middleware('auth:sanctum');
 
 Route::apiResource('/users', UserController::class)->middleware('auth:sanctum');
 
+Route::get('/search', [SearchController::class, 'search']);
+
 Route::post('/login', [LoginController::class, 'authentificate']);
 
-Route::get('/logout', [LogoutController::class, 'logout'])->middleware('auth:sanctum');;
+Route::get('/logout', [LogoutController::class, 'logout'])->middleware('auth:sanctum');
 
 Route::post('/registration', [RegistrationController::class, 'registration']);

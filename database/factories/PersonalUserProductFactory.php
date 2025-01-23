@@ -16,26 +16,28 @@ class PersonalUserProductFactory extends Factory
      */
     public function definition(): array
     {
+        $product_composition = json_encode([
+            fake()->text(10) => fake()->numberBetween(1, 10),
+            fake()->text(10) => fake()->numberBetween(1, 10),
+            fake()->text(10) => fake()->numberBetween(1, 10),
+            fake()->text(10) => fake()->numberBetween(1, 10),
+        ]);
+        $nutrients_and_vitamins = json_encode([
+            fake()->text(10) => fake()->numberBetween(1, 10),
+            fake()->text(10) => fake()->numberBetween(1, 10),
+            fake()->text(10) => fake()->numberBetween(1, 10),
+            fake()->text(10) => fake()->numberBetween(1, 10),
+        ]);
         return [
             'personal_user_category_id' => fake()->numberBetween(1, 3),
             'name' => fake()->text(20),
-            'product_composition' => json_encode(fn() => [
-                fake()->text(10) => fake()->numberBetween(1, 10),
-                fake()->text(10) => fake()->numberBetween(1, 10),
-                fake()->text(10) => fake()->numberBetween(1, 10),
-                fake()->text(10) => fake()->numberBetween(1, 10),
-            ]),
+            'product_composition' => $product_composition,
             'description' => fake()->text(35),
             'calory' => fake()->numberBetween(0, 500),
             'protein' => fake()->numberBetween(0, 35),
             'carbohydrates' => fake()->numberBetween(0, 70),
             'fat' => fake()->numberBetween(0, 45),
-            'nutrients_and_vitamins' => json_encode(fn() => [
-                fake()->text(10) => fake()->numberBetween(1, 10),
-                fake()->text(10) => fake()->numberBetween(1, 10),
-                fake()->text(10) => fake()->numberBetween(1, 10),
-                fake()->text(10) => fake()->numberBetween(1, 10),
-            ]),
+            'nutrients_and_vitamins' => $nutrients_and_vitamins,
         ];
     }
 }
