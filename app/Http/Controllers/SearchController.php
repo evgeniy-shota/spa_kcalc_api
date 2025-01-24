@@ -10,8 +10,7 @@ class SearchController extends Controller
 {
     public function search(Request $request)
     {
-        $products = Product::search($request->queryString)->get();
-
+        $products = Product::search($request->searchQuery)->get();
 
         return new SearchCollection($products);
 
