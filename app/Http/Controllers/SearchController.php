@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\DietCollection;
+use App\Http\Resources\PersonalUserProductCollection;
+use App\Http\Resources\ProductCollection;
 use App\Http\Resources\SearchCollection;
+use App\Models\Diet;
+use App\Models\PersonalUserProduct;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -12,10 +17,24 @@ class SearchController extends Controller
     {
         $products = Product::search($request->searchQuery)->get();
 
-        return new SearchCollection($products);
+        // add condition to where user_id=auth::user
+        $personalProducts = PersonalUserProduct::search($request->searchQuery)->get();
 
-        return response()->json([
-            'result' => $products,
-        ], 200);
+        // add condition to where user_id=auth::user
+        $diets = Diet::search($request->searchQuery)->get();
+
+        return [
+            new ProductCollection($products),
+            new PersonalUserProductCollection($personalProducts),
+            new DietCollection($diets)
+        ];
+
+        // return new SearchCollection([
+        //     'products' => $products,
+        //     'personalProducts' => $personalProducts,
+        //     'diets' => $diets
+        // ]);
+
+        // return new SearchCollection($products);
     }
 }

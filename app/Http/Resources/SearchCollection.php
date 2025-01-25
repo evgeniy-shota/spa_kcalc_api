@@ -14,8 +14,18 @@ class SearchCollection extends ResourceCollection
      */
     public function toArray(Request $request): array
     {
+        // dd($this->collection['products']);
+
         return [
             'data' => $this->collection,
         ];
+
+        // return [
+        //     'data' => [
+        //         'products' => $this->collection['products'],
+        //         // 'personalProducts' => $this->collection['personalProducts'],
+        //         // 'diets' => $this->collection['diets'],
+        //     ],
+        // ];
     }
 }

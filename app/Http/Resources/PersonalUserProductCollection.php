@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class DietCollection extends ResourceCollection
+class PersonalUserProductCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.
@@ -14,9 +14,8 @@ class DietCollection extends ResourceCollection
      */
     public function toArray(Request $request): array
     {
-        
         return [
-            'diets' => $this->collection,
+            'personalUserProducts' => $this->collection,
         ];
     }
 }
