@@ -27,6 +27,7 @@ class ProductResource extends JsonResource
             'fats' => $this->fats,
             'nutrients_and_vitamins' => json_decode($this->nutrients_and_vitamins),
             'is_visible' => $this->is_visible,
+            'type' => 'product'
         ];
     }
 }

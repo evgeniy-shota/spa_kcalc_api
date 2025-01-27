@@ -14,8 +14,12 @@ class ProductCollection extends ResourceCollection
      */
     public function toArray(Request $request): array
     {
+        // var_dump(count($this->collection))
+
         return [
-            'products' => $this->collection,
+            'data' => $this->collection,
+            'count' => count($this->collection),
+            'label' => 'Продукты'
         ];
     }
 }

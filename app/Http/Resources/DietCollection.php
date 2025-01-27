@@ -16,7 +16,9 @@ class DietCollection extends ResourceCollection
     {
         
         return [
-            'diets' => $this->collection,
+            'data' => $this->collection,
+            'count' => count($this->collection),
+            'label' => 'Диеты'
         ];
     }
 }

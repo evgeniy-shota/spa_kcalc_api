@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('personal_user_categories', function (Blueprint $table) {
+        Schema::create('trademarks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->index()->constrained('users');
-            $table->string('name', 128)->require();
-            $table->string('description', 256)->default('');
+            $table->string('name', 255);
+            $table->string('description', 255)->nullable();
+            $table->string('logo_path', 255)->nullable();
             $table->boolean('is_visible')->default(true);
+            
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('personal_user_categories');
+        Schema::dropIfExists('trademarks');
     }
 };

@@ -2,13 +2,12 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\PersonalUserCategory>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Trademark>
  */
-class PersonalUserCategoryFactory extends Factory
+class TrademarkFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,8 +17,7 @@ class PersonalUserCategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->text(15),
-            'description' => fake()->text(50),
+            //
         ];
     }
 }

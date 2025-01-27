@@ -14,15 +14,23 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->foreignId('category_id')->index()->constrained('categories');
-            $table->string('name');
-            $table->json('product_composition')->nullable();
-            $table->string('description')->nullable();
-            $table->float('calory')->default(0);
-            $table->float('proteins')->default(0);
-            $table->float('carbohydrates')->default(0);
-            $table->float('fats')->default(0);
-            $table->json('nutrients_and_vitamins')->nullable();
+            $table->foreignId('user_id')->nullable()->index()->constrained('users');
+            $table->boolean('is_personal')->default(false);
             $table->boolean('is_visible')->default(true);
+            $table->string('name', 255);
+            $table->string('manufacturer', 128)->nullable();
+            $table->string('country_of_manufacture', 64)->nullable();
+            $table->foreignId('trademark_id')->nullable()->index()->constrained('trademarks');
+            $table->string('description', 255)->nullable();
+            $table->enum('units_of_measurement', ['weight', 'qantity', 'volume'])->default('weight');
+            $table->float('quantity_to_calculate')->default(100);
+            $table->float('quantity')->default(100);
+            $table->json('product_composition')->nullable();
+            $table->float('kcalory');
+            $table->float('proteins');
+            $table->float('carbohydrates');
+            $table->float('fats');
+            $table->json('nutrients_and_vitamins')->nullable();
 
             $table->timestamps();
         });

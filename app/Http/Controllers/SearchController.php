@@ -25,9 +25,10 @@ class SearchController extends Controller
         $diets = Diet::search($request->searchQuery)->get();
 
         return [
-            new ProductCollection($products),
-            new PersonalUserProductCollection($personalProducts),
-            new DietCollection($diets)
+            'products' => new ProductCollection($products),
+            'personalUserProducts' => new PersonalUserProductCollection($personalProducts),
+            'diets' => new DietCollection($diets),
+            'searchQuery' => $request->searchQuery,
         ];
 
         // return new SearchCollection([

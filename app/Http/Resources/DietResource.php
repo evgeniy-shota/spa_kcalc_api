@@ -20,6 +20,7 @@ class DietResource extends JsonResource
             'description' => $this->description,
             'products' => json_decode($this->products),
             'summ_val' => json_decode($this->summ_val),
+            'type' => 'diet'
         ];
     }
 }

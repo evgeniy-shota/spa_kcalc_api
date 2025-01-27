@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Laravel\Scout\Searchable;
 
 class Product extends Model
@@ -12,15 +13,22 @@ class Product extends Model
 
     protected $fillable = [
         'category_id',
+        'is_visible',
         'name',
-        'product_composition',
+        'manufacturer',
+        'country_of_manufacture',
+        'trademark_id',
         'description',
-        'calory',
+        'units_of_measurement',
+        'quantity_to_calculate',
+        'quantity',
+        'product_composition',
+        'kcalory',
         'proteins',
         'carbohydrates',
         'fats',
         'nutrients_and_vitamins',
-        'is_visible',
+        'tag_id',
     ];
 
     protected $hidden = [
@@ -42,5 +50,15 @@ class Product extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function trademark(): BelongsTo
+    {
+        return $this->belongsTo(Trademark::class);
+    }
+
+    public function tags(): BelongsToMany
+    {
+        return $this->belongsToMany(Tag::class);
     }
 }
