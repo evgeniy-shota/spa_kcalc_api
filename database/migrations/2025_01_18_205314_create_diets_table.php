@@ -16,8 +16,8 @@ return new class extends Migration
             $table->foreignId('user_id')->index()->constrained('users');
             $table->string('name', 255);
             $table->string('description', 255);
-            $table->json('products');
-            $table->json('summ_val');
+            $table->json('products')->nullable();
+            $table->json('summ_val')->nullable();
 
             $table->timestamps();
         });

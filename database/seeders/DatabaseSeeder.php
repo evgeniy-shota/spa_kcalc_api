@@ -18,8 +18,6 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             DietSeeder::class,
             ActivitySeeder::class,
-            PersonalUserCategorySeeder::class,
-            PersonalUserProductSeeder::class
         ]);
     }
 }

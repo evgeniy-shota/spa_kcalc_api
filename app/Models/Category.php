@@ -11,10 +11,11 @@ class Category extends Model
 
     protected $fillable = [
         'name',
+        'is_personal',
         'is_visible',
     ];
 
-    protected $hidden =[
+    protected $hidden = [
         'created_at',
         'updated_at',
     ];

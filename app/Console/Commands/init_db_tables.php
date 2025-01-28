@@ -37,7 +37,7 @@ class init_db_tables extends Command
         $file = Items::fromFile('/home/evgeniy/ssd/learnPhp/laravel/spa_kcalc_api/db_data/prod_res.json');
 
         foreach ($file as $category => $data) {
-            
+
             $new_cat = Category::create([
                 'name' => $category,
             ]);
@@ -76,19 +76,17 @@ class init_db_tables extends Command
                         $prod_nutr = $val;
                         break;
                 }
-
             }
 
             Product::create([
                 'name' => $product_name,
                 'category_id' => $prod_cat_id,
-                'calory' => $prod_calory,
+                'kcalory' => $prod_calory,
                 'proteins' => $prod_prot,
                 'carbohydrates' => $prod_carb,
                 'fats' => $prod_fats,
-                'nutrients_and_vitamins' => json_encode($prod_nutr,JSON_UNESCAPED_UNICODE),
+                'nutrients_and_vitamins' => json_encode($prod_nutr, JSON_UNESCAPED_UNICODE),
             ]);
-
         }
     }
 }

@@ -17,7 +17,9 @@ class TrademarkFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => fake()->text(15),
+            'description' => fake()->text(40),
+            'logo_path' => 'logo/' . fake()->text(10) . '.webp',
         ];
     }
 }

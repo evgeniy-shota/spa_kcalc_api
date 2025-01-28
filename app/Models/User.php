@@ -34,7 +34,8 @@ class User extends Authenticatable
         'email',
         'password',
         'permission',
-        'status',
+        'is_banned',
+        'is_admin',
     ];
 
     /**
@@ -69,15 +70,5 @@ class User extends Authenticatable
     public function diets(): HasMany
     {
         return $this->hasMany(Diet::class);
-    }
-
-    public function personalCategories(): HasMany
-    {
-        return $this->hasMany(PersonalUserCategory::class);
-    }
-
-    public function personalProducts(): HasMany
-    {
-        return $this->hasMany(PersonalUserProduct::class);
     }
 }

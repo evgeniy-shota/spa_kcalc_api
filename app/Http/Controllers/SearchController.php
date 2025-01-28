@@ -18,15 +18,12 @@ class SearchController extends Controller
         $products = Product::search($request->searchQuery)->get();
 
         // add condition to where user_id=auth::user
-        $personalProducts = PersonalUserProduct::search($request->searchQuery)->get();
-
         // add condition 
         // Diet::search($request->searchQuery)->where('user_id',...)->get();
         $diets = Diet::search($request->searchQuery)->get();
 
         return [
             'products' => new ProductCollection($products),
-            'personalUserProducts' => new PersonalUserProductCollection($personalProducts),
             'diets' => new DietCollection($diets),
             'searchQuery' => $request->searchQuery,
         ];
