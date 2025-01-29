@@ -26,6 +26,7 @@ class SearchController extends Controller
             'products' => new ProductCollection($products),
             'diets' => new DietCollection($diets),
             'searchQuery' => $request->searchQuery,
+            'totalCountSearchResult' => count($products->toArray()) + count($diets->toArray()),
         ];
 
         // return new SearchCollection([
