@@ -1,0 +1,56 @@
+<?php
+
+namespace Database\Factories;
+
+use App\Models\Product;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\DayliRation>
+ */
+class DailyRationFactory extends Factory
+{
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition(): array
+    {
+        $users = User::all();
+        $products = Product::all();
+        $product1 = fake()->randomElement($products);
+        $product2 = fake()->randomElement($products);
+        $product3 = fake()->randomElement($products);
+
+        return [
+            'time_of_use' => fake()->time(),
+            'user_id' => fake()->randomElement($users),
+            'description' => fake()->text(20),
+            'products' => json_encode([
+                json_encode([
+                    'id' => $product1->id,
+                    'name' => $product1->name,
+                    'weight' => fake()->numberBetween(100, 300),
+                ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
+                json_encode([
+                    'id' => $product2->id,
+                    'name' => $product2->name,
+                    'weight' => fake()->numberBetween(100, 300),
+                ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
+                json_encode([
+                    'id' => $product3->id,
+                    'name' => $product3->name,
+                    'weight' => fake()->numberBetween(100, 300),
+                ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
+            ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
+            'ration_summary' => json_encode([
+                'kcalory' => fake()->numberBetween(100, 500),
+                'carbohydrates' => fake()->numberBetween(20, 70),
+                'proteins' => fake()->numberBetween(6, 25),
+                'fats' => fake()->numberBetween(0, 50),
+            ]),
+        ];
+    }
+}

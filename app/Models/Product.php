@@ -57,6 +57,11 @@ class Product extends Model
         return $this->belongsTo(Trademark::class);
     }
 
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function tags(): BelongsToMany
     {
         return $this->belongsToMany(Tag::class);

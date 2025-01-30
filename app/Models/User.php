@@ -67,8 +67,23 @@ class User extends Authenticatable
         return $this->hasOne(Profile::class);
     }
 
+    public function products(): HasMany
+    {
+        return $this->hasMany(Product::class);
+    }
+
+    public function categories(): HasMany
+    {
+        return $this->hasMany(Category::class);
+    }
+
     public function diets(): HasMany
     {
         return $this->hasMany(Diet::class);
+    }
+
+    public function dailyRations(): HasMany
+    {
+        return $this->hasMany(DailyRation::class);
     }
 }
