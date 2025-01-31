@@ -19,9 +19,18 @@ class DailyRationController extends Controller
         return new DailyRationResource(DailyRation::find($id));
     }
 
-    public function store(Request $request) {}
+    public function store(Request $request)
+    {
+        dd($request->products);
+    }
 
-    public function update(Request $request) {}
+    public function update(Request $request, string $id)
+    {
+        dd([
+            'id' => $request->daily_ration,
+            'prodcts' => $request->products,
+        ]);
+    }
 
     public function destroy(string $id) {}
 }

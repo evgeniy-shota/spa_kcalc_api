@@ -17,11 +17,13 @@ class DailyRationResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
+            // 'name' => $this->name,
             'user_id' => $this->user_id,
             'description' => $this->description,
-            'products' => $this->products,
-            'ration_summary' => $this->ration_summary,
+            // 'products' => $this->products,
+            // including ration products, $this->products  ==  DailyRation->products 
+            'products' => DailyRationProductResource::collection($this->products),
+            // 'ration_summary' => $this->ration_summary,
             'date' => date_format($this->created_at, 'd-m-Y'),
         ];
     }

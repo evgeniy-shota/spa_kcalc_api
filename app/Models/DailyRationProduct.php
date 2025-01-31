@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class DailyRationProduct extends Model
 {
@@ -11,6 +12,7 @@ class DailyRationProduct extends Model
     use HasFactory;
 
     protected $fillable = [
+        'time_of_use',
         'daily_ration_id',
         'product_id',
         'name',
@@ -20,4 +22,9 @@ class DailyRationProduct extends Model
         'carbohydrates',
         'fats',
     ];
+
+    public function dailyRation(): BelongsTo
+    {
+        return $this->belongsTo(DailyRation::class);
+    }
 }

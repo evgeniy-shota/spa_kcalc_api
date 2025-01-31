@@ -17,6 +17,12 @@ class ProductCollection extends ResourceCollection
         // var_dump(count($this->collection))
 
         return [
+            'data' => $this->collection->additional(['short_output' => true]),
+            'count' => count($this->collection),
+            'label' => 'Продукты'
+        ];
+
+        return [
             'data' => $this->collection,
             'count' => count($this->collection),
             'label' => 'Продукты'

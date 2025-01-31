@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('daily_ration_products', function (Blueprint $table) {
             $table->id();
             $table->foreignId('daily_ration_id')->index()->constrained('daily_rations');
-            $table->foreignId('product_id')->index()->constrained();
+            $table->foreignId('product_id')->index()->constrained('products');
+            $table->time('time_of_use');
             $table->string('name', 255);
             $table->integer('quantity')->default(100);
             $table->float('kcalory');

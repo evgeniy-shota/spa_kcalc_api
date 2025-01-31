@@ -14,6 +14,7 @@ class ProductResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        dump($request->short_output);
         // return parent::toArray($request);
         return [
             'id' => $this->id,
@@ -35,6 +36,16 @@ class ProductResource extends JsonResource
             'nutrients_and_vitamins' => json_decode($this->nutrients_and_vitamins),
 
             'type' => 'product'
+        ];
+
+        return [
+            "id" => $this->id,
+            "name" =>  $this->name,
+            "quantity" => $this->quantity,
+            "kcalory" =>  $this->kcalory,
+            "proteins" => $this->proteins,
+            "carbohydrates" =>  $this->carbohydrates,
+            "fats" => $this->fats,
         ];
     }
 }
