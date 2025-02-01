@@ -29,7 +29,7 @@ Route::apiResource('/users', UserController::class)->middleware('auth:sanctum');
 
 Route::apiResource('/daily-rations', DailyRationController::class);
 
-Route::get('/search', [SearchController::class, 'search']);
+Route::get('/search', [SearchController::class, 'search'])->name('search');
 
 Route::post('/login', [LoginController::class, 'authentificate']);
 

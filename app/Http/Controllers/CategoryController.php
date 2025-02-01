@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Http\Resources\CategoryCollection;
+use App\Http\Resources\ProductCollection;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -35,7 +36,8 @@ class CategoryController extends Controller
     public function show(string $id)
     {
         // return response()->json(Category::find($id)->products);
-        return new CategoryCollection(Category::find($id)->products);
+        // return new CategoryCollection(Category::find($id)->products);
+        return new ProductCollection(Category::find($id)->products);
     }
 
     /**

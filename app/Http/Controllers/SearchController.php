@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\DietCollection;
 use App\Http\Resources\PersonalUserProductCollection;
 use App\Http\Resources\ProductCollection;
+use App\Http\Resources\ProductResource;
 use App\Http\Resources\SearchCollection;
 use App\Models\Diet;
 use App\Models\PersonalUserProduct;

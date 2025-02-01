@@ -7,6 +7,8 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProductResource extends JsonResource
 {
+
+
     /**
      * Transform the resource into an array.
      *
@@ -14,8 +16,26 @@ class ProductResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        dump($request->short_output);
+
+
+        // dd($request->route()->getName());
+
+        $currentRout = $request->route()->getName();
+        // dump($request->short_output);
         // return parent::toArray($request);
+
+        if (in_array($currentRout, ['products.index', 'categories.show', 'search'])) {
+            return [
+                "id" => $this->id,
+                "name" =>  $this->name,
+                "quantity" => $this->quantity,
+                "kcalory" =>  $this->kcalory,
+                "proteins" => $this->proteins,
+                "carbohydrates" =>  $this->carbohydrates,
+                "fats" => $this->fats,
+            ];
+        }
+
         return [
             'id' => $this->id,
             'category_id' => $this->category_id,
@@ -35,17 +55,7 @@ class ProductResource extends JsonResource
             'fats' => $this->fats,
             'nutrients_and_vitamins' => json_decode($this->nutrients_and_vitamins),
 
-            'type' => 'product'
-        ];
-
-        return [
-            "id" => $this->id,
-            "name" =>  $this->name,
-            "quantity" => $this->quantity,
-            "kcalory" =>  $this->kcalory,
-            "proteins" => $this->proteins,
-            "carbohydrates" =>  $this->carbohydrates,
-            "fats" => $this->fats,
+            'type' => 'product',
         ];
     }
 }
