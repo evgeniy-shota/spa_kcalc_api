@@ -14,6 +14,7 @@ class DailyRationProductResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        //добавить ценногсть на грам
         return [
             'id' => $this->id,
             'time_of_use' => $this->time_of_use,

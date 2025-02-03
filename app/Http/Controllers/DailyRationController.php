@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Resources\DailyRationCollection;
 use App\Http\Resources\DailyRationResource;
 use App\Models\DailyRation;
+use App\Models\DailyRationProduct;
 use Illuminate\Http\Request;
+use Mockery\Undefined;
 
 class DailyRationController extends Controller
 {
@@ -26,10 +28,19 @@ class DailyRationController extends Controller
 
     public function update(Request $request, string $id)
     {
-        dd([
-            'id' => $request->daily_ration,
-            'prodcts' => $request->products,
-        ]);
+
+        $ration = DailyRation::updateOrCreate(['id' => $id], $request->ration);
+
+        DailyRationProduct::destroy($request->productsForDelete);
+
+        foreach ($request->products as $product) {
+            if (array_key_exists('id', $product)) {
+                DailyRationProduct::updateOrCreate(['id' => $product['id']], $product);
+            } else {
+                DailyRationProduct::create($product);
+            }
+        }
+        return new DailyRationResource($ration);
     }
 
     public function destroy(string $id) {}
