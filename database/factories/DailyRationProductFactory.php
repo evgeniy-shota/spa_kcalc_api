@@ -29,10 +29,10 @@ class DailyRationProductFactory extends Factory
             'product_id' => $randomProduct->id,
             'name' => $randomProduct->name,
             'quantity' => $randomQuantity,
-            'kcalory' => round(($randomProduct->kcalory / $randomProduct->quantity) * $randomQuantity, 1),
-            'proteins' => round(($randomProduct->proteins / $randomProduct->quantity) * $randomQuantity, 1),
-            'carbohydrates' => round(($randomProduct->carbohydrates / $randomProduct->quantity) * $randomQuantity, 1),
-            'fats' => round(($randomProduct->fats / $randomProduct->quantity) * $randomQuantity, 1),
+            'kcalory_per_unit' => round($randomProduct->kcalory / $randomProduct->quantity_to_calculate, 1),
+            'proteins_per_unit' => round($randomProduct->proteins / $randomProduct->quantity_to_calculate, 1),
+            'carbohydrates_per_unit' => round($randomProduct->carbohydrates / $randomProduct->quantity_to_calculate, 1),
+            'fats_per_unit' => round($randomProduct->fats / $randomProduct->quantity_to_calculate, 1),
         ];
     }
 }

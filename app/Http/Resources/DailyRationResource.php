@@ -24,11 +24,11 @@ class DailyRationResource extends JsonResource
             'fats' => 0,
         ];
 
-        foreach (iterator_to_array($products) as $products) {
-            $rationEnyrgyValue['kcalory'] += $products->kcalory;
-            $rationEnyrgyValue['proteins'] += $products->proteins;
-            $rationEnyrgyValue['carbohydrates'] += $products->carbohydrates;
-            $rationEnyrgyValue['fats'] += $products->fats;
+        foreach (iterator_to_array($products) as $product) {
+            $rationEnyrgyValue['kcalory'] += $product->kcalory_per_unit * $product->quantity;
+            $rationEnyrgyValue['proteins'] += $product->proteins_per_unit * $product->quantity;
+            $rationEnyrgyValue['carbohydrates'] += $product->carbohydrates_per_unit * $product->quantity;
+            $rationEnyrgyValue['fats'] += $product->fats_per_unit * $product->quantity;
         }
 
         return [

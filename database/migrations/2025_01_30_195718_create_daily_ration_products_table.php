@@ -18,10 +18,10 @@ return new class extends Migration
             $table->time('time_of_use');
             $table->string('name', 255);
             $table->integer('quantity')->default(100);
-            $table->float('kcalory');
-            $table->float('proteins');
-            $table->float('carbohydrates');
-            $table->float('fats');
+            $table->float('kcalory_per_unit');
+            $table->float('proteins_per_unit');
+            $table->float('carbohydrates_per_unit');
+            $table->float('fats_per_unit');
             $table->timestamps();
         });
     }

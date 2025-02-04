@@ -28,6 +28,7 @@ class ProductResource extends JsonResource
             return [
                 "id" => $this->id,
                 "name" =>  $this->name,
+                "quantity_to_calculate" => $this->quantity_to_calculate,
                 "quantity" => $this->quantity,
                 "kcalory" =>  $this->kcalory,
                 "proteins" => $this->proteins,

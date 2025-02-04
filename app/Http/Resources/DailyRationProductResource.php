@@ -22,10 +22,10 @@ class DailyRationProductResource extends JsonResource
             'product_id' => $this->product_id,
             'name' => $this->name,
             'quantity' => $this->quantity,
-            'kcalory' => $this->kcalory,
-            'proteins' => $this->proteins,
-            'carbohydrates' => $this->carbohydrates,
-            'fats' => $this->fats,
+            'kcalory_per_unit' => $this->kcalory_per_unit,
+            'proteins_per_unit' => $this->proteins_per_unit,
+            'carbohydrates_per_unit' => $this->carbohydrates_per_unit,
+            'fats_per_unit' => $this->fats_per_unit,
         ];
     }
 }

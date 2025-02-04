@@ -17,10 +17,10 @@ class DailyRationProduct extends Model
         'product_id',
         'name',
         'quantity',
-        'kcalory',
-        'proteins',
-        'carbohydrates',
-        'fats',
+        'kcalory_per_unit',
+        'proteins_per_unit',
+        'carbohydrates_per_unit',
+        'fats_per_unit',
     ];
 
     public function dailyRation(): BelongsTo
