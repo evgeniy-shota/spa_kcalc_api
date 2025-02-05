@@ -27,7 +27,7 @@ Route::apiResource('/diets', DietController::class)->middleware('auth:sanctum');
 
 Route::apiResource('/users', UserController::class)->middleware('auth:sanctum');
 
-Route::apiResource('/daily-rations', DailyRationController::class);
+Route::apiResource('/daily-rations', DailyRationController::class)->middleware('auth:sanctum');
 
 Route::get('/search', [SearchController::class, 'search'])->name('search');
 

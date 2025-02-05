@@ -26,9 +26,9 @@ class DailyRationFactory extends Factory
 
         return [
             // 'time_of_use' => fake()->time(),
-            'user_id' => fake()->randomElement($users),
+            // 'user_id' => fake()->randomElement($users),
             'description' => fake()->text(20),
-            // 'products' => ,
+            // 'products' => , 
             // 'ration_summary' => json_encode([
             //     'kcalory' => fake()->numberBetween(100, 500),
             //     'carbohydrates' => fake()->numberBetween(20, 70),

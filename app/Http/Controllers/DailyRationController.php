@@ -6,7 +6,9 @@ use App\Http\Resources\DailyRationCollection;
 use App\Http\Resources\DailyRationResource;
 use App\Models\DailyRation;
 use App\Models\DailyRationProduct;
+// use Illuminate\Container\Attributes\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Mockery\Undefined;
 
 class DailyRationController extends Controller
@@ -18,7 +20,11 @@ class DailyRationController extends Controller
 
     public function show(string $id)
     {
-        return new DailyRationResource(DailyRation::find($id));
+        $ration = DailyRation::where('user_id', Auth::user()->id)->whereDate('created_at', $id)->get();
+        // dd($userRations);
+        // $ration = $userRations->get();
+        // dd($ration);
+        return new DailyRationResource($ration[0]);
     }
 
     public function store(Request $request)
