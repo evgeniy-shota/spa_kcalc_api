@@ -15,6 +15,7 @@ class DailyRation extends Model
 
     protected $fillable = [
         // 'time_of_use',
+        'user_id',
         'description',
         // 'products',
         // 'ration_summary',

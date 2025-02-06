@@ -15,14 +15,20 @@ class DailyRationController extends Controller
 {
     public function index()
     {
-        return new DailyRationCollection(DailyRation::all());
+        return new DailyRationCollection(DailyRation::where('user_id', Auth::user()->id)->get());
     }
 
     public function show(string $id)
     {
-        $ration = DailyRation::where('user_id', Auth::user()->id)->whereDate('created_at', $id)->get();
+        $user_id = Auth::user()->id;
+        $ration = DailyRation::where('user_id', $user_id)->whereDate('created_at', $id)->get();
         // dd($userRations);
         // $ration = $userRations->get();
+        if (count($ration) == 0) {
+            return new DailyRationResource(DailyRation::create([
+                'user_id' => $user_id,
+            ]));
+        }
         // dd($ration);
         return new DailyRationResource($ration[0]);
     }

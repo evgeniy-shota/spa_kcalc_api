@@ -9,6 +9,7 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\StatisticController;
 use App\Http\Controllers\UserController;
 use App\Models\DailyRation;
 use Illuminate\Http\Request;
@@ -30,6 +31,13 @@ Route::apiResource('/users', UserController::class)->middleware('auth:sanctum');
 Route::apiResource('/daily-rations', DailyRationController::class)->middleware('auth:sanctum');
 
 Route::get('/search', [SearchController::class, 'search'])->name('search');
+
+Route::controller(StatisticController::class)->group(
+    function () {
+        Route::get('/statistic', 'index');
+        Route::get('/statistic/{resource}', 'show');
+    }
+)->name('statistic');
 
 Route::post('/login', [LoginController::class, 'authentificate']);
 
