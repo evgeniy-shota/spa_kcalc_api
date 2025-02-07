@@ -23,12 +23,20 @@ class StatisticController extends Controller
 
             // ];
 
+            $ration_stat[$i] = [
+                'id' => $rations[$i]->id,
+                //date format
+                'date' => $rations[$i]->created_at,
+                'data' => [],
+            ];
+
             for ($j = 0, $sizeJ = count($products); $j < $sizeJ; $j++) {
-                $ration_stat[$i][$j] = [
-                    'kcalory' => $products[$j]['kcalory_per_unit'] * $products[$j]['quantity'],
-                    'proteins' => $products[$j]['proteins_per_unit'] * $products[$j]['quantity'],
-                    'carbohydrates' => $products[$j]['carbohydrates_per_unit'] * $products[$j]['quantity'],
-                    'fats' => $products[$j]['fats_per_unit'] * $products[$j]['quantity'],
+                $ration_stat[$i]['data'][$j] = [
+                    'time' => $products[$j]['time_of_use'],
+                    'kcalory' => round($products[$j]['kcalory_per_unit'] * $products[$j]['quantity'], 1),
+                    'proteins' => round($products[$j]['proteins_per_unit'] * $products[$j]['quantity'], 1),
+                    'carbohydrates' => round($products[$j]['carbohydrates_per_unit'] * $products[$j]['quantity'], 1),
+                    'fats' => round($products[$j]['fats_per_unit'] * $products[$j]['quantity'], 1),
                 ];
             }
 
@@ -41,8 +49,8 @@ class StatisticController extends Controller
             // ];
         }
 
-        dd($ration_stat);
-        return response()->json('index', 200);
+        // dd($ration_stat);
+        return response()->json($ration_stat, 200);
     }
 
     public function show(string $resource)
