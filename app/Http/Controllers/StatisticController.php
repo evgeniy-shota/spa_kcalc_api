@@ -70,7 +70,6 @@ class StatisticController extends Controller
 
     public function index(Request $request)
     {
-        // $user_id = Auth::user()->id;
         $user_id = 3;
 
         if ($request->fromMonth != null) {
@@ -88,14 +87,11 @@ class StatisticController extends Controller
         }
 
         if ($request->fromDay != null) {
-            // dump();
             $rations = DailyRation::where('user_id', 3)->where("created_at", '>=', $request->fromDay)->where("created_at", '<=', $request->toDay)->oldest()->get();
 
             return response()->json($this->prepareRationsStatistic($rations), 200);
         }
 
-        // $ration_statistics = $this->prepareRationsStatistic($rations);
-        // dd($ration_stat);
         return response()->json([], 404);
     }
 
