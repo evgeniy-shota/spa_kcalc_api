@@ -8,6 +8,8 @@ use App\Models\Profile;
 use Illuminate\Console\Command;
 use App\Models\User;
 use GuzzleHttp\Promise\Create;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class develop extends Command
 {
@@ -33,11 +35,6 @@ class develop extends Command
 
         // $someuser = User::find(2)->profile;
         // $someprofile = Profile::find(3)->user;
-        User::create([
-            'name'=> 'TestUser',
-            'email'=> 'tuser@mail.com',
-            'password'=> 'qwerty',
-        ]);
 
 
         // Product::factory()->count(50)->create();

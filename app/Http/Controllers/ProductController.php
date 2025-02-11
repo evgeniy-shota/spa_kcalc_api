@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\ProductCollection;
 use App\Http\Resources\ProductResource;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -25,7 +27,44 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = Auth::user();
+
+        if (!$user) {
+            return response()->json('Unauthorized request...', 401);
+        }
+
+        $category = Category::create([
+            'name' => $request->category['name'],
+            'user_id' => $user->id,
+            'description' => $request->category['description'],
+            'is_personal' => true,
+        ]);
+
+        $nutrAndVit = $request->product['nutrients_and_vitamins'];
+        // dump($nutrAndVit);
+
+        $product = Product::create([
+            'category_id' => $category['id'],
+            'user_id' => $user->id,
+            'is_personal' => true,
+            'name' => $request->product['name'],
+            'description' => $request->product['description'],
+            'quantity_to_calculate' => $request->product['quantity'],
+            'product_composition' => $request->product['composition'],
+            'kcalory' => $request->product['kcalory'],
+            'proteins' => $request->product['proteins'],
+            'carbohydrates' => $request->product['carbohydrates'],
+            'fats' => $request->product['fats'],
+            'nutrients_and_vitamins' => count($nutrAndVit) > 0 ? json_encode($nutrAndVit, JSON_UNESCAPED_UNICODE) : null,
+        ]);
+
+        // dump($category);
+        // dump($product);
+
+        return response()->json([
+            'product' => $product,
+            'category' => $category,
+        ], 201);
     }
 
     /**

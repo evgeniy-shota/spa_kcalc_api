@@ -25,7 +25,7 @@ return new class extends Migration
             $table->enum('units_of_measurement', ['weight', 'qantity', 'volume'])->default('weight');
             $table->float('quantity_to_calculate')->default(100);
             $table->float('quantity')->default(100);
-            $table->json('product_composition')->nullable();
+            $table->string('product_composition', 512)->nullable();
             $table->float('kcalory');
             $table->float('proteins');
             $table->float('carbohydrates');
@@ -41,6 +41,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+
         Schema::dropIfExists('products');
     }
 };
