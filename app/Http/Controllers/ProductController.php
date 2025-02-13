@@ -50,6 +50,8 @@ class ProductController extends Controller
             'name' => $request->product['name'],
             'description' => $request->product['description'],
             'quantity_to_calculate' => $request->product['quantity'],
+            'manufacturer' => $request->product['manufacturer'],
+            'country_of_manufacture' => $request->product['country_of_manufacture'],
             'product_composition' => $request->product['composition'],
             'kcalory' => $request->product['kcalory'],
             'proteins' => $request->product['proteins'],
