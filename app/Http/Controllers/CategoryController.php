@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Http\Resources\CategoryCollection;
 use App\Http\Resources\ProductCollection;
+use App\Http\Resources\ProductResource;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -15,7 +17,14 @@ class CategoryController extends Controller
     public function index()
     {
         // return response()->json(Category::all());
-        return new CategoryCollection(Category::all());
+
+        if (Auth::user()) {
+            $categories = Category::where('is_personal', false)->orWhere('user_id', Auth::user()->id)->orderBy('is_personal', 'desc')->get();
+        } else {
+            $categories = Category::where('is_personal', false)->where('is_visible', true)->get();
+        }
+
+        return new CategoryCollection($categories);
     }
 
     /**
@@ -35,9 +44,20 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
-        // return response()->json(Category::find($id)->products);
-        // return new CategoryCollection(Category::find($id)->products);
-        return new ProductCollection(Category::find($id)->products);
+        // $category = Category::where('is_visible', true)->where('id', $id)->where('is_personal', false)->orWhere('user_id', $user_id)->get();
+        $category = Category::find($id);
+
+        if ($category && $category->is_visible) {
+
+            $user_id = Auth::user() ? Auth::user()->id : null;
+
+            if ($category->is_personal == false || $category->user_id == $user_id) {
+                return new ProductCollection($category->products);
+            }
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
+
+        return response()->json(['message' => 'Not Found'], 404);
     }
 
     /**

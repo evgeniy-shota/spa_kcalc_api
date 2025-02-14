@@ -19,7 +19,42 @@ class ProductController extends Controller
         // return response()->json(
         //     Product::all()
         // );
-        return new ProductCollection(Product::all());
+
+        $user_id = Auth::user() ? Auth::user()->id : null;
+
+        $products = Product::where('is_visible', true)->where('is_personal', false)->orWhere('user_id', $user_id)->orderBy('is_personal', 'desc')->get();
+
+        return new ProductCollection($products);
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        // return response()->json(
+        //     Product::find($id)
+        // );
+        // dd(Product::find($id));
+        $product = Product::find($id);
+
+        if ($product && $product->is_visible) {
+
+            // $user_id = Auth::user() ? Auth::user()->id : null;
+
+            if ($product->is_personal == false || (Auth::user() && $product->user_id == Auth::user()->id)) {
+                return new ProductResource($product);
+            }
+
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
+
+        return response()->json(['message' => 'Not Found'], 404);
+
+
+        // $product = Product::where('is_visible', true)->where('is_personal', false)->orWhere('user_id', $user_id)->get();
+
+        // return new ProductResource($product);
     }
 
     /**
@@ -67,18 +102,6 @@ class ProductController extends Controller
             'product' => $product,
             'category' => $category,
         ], 201);
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        // return response()->json(
-        //     Product::find($id)
-        // );
-        // dd(Product::find($id));
-        return new ProductResource(Product::find($id));
     }
 
     /**
