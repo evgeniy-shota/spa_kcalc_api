@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('daily_rations', function (Blueprint $table) {
+        Schema::create('user_favorite_categories', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->index()->constrained('users');
-            $table->string('description', 255)->nullable();
-            $table->date('date');
-
+            $table->foreignId('category_id')->index()->constrained('categories');
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('daily_rations');
+        Schema::dropIfExists('user_favorite_categories');
     }
 };

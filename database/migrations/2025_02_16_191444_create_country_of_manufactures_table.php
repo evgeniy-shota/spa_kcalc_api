@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('daily_rations', function (Blueprint $table) {
+        Schema::create('country_of_manufactures', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->index()->constrained('users');
-            $table->string('description', 255)->nullable();
-            $table->date('date');
-
+            $table->string('name_ru', 100);
+            $table->string('name_en', 100)->nullable();
+            $table->string('flag_path', 255)->nullable();
+            $table->boolean('is_enabled')->default(true);
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('daily_rations');
+        Schema::dropIfExists('country_of_manufactures');
     }
 };

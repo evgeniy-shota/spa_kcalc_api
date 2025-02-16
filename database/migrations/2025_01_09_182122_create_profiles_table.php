@@ -14,9 +14,15 @@ return new class extends Migration
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->index()->constrained('users');
-            $table->string('gender')->nullable();
-            $table->float('height')->nullable();
-            $table->json('weight')->nullable();
+            $table->enum('gender', ['man', 'woman'])->nullable();
+            $table->date('date_of_birth')->nullable();
+            $table->float('height',1)->nullable();
+            $table->enum('level_of_training', ['low', 'medium', 'hgh', 'profi'])->nullable();
+            $table->enum('daily_activity_level', ['low', 'medium', 'high', 'very_nigh'])->nullable();
+            $table->float('weight',1)->nullable();
+            $table->float('target_weight',1)->nullable();
+            $table->json('target_energy_value_ration')->nullable();
+
             $table->timestamps();
         });
     }

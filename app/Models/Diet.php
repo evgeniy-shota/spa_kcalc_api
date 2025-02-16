@@ -9,10 +9,16 @@ use Laravel\Scout\Searchable;
 class Diet extends Model
 {
     protected $fillable = [
+        'user_id',
         'name',
+        'is_enabled',
+        'is_personal',
         'description',
-        'products',
-        'summ_val',
+        // 'kcalory',
+        // 'proteins',
+        // 'carbohydrates',
+        // 'fats',
+        'thumbnail_image_path',
     ];
     // protected $hiddden = [];
     /** @use HasFactory<\Database\Factories\DietFactory> */

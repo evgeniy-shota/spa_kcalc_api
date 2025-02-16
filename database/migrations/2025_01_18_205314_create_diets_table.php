@@ -13,11 +13,18 @@ return new class extends Migration
     {
         Schema::create('diets', function (Blueprint $table) {
             $table->id();
+
             $table->foreignId('user_id')->index()->constrained('users');
             $table->string('name', 255);
-            $table->string('description', 255);
-            $table->json('products')->nullable();
-            $table->json('summ_val')->nullable();
+            $table->boolean('is_enabled')->default(true);
+            $table->boolean('is_personal')->default(false);
+            $table->string('description', 400)->nullable();
+            // $table->float('kcalory', 1)->default(0);
+            // $table->float('proteins', 1)->default(0);
+            // $table->float('carbohydrates', 1)->default(0);
+            // $table->float('fats', 1)->default(0);
+            $table->string('thumbnail_image_path', 255)->nullable();
+            // $table->('tags');
 
             $table->timestamps();
         });

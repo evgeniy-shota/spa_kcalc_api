@@ -78,6 +78,11 @@ class init_db_tables extends Command
                 }
             }
 
+            $prod_calory_per_unit = round($prod_calory / 100, 2);
+            $prod_prot_per_unit = round($prod_prot / 100, 2);
+            $prod_carb_per_unit = round($prod_carb / 100, 2);
+            $prod_fats_per_unit = round($prod_fats / 100, 2);
+
             Product::create([
                 'name' => $product_name,
                 'category_id' => $prod_cat_id,
@@ -85,6 +90,10 @@ class init_db_tables extends Command
                 'proteins' => $prod_prot,
                 'carbohydrates' => $prod_carb,
                 'fats' => $prod_fats,
+                'kcalory_per_unit' => $prod_calory_per_unit,
+                'proteins_per_unit' => $prod_prot_per_unit,
+                'carbohydrates_per_unit' => $prod_carb_per_unit,
+                'fats_per_unit' => $prod_fats_per_unit,
                 'nutrients_and_vitamins' => json_encode($prod_nutr, JSON_UNESCAPED_UNICODE),
             ]);
         }

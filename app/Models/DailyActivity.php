@@ -6,26 +6,25 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Profile extends Model
+class DailyActivity extends Model
 {
-    /** @use HasFactory<\Database\Factories\ProfileFactory> */
+    /** @use HasFactory<\Database\Factories\DailyActivityFactory> */
     use HasFactory;
 
     protected $fillable = [
         'user_id',
-        'gender',
-        'date_of_birth',
-        'height',
-        'level_of_training',
-        'daily_activity_level',
-        'weight',
-        'target_weight',
-        'target_energy_value_ration',
+        'activity_id',
+        'date',
+        'time',
+        'description',
+        'duration_sec',
+        'quantity',
     ];
 
-    protected $hidden = [
-        'updated_at',
-    ];
+    public function activity(): BelongsTo
+    {
+        return $this->belongsTo(Activity::class);
+    }
 
     public function user(): BelongsTo
     {

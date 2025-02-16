@@ -17,6 +17,7 @@ class DailyRation extends Model
         // 'time_of_use',
         'user_id',
         'description',
+        'date',
         // 'products',
         // 'ration_summary',
     ];
@@ -25,6 +26,7 @@ class DailyRation extends Model
     {
         return [
             'created_at' => 'datetime:Y-m-d',
+            'date' => 'datetime:Y-m-d',
         ];
     }
 

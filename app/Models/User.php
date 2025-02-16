@@ -33,7 +33,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'permission',
+        // 'permission',
         'is_banned',
         'is_admin',
     ];
@@ -85,5 +85,25 @@ class User extends Authenticatable
     public function dailyRations(): HasMany
     {
         return $this->hasMany(DailyRation::class);
+    }
+
+    public function activityCategories(): HasMany
+    {
+        return $this->hasMany(ActivityCategory::class);
+    }
+
+    public function activities(): HasMany
+    {
+        return $this->hasMany(Activity::class);
+    }
+
+    public function dailyActivities(): HasMany
+    {
+        return $this->hasMany(DailyActivity::class);
+    }
+
+    public function manufacturer(): HasMany
+    {
+        return $this->hasMany(Manufacturer::class);
     }
 }

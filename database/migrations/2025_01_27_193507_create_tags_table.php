@@ -13,10 +13,13 @@ return new class extends Migration
     {
         Schema::create('tags', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 255);
-            $table->string('desctiption', 255)->nullable();
-            $table->boolean('is_visible')->default(true);
-            $table->string('icon', 255);
+            $table->foreignId('user_id')->index()->nullable()->constrained('users');
+            $table->string('name', 100);
+            // $table->enum('type', ['product', 'activity'])->default();
+            $table->boolean('is_enable')->default(true);
+            $table->boolean('is_personal')->default(false);
+            $table->string('description', 300)->nullable();
+            $table->string('icon_path', 255)->nullable();
 
             $table->timestamps();
         });

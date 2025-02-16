@@ -15,12 +15,12 @@ return new class extends Migration
             $table->id();
             $table->foreignId('diet_id')->index()->constrained('diets');
             $table->foreignId('product_id')->index()->constrained('products');
-            $table->string('name', 255);
+            // $table->string('name', 255);
             $table->integer('quantity')->default(100);
-            $table->float('kcalory_per_unit');
-            $table->float('proteins_per_unit');
-            $table->float('carbohydrates_per_unit');
-            $table->float('fats_per_unit');
+            // $table->float('kcalory_per_unit', 1)->default(0);
+            // $table->float('proteins_per_unit', 1)->default(0);
+            // $table->float('carbohydrates_per_unit', 1)->default(0);
+            // $table->float('fats_per_unit', 1)->default(0);
             $table->timestamps();
         });
     }

@@ -14,10 +14,12 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullable()->index()->constrained('users');
-            $table->string('name', 255);
-            $table->string('description', 255)->nullable();
-            $table->boolean('is_visible')->default(true);
+            $table->string('name', 100);
+            $table->string('description', 400)->nullable();
             $table->boolean('is_personal')->default(false);
+            $table->boolean('is_enabled')->default(true);
+            $table->string('icon_path',255)->nullable();
+            $table->string('thumbnail_image_path',255)->nullable();
 
             $table->timestamps();
         });

@@ -14,13 +14,16 @@ class Product extends Model
     protected $fillable = [
         'user_id',
         'category_id',
-        'is_visible',
+        'is_personal',
+        'is_enabled',
         'name',
+        'thumbnail_image_path',
         'manufacturer',
         'country_of_manufacture',
         'trademark_id',
         'description',
         'units_of_measurement',
+        'type',
         'quantity_to_calculate',
         'quantity',
         'product_composition',
@@ -28,13 +31,16 @@ class Product extends Model
         'proteins',
         'carbohydrates',
         'fats',
+        'kcalory_per_unit',
+        'proteins_per_unit',
+        'carbohydrates_per_unit',
+        'fats_per_unit',
         'nutrients_and_vitamins',
-        'tag_id',
     ];
 
     protected $hidden = [
         'created_at',
-        'updated_at',
+        // 'updated_at',
     ];
     /** @use HasFactory<\Database\Factories\ProductFactory> */
     use HasFactory, Searchable;

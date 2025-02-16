@@ -13,12 +13,19 @@ return new class extends Migration
     {
         Schema::create('activities', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('description')->nullable();
-            $table->integer('type_of_load')->default(1);
-            $table->integer('load_from_duration')->nullable();
-            $table->integer('load_from_quantity')->nullable();
+            $table->foreignId('user_id')->index()->nullable()->constrained('users');
+            $table->foreignId('activity_category_id')->index()->constrained('activity_categories');
+            $table->boolean('is_personal')->default(false);
+            $table->boolean('is_enabled')->default(true);
+            $table->string('name', 255);
+            $table->string('description', 600)->nullable();
+            $table->enum('type_of_load', ['duration', 'quantity'])->default('duration');
+            $table->integer('duration_sec_to_calculate')->default(60);
+            $table->integer('quantity_to_calculate')->default(1);
             $table->integer('energy_cost')->default(0);
+            $table->float('energy_cost_per_unit', 3)->default(0);
+            $table->string('thumbnail_image_path', 255)->nullable();
+
             $table->timestamps();
         });
     }

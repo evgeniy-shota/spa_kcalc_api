@@ -12,19 +12,25 @@ class DailyRationProduct extends Model
     use HasFactory;
 
     protected $fillable = [
-        'time_of_use',
         'daily_ration_id',
         'product_id',
-        'name',
+        'diet_id',
+        'time',
+        // 'name',
         'quantity',
-        'kcalory_per_unit',
-        'proteins_per_unit',
-        'carbohydrates_per_unit',
-        'fats_per_unit',
+        // 'kcalory_per_unit',
+        // 'proteins_per_unit',
+        // 'carbohydrates_per_unit',
+        // 'fats_per_unit',
     ];
 
     public function dailyRation(): BelongsTo
     {
         return $this->belongsTo(DailyRation::class);
+    }
+
+    public function product(): BelongsTo
+    {
+        return $this->belongsTo(Product::class);
     }
 }

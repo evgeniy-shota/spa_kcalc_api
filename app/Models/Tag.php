@@ -11,11 +11,14 @@ class Tag extends Model
     /** @use HasFactory<\Database\Factories\TagFactory> */
     use HasFactory;
 
-    protected $fillablee = [
+    protected $fillable = [
+        'user_id',
         'name',
-        'desctiption',
-        'is_visible',
-        'icon',
+        // 'type',
+        'is_enable',
+        'is_personal',
+        'description',
+        'icon_path',
     ];
 
     public function products(): BelongsToMany

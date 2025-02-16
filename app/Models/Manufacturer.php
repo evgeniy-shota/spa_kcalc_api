@@ -5,32 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Category extends Model
+class Manufacturer extends Model
 {
+    /** @use HasFactory<\Database\Factories\ManufacturerFactory> */
+    use HasFactory;
 
     protected $fillable = [
         'user_id',
         'name',
+        'description',
         'is_personal',
         'is_enabled',
-        'icon_path',
-        'thumbnail_image_path',
     ];
-
-    protected $hidden = [
-        'created_at',
-        'updated_at',
-    ];
-
-    /** @use HasFactory<\Database\Factories\CategoryFactory> */
-    use HasFactory;
-
-    public function products(): HasMany
-    {
-        return $this->hasMany(Product::class);
-    }
 
     public function user(): BelongsTo
     {

@@ -11,12 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('daily_rations', function (Blueprint $table) {
+        Schema::create('daily_activities', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->index()->constrained('users');
-            $table->string('description', 255)->nullable();
+            $table->foreignId('activity_id')->index()->constrained('activities');
             $table->date('date');
-
+            $table->time('time');
+            $table->string('description', 255)->nullable();
+            $table->integer('duration_sec')->default(60);
+            $table->integer('quantity')->default(1);
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('daily_rations');
+        Schema::dropIfExists('daily_activities');
     }
 };
