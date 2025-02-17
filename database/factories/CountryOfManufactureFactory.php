@@ -17,7 +17,7 @@ class CountryOfManufactureFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name_ru' => fake()->country(),
         ];
     }
 }

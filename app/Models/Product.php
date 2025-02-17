@@ -17,7 +17,7 @@ class Product extends Model
         'is_personal',
         'is_enabled',
         'name',
-        'thumbnail_image_path',
+        'thumbnail_image_name',
         'manufacturer',
         'country_of_manufacture',
         'trademark_id',
@@ -67,6 +67,11 @@ class Product extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function datasource(): BelongsTo
+    {
+        return $this->belongsTo(DataSource::class);
     }
 
     public function tags(): BelongsToMany

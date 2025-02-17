@@ -17,7 +17,8 @@ class ActivityCategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => fake()->text(10),
+            'description' => fake()->text(40),
         ];
     }
 }

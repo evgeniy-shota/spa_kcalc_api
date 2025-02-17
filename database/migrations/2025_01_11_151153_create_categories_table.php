@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->index()->constrained('users');
+            $table->foreignId('user_id')->index()->nullable()->constrained('users');
+            $table->foreignId('category_group_id')->index()->constrained('category_groups');
             $table->string('name', 100);
             $table->string('description', 400)->nullable();
             $table->boolean('is_personal')->default(false);

@@ -1,772 +1,994 @@
 [
     {
-        "country": "Afghanistan",
-        "country_ru":"Афганистан",
+        "country_en": "Afghanistan",
+        "country_ru": "Афганистан"
     },
     {
-        "country": "Albania",
-        "country_ru":"Албания",
+        "country_en": "Albania",
+        "country_ru": "Албания"
     },
     {
-        "country": "Algeria",
-        "country_ru":"Алжир",
+        "country_en": "Algeria",
+        "country_ru": "Алжир"
     },
     {
-        "country": "American Samoa",
-        "country_ru":"Американское Самоа",
+        "country_en": "American Samoa",
+        "country_ru": "Американское Самоа"
     },
     {
-        "country": "Andorra",
-        "country_ru":"Андорра",
+        "country_en": "Andorra",
+        "country_ru": "Андорра"
     },
     {
-        "country": "Angola",
-        "country_ru":"Ангола",
+        "country_en": "Angola",
+        "country_ru": "Ангола"
     },
     {
-        "country": "Anguilla",
-        "country_ru":"Ангилья",
+        "country_en": "Anguilla",
+        "country_ru": "Ангилья"
     },
     {
-        "country": "Antarctica",
-        "country_ru":"Антарктида",
+        "country_en": "Antarctica",
+        "country_ru": "Антарктида"
     },
     {
-        "country": "Antigua and Barbuda",
-        "country_ru":"Антигуа и Барбуда",
+        "country_en": "Antigua and Barbuda",
+        "country_ru": "Антигуа и Барбуда"
     },
     {
-        "country": "Argentina",
-        "country_ru":"Аргентина",
+        "country_en": "Argentina",
+        "country_ru": "Аргентина"
     },
     {
-        "country": "Armenia",
-        "country_ru":"Армения",
+        "country_en": "Armenia",
+        "country_ru": "Армения"
     },
     {
-        "country": "Aruba",
-        "country_ru":"Аруба",
+        "country_en": "Aruba",
+        "country_ru": "Аруба"
     },
     {
-        "country": "Australia",
-        "country_ru":"Австралия",
+        "country_en": "Australia",
+        "country_ru": "Австралия"
     },
     {
-        "country": "Austria",
-        "country_ru":"Австрия",
+        "country_en": "Austria",
+        "country_ru": "Австрия"
     },
     {
-        "country": "Azerbaijan",
-        "country_ru":"Азербайджан",
+        "country_en": "Azerbaijan",
+        "country_ru": "Азербайджан"
     },
     {
-        "country": "Bahamas",
-        "country_ru":"Багамы",
+        "country_en": "Bahamas",
+        "country_ru": "Багамы"
     },
     {
-        "country": "Bahrain",
-        "country_ru":"Бахрейн",
+        "country_en": "Bahrain",
+        "country_ru": "Бахрейн"
     },
     {
-        "country": "Bangladesh",
-        "country_ru":"Бангладеш",
+        "country_en": "Bangladesh",
+        "country_ru": "Бангладеш"
     },
     {
-        "country": "Barbados",
-        "country_ru":"Барбадос",
+        "country_en": "Barbados",
+        "country_ru": "Барбадос"
     },
     {
-        "country": "Belarus",
-        "country_ru":"Беларусь",
+        "country_en": "Belarus",
+        "country_ru": "Беларусь"
     },
     {
-        "country": "Belgium",
-        "country_ru":"Бельгия",
+        "country_en": "Belgium",
+        "country_ru": "Бельгия"
     },
     {
-        "country": "Belize",
-        "country_ru":"Белиз",
+        "country_en": "Belize",
+        "country_ru": "Белиз"
     },
     {
-        "country": "Benin",
-        "country_ru":"Бенин",
+        "country_en": "Benin",
+        "country_ru": "Бенин"
     },
     {
-        "country": "Bermuda",
-        "country_ru":"Бермудские острова",
+        "country_en": "Bermuda",
+        "country_ru": "Бермудские острова"
     },
     {
-        "country": "Bhutan",
-        "country_ru":"Бутан",
+        "country_en": "Bhutan",
+        "country_ru": "Бутан"
     },
     {
-        "country": "Bolivia",
-        "country_ru":"Боливия",
+        "country_en": "Bolivia",
+        "country_ru": "Боливия"
     },
     {
-        "country": "Bosnia and Herzegovina"
+        "country_en": "Bosnia and Herzegovina",
+        "country_ru": "Босния и Герцеговина"
     },
     {
-        "country": "Botswana"
+        "country_en": "Botswana",
+        "country_ru": "Ботсвана"
     },
     {
-        "country": "Bouvet Island"
+        "country_en": "Bouvet Island",
+        "country_ru": "Остров Буве"
     },
     {
-        "country": "Brazil"
+        "country_en": "Brazil",
+        "country_ru": "Бразилия"
     },
     {
-        "country": "British Indian Ocean Territory"
+        "country_en": "British Indian Ocean Territory",
+        "country_ru": "Британская территория в Индийском океане"
     },
     {
-        "country": "Brunei"
+        "country_en": "Brunei",
+        "country_ru": "Бруней"
     },
     {
-        "country": "Bulgaria"
+        "country_en": "Bulgaria",
+        "country_ru": "Болгария"
     },
     {
-        "country": "Burkina Faso"
+        "country_en": "Burkina Faso",
+        "country_ru": "Буркина-Фасо"
     },
     {
-        "country": "Burundi"
+        "country_en": "Burundi",
+        "country_ru": "Бурунди"
     },
     {
-        "country": "Cambodia"
+        "country_en": "Cambodia",
+        "country_ru": "Камбоджа"
     },
     {
-        "country": "Cameroon"
+        "country_en": "Cameroon",
+        "country_ru": "Камерун"
     },
     {
-        "country": "Canada"
+        "country_en": "Canada",
+        "country_ru": "Канада"
     },
     {
-        "country": "Cape Verde"
+        "country_en": "Cape Verde",
+        "country_ru": "Кабо-Верде"
     },
     {
-        "country": "Cayman Islands"
+        "country_en": "Cayman Islands",
+        "country_ru": "Каймановы острова"
     },
     {
-        "country": "Central African Republic"
+        "country_en": "Central African Republic",
+        "country_ru": "Центральноафриканская Республика"
     },
     {
-        "country": "Chad"
+        "country_en": "Chad",
+        "country_ru": "Чад"
     },
     {
-        "country": "Chile"
+        "country_en": "Chile",
+        "country_ru": "Чили"
     },
     {
-        "country": "China"
+        "country_en": "China",
+        "country_ru": "Китай"
     },
     {
-        "country": "Christmas Island"
+        "country_en": "Christmas Island",
+        "country_ru": "Остров Рождества"
     },
     {
-        "country": "Cocos (Keeling) Islands"
+        "country_en": "Cocos (Keeling) Islands",
+        "country_ru": "Кокосовые (Килинг) острова"
     },
     {
-        "country": "Colombia"
+        "country_en": "Colombia",
+        "country_ru": "Колумбия"
     },
     {
-        "country": "Comoros"
+        "country_en": "Comoros",
+        "country_ru": "Коморские острова"
     },
     {
-        "country": "Congo"
+        "country_en": "Congo",
+        "country_ru": "Конго"
     },
     {
-        "country": "The Democratic Republic of Congo"
+        "country_en": "The Democratic Republic of Congo",
+        "country_ru": "Демократическая Республика Конго"
     },
     {
-        "country": "Cook Islands"
+        "country_en": "Cook Islands",
+        "country_ru": "Острова Кука"
     },
     {
-        "country": "Costa Rica"
+        "country_en": "Costa Rica",
+        "country_ru": "Коста-Рика"
     },
     {
-        "country": "Ivory Coast"
+        "country_en": "Ivory Coast",
+        "country_ru": "Берег Слоновой Кости"
     },
     {
-        "country": "Croatia"
+        "country_en": "Croatia",
+        "country_ru": "Хорватия"
     },
     {
-        "country": "Cuba"
+        "country_en": "Cuba",
+        "country_ru": "Куба"
     },
     {
-        "country": "Cyprus"
+        "country_en": "Cyprus",
+        "country_ru": "Кипр"
     },
     {
-        "country": "Czech Republic"
+        "country_en": "Czech Republic",
+        "country_ru": "Чешская Республика"
     },
     {
-        "country": "Denmark"
+        "country_en": "Denmark",
+        "country_ru": "Дания"
     },
     {
-        "country": "Djibouti"
+        "country_en": "Djibouti",
+        "country_ru": "Джибути"
     },
     {
-        "country": "Dominica"
+        "country_en": "Dominica",
+        "country_ru": "Доминика"
     },
     {
-        "country": "Dominican Republic"
+        "country_en": "Dominican Republic",
+        "country_ru": "Доминиканская Республика"
     },
     {
-        "country": "East Timor"
+        "country_en": "East Timor",
+        "country_ru": "Восточный Тимор"
     },
     {
-        "country": "Ecuador"
+        "country_en": "Ecuador",
+        "country_ru": "Эквадор"
     },
     {
-        "country": "Egypt"
+        "country_en": "Egypt",
+        "country_ru": "Египет"
     },
     {
-        "country": "England"
+        "country_en": "England",
+        "country_ru": "Англия"
     },
     {
-        "country": "El Salvador"
+        "country_en": "El Salvador",
+        "country_ru": "Сальвадор"
     },
     {
-        "country": "Equatorial Guinea"
+        "country_en": "Equatorial Guinea",
+        "country_ru": "Экваториальная Гвинея"
     },
     {
-        "country": "Eritrea"
+        "country_en": "Eritrea",
+        "country_ru": "Эритрея"
     },
     {
-        "country": "Estonia"
+        "country_en": "Estonia",
+        "country_ru": "Эстония"
     },
     {
-        "country": "Eswatini"
+        "country_en": "Eswatini",
+        "country_ru": "Эсватини"
     },
     {
-        "country": "Ethiopia"
+        "country_en": "Ethiopia",
+        "country_ru": "Эфиопия"
     },
     {
-        "country": "Falkland Islands"
+        "country_en": "Falkland Islands",
+        "country_ru": "Фолклендские острова"
     },
     {
-        "country": "Faroe Islands"
+        "country_en": "Faroe Islands",
+        "country_ru": "Фарерские острова"
     },
     {
-        "country": "Fiji Islands"
+        "country_en": "Fiji Islands",
+        "country_ru": "Острова Фиджи"
     },
     {
-        "country": "Finland"
+        "country_en": "Finland",
+        "country_ru": "Финляндия"
     },
     {
-        "country": "France"
+        "country_en": "France",
+        "country_ru": "Франция"
     },
     {
-        "country": "French Guiana"
+        "country_en": "French Guiana",
+        "country_ru": "Французская Гвиана"
     },
     {
-        "country": "French Polynesia"
+        "country_en": "French Polynesia",
+        "country_ru": "Французская Полинезия"
     },
     {
-        "country": "French Southern territories"
+        "country_en": "French Southern territories",
+        "country_ru": "Южные территории Франции"
     },
     {
-        "country": "Gabon"
+        "country_en": "Gabon",
+        "country_ru": "Габон"
     },
     {
-        "country": "Gambia"
+        "country_en": "Gambia",
+        "country_ru": "Гамбия"
     },
     {
-        "country": "Georgia"
+        "country_en": "Georgia",
+        "country_ru": "Грузия"
     },
     {
-        "country": "Germany"
+        "country_en": "Germany",
+        "country_ru": "Германия"
     },
     {
-        "country": "Ghana"
+        "country_en": "Ghana",
+        "country_ru": "Гана"
     },
     {
-        "country": "Gibraltar"
+        "country_en": "Gibraltar",
+        "country_ru": "Гибралтар"
     },
     {
-        "country": "Greece"
+        "country_en": "Greece",
+        "country_ru": "Греция"
     },
     {
-        "country": "Greenland"
+        "country_en": "Greenland",
+        "country_ru": "Гренландия"
     },
     {
-        "country": "Grenada"
+        "country_en": "Grenada",
+        "country_ru": "Гренада"
     },
     {
-        "country": "Guadeloupe"
+        "country_en": "Guadeloupe",
+        "country_ru": "Гваделупа"
     },
     {
-        "country": "Guam"
+        "country_en": "Guam",
+        "country_ru": "Гуам"
     },
     {
-        "country": "Guatemala"
+        "country_en": "Guatemala",
+        "country_ru": "Гватемала"
     },
     {
-        "country": "Guernsey"
+        "country_en": "Guernsey",
+        "country_ru": "Гернси"
     },
     {
-        "country": "Guinea"
+        "country_en": "Guinea",
+        "country_ru": "Гвинея"
     },
     {
-        "country": "Guinea-Bissau"
+        "country_en": "Guinea-Bissau",
+        "country_ru": "Гвинея-Бисау"
     },
     {
-        "country": "Guyana"
+        "country_en": "Guyana",
+        "country_ru": "Гайана"
     },
     {
-        "country": "Haiti"
+        "country_en": "Haiti",
+        "country_ru": "Гаити"
     },
     {
-        "country": "Heard Island and McDonald Islands"
+        "country_en": "Heard Island and McDonald Islands",
+        "country_ru": "Остров Херд и острова Макдональд"
     },
     {
-        "country": "Holy See (Vatican City State)"
+        "country_en": "Holy See (Vatican City State)",
+        "country_ru": "Святой Престол (город-государство Ватикан)"
     },
     {
-        "country": "Honduras"
+        "country_en": "Honduras",
+        "country_ru": "Гондурас"
     },
     {
-        "country": "Hong Kong"
+        "country_en": "Hong Kong",
+        "country_ru": "Гонконг"
     },
     {
-        "country": "Hungary"
+        "country_en": "Hungary",
+        "country_ru": "Венгрия"
     },
     {
-        "country": "Iceland"
+        "country_en": "Iceland",
+        "country_ru": "Исландия"
     },
     {
-        "country": "India"
+        "country_en": "India",
+        "country_ru": "Индия"
     },
     {
-        "country": "Indonesia"
+        "country_en": "Indonesia",
+        "country_ru": "Индонезия"
     },
     {
-        "country": "Iran"
+        "country_en": "Iran",
+        "country_ru": "Иран"
     },
     {
-        "country": "Iraq"
+        "country_en": "Iraq",
+        "country_ru": "Ирак"
     },
     {
-        "country": "Ireland"
+        "country_en": "Ireland",
+        "country_ru": "Ирландия"
     },
     {
-        "country": "Israel"
+        "country_en": "Israel",
+        "country_ru": "Израиль"
     },
     {
-        "country": "Isle of Man"
+        "country_en": "Isle of Man",
+        "country_ru": "Остров Мэн"
     },
     {
-        "country": "Italy"
+        "country_en": "Italy",
+        "country_ru": "Италия"
     },
     {
-        "country": "Jamaica"
+        "country_en": "Jamaica",
+        "country_ru": "Ямайка"
     },
     {
-        "country": "Japan"
+        "country_en": "Japan",
+        "country_ru": "Япония"
     },
     {
-        "country": "Jersey"
+        "country_en": "Jersey",
+        "country_ru": "Джерси"
     },
     {
-        "country": "Jordan"
+        "country_en": "Jordan",
+        "country_ru": "Иордания"
     },
     {
-        "country": "Kazakhstan"
+        "country_en": "Kazakhstan",
+        "country_ru": "Казахстан"
     },
     {
-        "country": "Kenya"
+        "country_en": "Kenya",
+        "country_ru": "Кения"
     },
     {
-        "country": "Kiribati"
+        "country_en": "Kiribati",
+        "country_ru": "Кирибати"
     },
     {
-        "country": "Kuwait"
+        "country_en": "Kuwait",
+        "country_ru": "Кувейт"
     },
     {
-        "country": "Kyrgyzstan"
+        "country_en": "Kyrgyzstan",
+        "country_ru": "Киргизия"
     },
     {
-        "country": "Laos"
+        "country_en": "Laos",
+        "country_ru": "Лаос"
     },
     {
-        "country": "Latvia"
+        "country_en": "Latvia",
+        "country_ru": "Латвия"
     },
     {
-        "country": "Lebanon"
+        "country_en": "Lebanon",
+        "country_ru": "Ливан"
     },
     {
-        "country": "Lesotho"
+        "country_en": "Lesotho",
+        "country_ru": "Лесото"
     },
     {
-        "country": "Liberia"
+        "country_en": "Liberia",
+        "country_ru": "Либерия"
     },
     {
-        "country": "Libya"
+        "country_en": "Libya",
+        "country_ru": "Ливия"
     },
     {
-        "country": "Liechtenstein"
+        "country_en": "Liechtenstein",
+        "country_ru": "Лихтенштейн"
     },
     {
-        "country": "Lithuania"
+        "country_en": "Lithuania",
+        "country_ru": "Литва"
     },
     {
-        "country": "Luxembourg"
+        "country_en": "Luxembourg",
+        "country_ru": "Люксембург"
     },
     {
-        "country": "Macao"
+        "country_en": "Macao",
+        "country_ru": "Макао"
     },
     {
-        "country": "North Macedonia"
+        "country_en": "North Macedonia",
+        "country_ru": "Северная Македония"
     },
     {
-        "country": "Madagascar"
+        "country_en": "Madagascar",
+        "country_ru": "Мадагаскар"
     },
     {
-        "country": "Malawi"
+        "country_en": "Malawi",
+        "country_ru": "Малави"
     },
     {
-        "country": "Malaysia"
+        "country_en": "Malaysia",
+        "country_ru": "Малайзия"
     },
     {
-        "country": "Maldives"
+        "country_en": "Maldives",
+        "country_ru": "Мальдивы"
     },
     {
-        "country": "Mali"
+        "country_en": "Mali",
+        "country_ru": "Мали"
     },
     {
-        "country": "Malta"
+        "country_en": "Malta",
+        "country_ru": "Мальта"
     },
     {
-        "country": "Marshall Islands"
+        "country_en": "Marshall Islands",
+        "country_ru": "Маршалловы Острова"
     },
     {
-        "country": "Martinique"
+        "country_en": "Martinique",
+        "country_ru": "Мартиника"
     },
     {
-        "country": "Mauritania"
+        "country_en": "Mauritania",
+        "country_ru": "Мавритания"
     },
     {
-        "country": "Mauritius"
+        "country_en": "Mauritius",
+        "country_ru": "Маврикий"
     },
     {
-        "country": "Mayotte"
+        "country_en": "Mayotte",
+        "country_ru": "Майотта"
     },
     {
-        "country": "Mexico"
+        "country_en": "Mexico",
+        "country_ru": "Мексика"
     },
     {
-        "country": "Micronesia, Federated States of"
+        "country_en": "Micronesia, Federated States of",
+        "country_ru": "Микронезия, Федеративные Штаты"
     },
     {
-        "country": "Moldova"
+        "country_en": "Moldova",
+        "country_ru": "Молдова"
     },
     {
-        "country": "Monaco"
+        "country_en": "Monaco",
+        "country_ru": "Монако"
     },
     {
-        "country": "Mongolia"
+        "country_en": "Mongolia",
+        "country_ru": "Монголия"
     },
     {
-        "country": "Montserrat"
+        "country_en": "Montserrat",
+        "country_ru": "Монтсеррат"
     },
     {
-        "country": "Montenegro"
+        "country_en": "Montenegro",
+        "country_ru": "Черногория"
     },
     {
-        "country": "Morocco"
+        "country_en": "Morocco",
+        "country_ru": "Марокко"
     },
     {
-        "country": "Mozambique"
+        "country_en": "Mozambique",
+        "country_ru": "Мозамбик"
     },
     {
-        "country": "Myanmar"
+        "country_en": "Myanmar",
+        "country_ru": "Мьянма"
     },
     {
-        "country": "Namibia"
+        "country_en": "Namibia",
+        "country_ru": "Намибия"
     },
     {
-        "country": "Nauru"
+        "country_en": "Nauru",
+        "country_ru": "Науру"
     },
     {
-        "country": "Nepal"
+        "country_en": "Nepal",
+        "country_ru": "Непал"
     },
     {
-        "country": "Netherlands"
+        "country_en": "Netherlands",
+        "country_ru": "Нидерланды"
     },
     {
-        "country": "Netherlands Antilles"
+        "country_en": "Netherlands Antilles",
+        "country_ru": "Нидерландские Антильские острова"
     },
     {
-        "country": "New Caledonia"
+        "country_en": "New Caledonia",
+        "country_ru": "Новая Каледония"
     },
     {
-        "country": "New Zealand"
+        "country_en": "New Zealand",
+        "country_ru": "Новая Зеландия"
     },
     {
-        "country": "Nicaragua"
+        "country_en": "Nicaragua",
+        "country_ru": "Никарагуа"
     },
     {
-        "country": "Niger"
+        "country_en": "Niger",
+        "country_ru": "Нигер"
     },
     {
-        "country": "Nigeria"
+        "country_en": "Nigeria",
+        "country_ru": "Нигерия"
     },
     {
-        "country": "Niue"
+        "country_en": "Niue",
+        "country_ru": "Ниуэ"
     },
     {
-        "country": "Norfolk Island"
+        "country_en": "Norfolk Island",
+        "country_ru": "Остров Норфолк"
     },
     {
-        "country": "North Korea"
+        "country_en": "North Korea",
+        "country_ru": "Северная Корея"
     },
     {
-        "country": "Northern Ireland"
+        "country_en": "Northern Ireland",
+        "country_ru": "Северная Ирландия"
     },
     {
-        "country": "Northern Mariana Islands"
+        "country_en": "Northern Mariana Islands",
+        "country_ru": "СеверныСеверные Марианские островае Марианские острова"
     },
     {
-        "country": "Norway"
+        "country_en": "Norway",
+        "country_ru": "НорвегиНорвегияя"
     },
     {
-        "country": "Oman"
+        "country_en": "Oman",
+        "country_ru": "ОманОман"
     },
     {
-        "country": "Pakistan"
+        "country_en": "Pakistan",
+        "country_ru": "ПакистаПакистанн"
     },
     {
-        "country": "Palau"
+        "country_en": "Palau",
+        "country_ru": "ПалауПалау"
     },
     {
-        "country": "Palestine"
+        "country_en": "Palestine",
+        "country_ru": "ПалестиПалестинана"
     },
     {
-        "country": "Panama"
+        "country_en": "Panama",
+        "country_ru": "ПанамаПанама"
     },
     {
-        "country": "Papua New Guinea"
+        "country_en": "Papua New Guinea",
+        "country_ru": "Папуа-НПапуа — Новая Гвинеяовая Гвинея"
     },
     {
-        "country": "Paraguay"
+        "country_en": "Paraguay",
+        "country_ru": "ПарагваПарагвайй"
     },
     {
-        "country": "Peru"
+        "country_en": "Peru",
+        "country_ru": "ПеруПеру"
     },
     {
-        "country": "Philippines"
+        "country_en": "Philippines",
+        "country_ru": "ФилиппиФилиппиныны"
     },
     {
-        "country": "Pitcairn"
+        "country_en": "Pitcairn",
+        "country_ru": "ПиткэрнПиткэрн"
     },
     {
-        "country": "Poland"
+        "country_en": "Poland",
+        "country_ru": "ПольшаПольша"
     },
     {
-        "country": "Portugal"
+        "country_en": "Portugal",
+        "country_ru": "ПортугаПортугалиялия"
     },
     {
-        "country": "Puerto Rico"
+        "country_en": "Puerto Rico",
+        "country_ru": "Пуэрто-Пуэрто-РикоРико"
     },
     {
-        "country": "Qatar"
+        "country_en": "Qatar",
+        "country_ru": "КатарКатар"
     },
     {
-        "country": "Reunion"
+        "country_en": "Reunion",
+        "country_ru": "РеюньонРеюньон"
     },
     {
-        "country": "Romania"
+        "country_en": "Romania",
+        "country_ru": "РумынияРумыния"
     },
     {
-        "country": "Russia"
+        "country_en": "Russia",
+        "country_ru": "РоссияРоссия"
     },
     {
-        "country": "Rwanda"
+        "country_en": "Rwanda",
+        "country_ru": "РуандаРуанда"
     },
     {
-        "country": "Saint Helena"
+        "country_en": "Saint Helena",
+        "country_ru": "Остров Остров Святой ЕленыСвятой Елены"
     },
     {
-        "country": "Saint Kitts and Nevis"
+        "country_en": "Saint Kitts and Nevis",
+        "country_ru": "Сент-КиСент-Китс и Невистс и Невис"
     },
     {
-        "country": "Saint Lucia"
+        "country_en": "Saint Lucia",
+        "country_ru": "Сент-ЛюСент-Люсиясия"
     },
     {
-        "country": "Saint Pierre and Miquelon"
+        "country_en": "Saint Pierre and Miquelon",
+        "country_ru": "Сен-ПьеСен-Пьер и Микелонр и Микелон"
     },
     {
-        "country": "Saint Vincent and the Grenadines"
+        "country_en": "Saint Vincent and the Grenadines",
+        "country_ru": "Сент-ВиСент-Винсент и Гренадинынсент и Гренадины"
     },
     {
-        "country": "Samoa"
+        "country_en": "Samoa",
+        "country_ru": "СамоаСамоа"
     },
     {
-        "country": "San Marino"
+        "country_en": "San Marino",
+        "country_ru": "Сан-МарСан-Мариноино"
     },
     {
-        "country": "Sao Tome and Principe"
+        "country_en": "Sao Tome and Principe",
+        "country_ru": "Сан-ТомСан-Томе и Принсипие и Принсипи"
     },
     {
-        "country": "Saudi Arabia"
+        "country_en": "Saudi Arabia",
+        "country_ru": "СаудовсСаудовская Аравиякая Аравия"
     },
     {
-        "country": "Scotland"
+        "country_en": "Scotland",
+        "country_ru": "ШотландШотландияия"
     },
     {
-        "country": "Senegal"
+        "country_en": "Senegal",
+        "country_ru": "СенегалСенегал"
     },
     {
-        "country": "Serbia"
+        "country_en": "Serbia",
+        "country_ru": "СербияСербия"
     },
     {
-        "country": "Seychelles"
+        "country_en": "Seychelles",
+        "country_ru": "СейшельСейшельские островаские Острова"
     },
     {
-        "country": "Sierra Leone"
+        "country_en": "Sierra Leone",
+        "country_ru": "Сьерра-Сьерра-ЛеонеЛеоне"
     },
     {
-        "country": "Singapore"
+        "country_en": "Singapore",
+        "country_ru": "СингапуСингапурр"
     },
     {
-        "country": "Slovakia"
+        "country_en": "Slovakia",
+        "country_ru": "СловакиСловакияя"
     },
     {
-        "country": "Slovenia"
+        "country_en": "Slovenia",
+        "country_ru": "СловениСловенияя"
     },
     {
-        "country": "Solomon Islands"
+        "country_en": "Solomon Islands",
+        "country_ru": "Соломоновы Острова"
     },
     {
-        "country": "Somalia"
+        "country_en": "Somalia",
+        "country_ru": "Сомали"
     },
     {
-        "country": "South Africa"
+        "country_en": "South Africa",
+        "country_ru": "Южная Африка"
     },
     {
-        "country": "South Georgia and the South Sandwich Islands"
+        "country_en": "South Georgia and the South Sandwich Islands",
+        "country_ru": "Южная Георгия и Южные Сандвичевы Острова"
     },
     {
-        "country": "South Korea"
+        "country_en": "South Korea",
+        "country_ru": "Южная Корея"
     },
     {
-        "country": "South Sudan"
+        "country_en": "South Sudan",
+        "country_ru": "Южный Судан"
     },
     {
-        "country": "Spain"
+        "country_en": "Spain",
+        "country_ru": "Испания"
     },
     {
-        "country": "Sri Lanka"
+        "country_en": "Sri Lanka",
+        "country_ru": "Шри-Ланка"
     },
     {
-        "country": "Sudan"
+        "country_en": "Sudan",
+        "country_ru": "Судан"
     },
     {
-        "country": "Suriname"
+        "country_en": "Suriname",
+        "country_ru": "Суринам"
     },
     {
-        "country": "Svalbard and Jan Mayen"
+        "country_en": "Svalbard and Jan Mayen",
+        "country_ru": "Шпицберген и Ян Майен"
     },
     {
-        "country": "Sweden"
+        "country_en": "Sweden",
+        "country_ru": "Швеция"
     },
     {
-        "country": "Switzerland"
+        "country_en": "Switzerland",
+        "country_ru": "Швейцария"
     },
     {
-        "country": "Syria"
+        "country_en": "Syria",
+        "country_ru": "Сирия"
     },
     {
-        "country": "Tajikistan"
+        "country_en": "Tajikistan",
+        "country_ru": "Таджикистан"
     },
     {
-        "country": "Tanzania"
+        "country_en": "Tanzania",
+        "country_ru": "Танзания"
     },
     {
-        "country": "Thailand"
+        "country_en": "Thailand",
+        "country_ru": "Таиланд"
     },
     {
-        "country": "Timor-Leste"
+        "country_en": "Timor-Leste",
+        "country_ru": "Тимор-Лешти"
     },
     {
-        "country": "Togo"
+        "country_en": "Togo",
+        "country_ru": "Того"
     },
     {
-        "country": "Tokelau"
+        "country_en": "Tokelau",
+        "country_ru": "Токелау"
     },
     {
-        "country": "Tonga"
+        "country_en": "Tonga",
+        "country_ru": "Тонга"
     },
     {
-        "country": "Trinidad and Tobago"
+        "country_en": "Trinidad and Tobago",
+        "country_ru": "Тринидад и Тобаго"
     },
     {
-        "country": "Tunisia"
+        "country_en": "Tunisia",
+        "country_ru": "Тунис"
     },
     {
-        "country": "Turkey"
+        "country_en": "Turkey",
+        "country_ru": "Турция"
     },
     {
-        "country": "Turkmenistan"
+        "country_en": "Turkmenistan",
+        "country_ru": "Туркменистан"
     },
     {
-        "country": "Turks and Caicos Islands"
+        "country_en": "Turks and Caicos Islands",
+        "country_ru": "Острова Тёркс и Кайкос"
     },
     {
-        "country": "Tuvalu"
+        "country_en": "Tuvalu",
+        "country_ru": "Тувалу"
     },
     {
-        "country": "Uganda"
+        "country_en": "Uganda",
+        "country_ru": "Уганда"
     },
     {
-        "country": "Ukraine"
+        "country_en": "Ukraine",
+        "country_ru": "Украина"
     },
     {
-        "country": "United Arab Emirates"
+        "country_en": "United Arab Emirates",
+        "country_ru": "Объединенные Арабские Эмираты"
     },
     {
-        "country": "United Kingdom"
+        "country_en": "United Kingdom",
+        "country_ru": "Великобритания"
     },
     {
-        "country": "United States"
+        "country_en": "United States",
+        "country_ru": "Соединенные Штаты"
     },
     {
-        "country": "United States Minor Outlying Islands"
+        "country_en": "United States Minor Outlying Islands",
+        "country_ru": "Малые отдаленные острова США"
     },
     {
-        "country": "Uruguay"
+        "country_en": "Uruguay",
+        "country_ru": "Уругвай"
     },
     {
-        "country": "Uzbekistan"
+        "country_en": "Uzbekistan",
+        "country_ru": "Узбекистан"
     },
     {
-        "country": "Vanuatu"
+        "country_en": "Vanuatu",
+        "country_ru": "Вануату"
     },
     {
-        "country": "Venezuela"
+        "country_en": "Venezuela",
+        "country_ru": "Венесуэла"
     },
     {
-        "country": "Vietnam"
+        "country_en": "Vietnam",
+        "country_ru": "Вьетнам"
     },
     {
-        "country": "Virgin Islands, British"
+        "country_en": "Virgin Islands, British",
+        "country_ru": "Виргинские острова, Британская"
     },
     {
-        "country": "Virgin Islands, U.S."
+        "country_en": "Virgin Islands, U.S.",
+        "country_ru": "Виргинские острова, США"
     },
     {
-        "country": "Wales"
+        "country_en": "Wales",
+        "country_ru": "Уэльс"
     },
     {
-        "country": "Wallis and Futuna"
+        "country_en": "Wallis and Futuna",
+        "country_ru": "Уоллис и Футуна"
     },
     {
-        "country": "Western Sahara"
+        "country_en": "Western Sahara",
+        "country_ru": "Западная Сахара"
     },
     {
-        "country": "Yemen"
+        "country_en": "Yemen",
+        "country_ru": "Йемен"
     },
     {
-        "country": "Zambia"
+        "country_en": "Zambia",
+        "country_ru": "Замбия"
     },
     {
-        "country": "Zimbabwe"
+        "country_en": "Zimbabwe",
+        "country_ru": "Зимбабве"
     }
 ]

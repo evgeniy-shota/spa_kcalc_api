@@ -1,0 +1,15 @@
+[
+{
+"name":"USDA FoodData Central",
+"description_eu":"USDA’s comprehensive source of food composition data. FoodData Central is managed by the Agricultural Research Service's Beltsville Human Nutrition Research Center and hosted by the National Agricultural Library.",
+"description_ru":"Комплексный источник данных о составе продуктов питания Министерства сельского хозяйства США. FoodData Central управляется Исследовательским центром питания человека Белтсвилля Службы сельскохозяйственных исследований и размещен в Национальной сельскохозяйственной библиотеке.",
+"citation":"U.S. Department of Agriculture, Agricultural Research Service, Beltsville Human Nutrition Research Center. FoodData Central. Available from https://fdc.nal.usda.gov/.",
+"thumbnail_image_name": "usda-symbol-logo.svg"
+},
+{
+"name":"Open Food Facts",
+"description_eu":"Open Food Facts is a non-profit project developed by thousands of volunteers from around the world. A collaborative, free and open database of food products from around the world. https://openfoodfacts.org",
+"description_ru":"Open Food Facts — некоммерческий проект, разработанный тысячами волонтеров со всего мира. Совместная, бесплатная и открытая база данных продуктов питания со всего мира. https://openfoodfacts.org",
+"thumbnail_image_name": "openfoodfacts-logo.svg"
+}
+]

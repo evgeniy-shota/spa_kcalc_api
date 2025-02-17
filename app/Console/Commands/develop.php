@@ -11,6 +11,7 @@ use GuzzleHttp\Promise\Create;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use PhpParser\Node\Expr\Cast\Object_;
+use JsonMachine\Items;
 
 class develop extends Command
 {
@@ -33,20 +34,14 @@ class develop extends Command
      */
     public function handle()
     {
-        $file = file_get_contents('./db_data/CountryOfManufacture.json');
+        $filePath = './db_data/';
+        $fileName = 'CountryOfManufacture.json';
 
-        // dd(json_decode(json_encode($file)));
-        // $pattern = '/\"[\w]*\":\s?\"[\wА-я\s\',().-]*\"/m';
-        // $pattern = '/(\[\s{\s)|(,\s},\s{\s)|(\s},\s])/';
-        $pattern = '/(\[\s*{\s*)|(,?\s*},\s*{\s*)|(,?\s*},?\s*]?)/';
-        $arrayOfCountry = preg_split($pattern, $file);
-        $res = [];
+        $file = Items::fromFile('/home/evgeniy/ssd/learnPhp/laravel/spa_kcalc_api/db_data/prod_res.json');
+        
+        // $arrayFromJson = json_decode($file, JSON_UNESCAPED_UNICODE);
+        // $res = [];
 
-        for ($i = 0, $size = count($arrayOfCountry); $i < $size; $i++) {
-            $res[] = strpos($arrayOfCountry[$i], ',\n') ?  preg_split('/,\n\s*/', $arrayOfCountry[$i]) : $arrayOfCountry[$i];
-        }
-
-        dd($res);
 
         // $someuser = User::find(2)->profile;
         // $someprofile = Profile::find(3)->user;

@@ -17,9 +17,14 @@ class ActivityFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->text(20),
+            'activity_category_id' => fake()->randomElement([0, 1, 2, 3, 4, 5]),
+            'name' => fake()->text(10),
             'description' => fake()->text(40),
-            'energy_cost' => fake()->numberBetween(10, 100)
+            'type_of_load' => fake()->randomElement(['duration', 'quantity']),
+            'duration_sec_to_calculate' => fake()->randomElement([60, 3600]),
+            'quantity_to_calculate' => fake()->numberBetween(10, 100),
+            'energy_cost' => fake()->numberBetween(50, 500),
+            'energy_cost_per_unit' => fake()->numberBetween(1, 50),
         ];
     }
 }

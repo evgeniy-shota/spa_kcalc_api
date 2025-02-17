@@ -11,15 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('trademarks', function (Blueprint $table) {
+        Schema::create('data_sources', function (Blueprint $table) {
             $table->id();
-            
-            $table->string('name', 125);
-            $table->foreignId('user_id')->index()->nullable()->constrained('users');
-            $table->string('description', 400)->nullable();
-            $table->string('logo_path', 255)->nullable();
+
+            $table->string('name', 150);
+            $table->string('name_orig', 150)->nullable();
+            $table->string('description_ru', 600)->nullable();
+            $table->string('description_en', 600)->nullable();
+            $table->string('citation', 400)->nullable();
+            $table->string('thumbnail_image_name', 255)->nullable();
             $table->boolean('is_enabled')->default(true);
-            $table->boolean('is_personal')->default(true);
 
             $table->timestamps();
         });
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('trademarks');
+        Schema::dropIfExists('data_sources');
     }
 };

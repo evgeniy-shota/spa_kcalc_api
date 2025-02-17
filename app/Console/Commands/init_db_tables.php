@@ -83,6 +83,9 @@ class init_db_tables extends Command
             $prod_carb_per_unit = round($prod_carb / 100, 2);
             $prod_fats_per_unit = round($prod_fats / 100, 2);
 
+            $productTypeLiquidReg = '/([\s]?(В|в)ода[\s]?)|([\s]?(Н|н)ектар[\s]?)|([\s]?(Н|н)апиток[\s]?)|([\s]?(М|м)орс[\s]?)|([\s]?(С|с)ок[\s?])/';
+            
+
             Product::create([
                 'name' => $product_name,
                 'category_id' => $prod_cat_id,

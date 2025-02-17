@@ -18,7 +18,7 @@ return new class extends Migration
             $table->boolean('is_personal')->default(false);
             $table->boolean('is_enabled')->default(true);
             $table->string('name', 255);
-            $table->string('thumbnail_image_path', 255)->nullable();
+            $table->string('thumbnail_image_name', 255)->nullable();
             $table->string('manufacturer', 255)->nullable();
             $table->string('country_of_manufacture', 100)->nullable();
             $table->integer('trademark_id')->nullable();
@@ -36,6 +36,7 @@ return new class extends Migration
             $table->float('proteins_per_unit', 2)->default(0);
             $table->float('carbohydrates_per_unit', 2)->default(0);
             $table->float('fats_per_unit', 2)->default(0);
+            $table->foreignId('data_source')->index()->nullable()->constrained();
             $table->json('nutrients_and_vitamins')->nullable();
 
             $table->timestamps();
