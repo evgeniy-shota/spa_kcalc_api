@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('user_id')->nullable()->index()->constrained('users');
             $table->boolean('is_personal')->default(false);
             $table->boolean('is_enabled')->default(true);
+            $table->boolean('is_abstract')->default(true);
             $table->string('name', 255);
             $table->string('thumbnail_image_name', 255)->nullable();
             $table->string('manufacturer', 255)->nullable();
@@ -24,6 +25,7 @@ return new class extends Migration
             $table->integer('trademark_id')->nullable();
             $table->string('description', 400)->nullable();
             $table->enum('type', ['solid', 'liquid', 'semi-liquid', 'frozen', 'canned', 'bulk'])->default('solid');
+            $table->enum('state', ['chilled', 'frozen', 'fresh'])->nullable();
             $table->enum('units_of_measurement', ['grams', 'milliliters'])->default('grams');
             $table->integer('quantity_to_calculate')->default(100);
             $table->integer('quantity')->default(100);

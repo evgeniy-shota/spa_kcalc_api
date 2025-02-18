@@ -19,12 +19,16 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             CategoryGroupSeeder::class,
             CategorySeeder::class,
-            ManufacturerSeeder::class,
-            TrademarkSeeder::class,
-            CountryOfManufactureSeeder::class,
-            DietSeeder::class,
-            ActivityCategorySeeder::class,
-            ActivitySeeder::class,
+            // ManufacturerSeeder::class,
+            // TrademarkSeeder::class,
+            // CountryOfManufactureSeeder::class,
+            ProductSeeder::class,
+            // DietSeeder::class,
+            // ActivityCategorySeeder::class,
+            // ActivitySeeder::class,
+            DishCategorySeeder::class,
+            DishSeeder::class,
+            DishProductSeeder::class,
         ]);
     }
 }
