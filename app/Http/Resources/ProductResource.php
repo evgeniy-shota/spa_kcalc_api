@@ -16,8 +16,6 @@ class ProductResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-
-
         // dd($request->route()->getName());
 
         $currentRout = $request->route()->getName();
@@ -46,7 +44,7 @@ class ProductResource extends JsonResource
             'countryOfManufacture' => $this->country_of_manufacture,
             'trademark_id' => $this->trademark_id,
             'description' => $this->description,
-            'units_of_measurement' => $this->units_of_measurement,
+            'units' => $this->units,
             'quantity_to_calculate' => $this->quantity_to_calculate,
             'quantity' => $this->quantity,
             'composition' => json_encode($this->product_composition, JSON_UNESCAPED_UNICODE),

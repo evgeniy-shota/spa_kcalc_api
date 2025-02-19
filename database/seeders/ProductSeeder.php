@@ -14,7 +14,7 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
-        $path = './db_data/products/res';
+        $path = './db_data/products/res/';
 
         if (($fileNames = $this->getFileNames($path)) == false) {
             dd('No such files');
@@ -25,11 +25,17 @@ class ProductSeeder extends Seeder
         foreach ($fileNames as $fileName) {
 
             $categoryName = substr($fileName, 0, strrpos($fileName, '.json'));
-            dd($categoryName);
-            $categoryId = Category::where('name', $categoryName);
-            $products = json_decode(file_get_contents($fileName, 'r'), JSON_UNESCAPED_UNICODE);
+            dump($categoryName);
+            $categoryId = (Category::where('name', $categoryName)->get())[0]->id;
+            $productsFile = file_get_contents($path . $categoryName . '.json', 'r') or die('can\'t open file...');
+            $products = json_decode($productsFile, true, JSON_UNESCAPED_UNICODE);
+
+            // dump($products);
 
             foreach ($products as $product => $value) {
+
+                dump('->' . $product);
+                // dump($value);
 
                 $prod_calory = 0;
                 $prod_prot = 0;
@@ -53,18 +59,25 @@ class ProductSeeder extends Seeder
                             $prod_fats = (float)substr($val, 0, strpos($val, " "));
                             break;
                         case "вещества":
-                            $prod_nutr = $val;
+                            $prod_nutr = json_encode($val, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
                             break;
                     }
                 }
 
+
                 Product::factory()->create([
 
                     'category_id' => $categoryId,
-                    'is_abstract' => $value['is_abstract'],
+                    'is_abstract' => key_exists('is_abstract', $value) ? $value['is_abstract'] : true,
                     'name' => $product,
-                    'manufacturer' => $value['manufacturer'],
-                    'quantity_to_calculate' => $value['quantity'],
+                    // 'trademark_id' => key_exists('trademark', $value) ? $value['trademark'] : null,
+                    'manufacturer' => key_exists('manufacturer', $value) ? $value['manufacturer'] : null,
+                    'description' => key_exists('description', $value) ? $value['description'] : null,
+                    'composition' => key_exists('composition', $value) ? $value['composition'] : null,
+                    'quantity_to_calculate' => key_exists('quantity_to_calculate', $value) ? $value['quantity_to_calculate'] : 100,
+                    'quantity' => key_exists('quantity', $value) ? $value['quantity'] : null,
+                    'condition' => key_exists('condition', $value) ? $value['condition'] : 'solid',
+                    'units' =>  key_exists('units', $value) ? $value['units'] : 'gr',
                     'kcalory' => $prod_calory,
                     'proteins' => $prod_prot,
                     'carbohydrates' => $prod_carb,

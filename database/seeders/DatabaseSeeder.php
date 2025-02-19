@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\CountryOfManufacture;
+use App\Models\ProductType;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -19,6 +20,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             CategoryGroupSeeder::class,
             CategorySeeder::class,
+            ProductTypeSeeder::class,
             // ManufacturerSeeder::class,
             // TrademarkSeeder::class,
             // CountryOfManufactureSeeder::class,
@@ -26,9 +28,9 @@ class DatabaseSeeder extends Seeder
             // DietSeeder::class,
             // ActivityCategorySeeder::class,
             // ActivitySeeder::class,
-            DishCategorySeeder::class,
-            DishSeeder::class,
-            DishProductSeeder::class,
+            // DishCategorySeeder::class,
+            // DishSeeder::class,
+            // DishProductSeeder::class,
         ]);
     }
 }

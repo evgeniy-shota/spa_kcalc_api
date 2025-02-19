@@ -24,10 +24,10 @@ class ProductCollection extends ResourceCollection
             'label' => 'Продукты'
         ];
 
-        return [
-            'data' => $this->collection,
-            'count' => count($this->collection),
-            'label' => 'Продукты'
-        ];
+        // return [
+        //     'data' => $this->collection,
+        //     'count' => count($this->collection),
+        //     'label' => 'Продукты'
+        // ];
     }
 }

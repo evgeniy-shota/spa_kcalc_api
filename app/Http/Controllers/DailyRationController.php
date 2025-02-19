@@ -25,8 +25,11 @@ class DailyRationController extends Controller
         // dd($userRations);
         // $ration = $userRations->get();
         if (count($ration) == 0) {
+
+            // dd(date('Y-m-d'));
             return new DailyRationResource(DailyRation::create([
                 'user_id' => $user_id,
+                'date' => date('Y-m-d'),
             ]));
         }
         // dd($ration);

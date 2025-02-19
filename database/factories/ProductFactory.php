@@ -22,11 +22,27 @@ class ProductFactory extends Factory
         $proteins = fake()->numberBetween(0, 25);
         $carbohydrates = fake()->numberBetween(0, 70);
         $fats = fake()->numberBetween(0, 30);
-
+        $condition = fake()->randomElement(['liquid', 'solid']);
         $categories = Category::all()->toArray();
+
+        $nutrVit = function () {
+            $nutrCount = fake()->numberBetween(3, 10);
+            $nutr = [];
+            for ($i = 0; $i < $nutrCount; $i++) {
+                $nutr[] = [
+                    fake()->word() => fake()->randomFloat(2, 0.01, 2.0) . fake()->randomElement(['мкг', 'мг', 'г'])
+                ];
+            }
+            return json_encode($nutr, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+        };
 
         return [
             // 'category_id'=>fake(),
+            'is_abstract' => true,
+            'composition' => fake()->text(),
+            'quantity' => fake()->randomElement([100, 200, 500, 1000]),
+            'condition' => $condition,
+            'units' => $condition == 'solid' ? 'gr' : 'ml',
             'name' => fake()->text(25),
             'description' => fake()->text(100),
             'category_id' => fake()->randomElement($categories)['id'],
@@ -41,17 +57,7 @@ class ProductFactory extends Factory
             'carbohydrates_per_unit' => round($carbohydrates / $quantity_to_calculate, 2),
             'fats_per_unit' => round($fats / $quantity_to_calculate, 2),
 
-            'nutrients_and_vitamins' => (function () {
-                $nutrCount = fake()->numberBetween(3, 10);
-                $nutr = [];
-                for ($i = 0; $i < $nutrCount; $i++) {
-                    $nutr[] = [
-                        fake()->word() => fake()->randomFloat(2, 0.01, 2.0) . fake()->randomElement(['мкг', 'мг', 'г'])
-                    ];
-                }
-                return $nutr;
-            }),
-
+            'nutrients_and_vitamins' => $nutrVit
 
         ];
     }

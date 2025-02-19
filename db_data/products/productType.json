@@ -1,0 +1,633 @@
+[
+{
+"name":"Баклажаны",
+"description":""
+},
+{
+"name":"Имбирь",
+"description":""
+},
+{
+"name":"Кабачки",
+"description":""
+},
+{
+"name":"Капуста",
+"description":""
+},
+{
+"name":"Картофель",
+"description":""
+},
+{
+"name":"Лук, чеснок",
+"description":""
+},
+{
+"name":"Морковь",
+"description":""
+},
+{
+"name":"Огурцы",
+"description":""
+},
+{
+"name":"Перцы",
+"description":""
+},
+{
+"name":"Редис, редька",
+"description":""
+},
+{
+"name":"Свекла",
+"description":""
+},
+{
+"name":"Томаты",
+"description":""
+},
+{
+"name":"Другие овощи",
+"description":""
+},
+{
+"name":"Тыква",
+"description":""
+},
+{
+"name":"Авокадо",
+"description":""
+},
+{
+"name":"Ананасы",
+"description":""
+},
+{
+"name":"Апельсины",
+"description":""
+},
+{
+"name":"Бананы",
+"description":""
+},
+{
+"name":"Виноград",
+"description":""
+},
+{
+"name":"Гранаты",
+"description":""
+},
+{
+"name":"Грейпфруты, помело",
+"description":""
+},
+{
+"name":"Груши",
+"description":""
+},
+{
+"name":"Киви",
+"description":""
+},
+{
+"name":"Лимоны",
+"description":""
+},
+{
+"name":"Манго",
+"description":""
+},
+{
+"name":"Мандарины",
+"description":""
+},
+{
+"name":"Хурма",
+"description":""
+},
+{
+"name":"Яблоки",
+"description":""
+},
+{
+"name":"Другие фрукты",
+"description":""
+},
+{
+"name":"Лук",
+"description":""
+},
+{
+"name":"Петрушка",
+"description":""
+},
+{
+"name":"Укроп",
+"description":""
+},
+{
+"name":"Микрозелень",
+"description":""
+},
+{
+"name":"Пряные травы",
+"description":""
+},
+{
+"name":"Наборы зелени",
+"description":""
+},
+{
+"name":"Салаты",
+"description":""
+},
+{
+"name":"Салатные смеси",
+"description":""
+},
+{
+"name":"Готовые салаты",
+"description":""
+},
+{
+"name":"Грибы",
+"description":""
+},
+{
+"name":"Ягоды",
+"description":""
+},
+{
+"name":"Мороженое",
+"description":""
+},
+{
+"name":"Яйца",
+"description":""
+},
+{
+"name":"Молоко",
+"description":""
+},
+{
+"name":"Сгущенное, сухое молоко",
+"description":""
+},
+{
+"name":"Сливки",
+"description":""
+},
+{
+"name":"Растительное молоко",
+"description":""
+},
+{
+"name":"Кефир, бифидопродукты",
+"description":""
+},
+{
+"name":"Ряженки, простокваши, сыворотки",
+"description":""
+},
+{
+"name":"Масло, маргарин",
+"description":""
+},
+{
+"name":"Творог",
+"description":""
+},
+{
+"name":"Сметана",
+"description":""
+},
+{
+"name":"Сыры",
+"description":""
+},
+{
+"name":"Йогурты, десерты, каши",
+"description":""
+},
+{
+"name":"Йогурты",
+"description":""
+},
+{
+"name":"Десерты, желе",
+"description":""
+},
+{
+"name":"Творожные десерты",
+"description":""
+},
+{
+"name":"Творожные сырки",
+"description":""
+},
+{
+"name":"Хлеб",
+"description":""
+},
+{
+"name":"Батон, багет",
+"description":""
+},
+{
+"name":"Тостовый, сэндвичный хлеб",
+"description":""
+},
+{
+"name":"Лаваши, лепешки",
+"description":""
+},
+{
+"name":"Хлеб для диетического, диабетического питания",
+"description":""
+},
+{
+"name":"Коржи, тарталетки",
+"description":""
+},
+{
+"name":"Торты, пирожные",
+"description":""
+},
+{
+"name":"Выпечка",
+"description":""
+},
+{
+"name":"Сушки, пряники",
+"description":""
+},
+{
+"name":"Замороженный хлеб, выпечка",
+"description":""
+},
+{
+"name":"Говядина",
+"description":""
+},
+{
+"name":"Свинина",
+"description":""
+},
+{
+"name":"Курица",
+"description":""
+},
+{
+"name":"Индейка",
+"description":""
+},
+{
+"name":"Кролик",
+"description":""
+},
+{
+"name":"Другие виды мяса",
+"description":""
+},
+{
+"name":"Субпродукты",
+"description":""
+},
+{
+"name":"Полуфабрикаты",
+"description":""
+},
+{
+"name":"Колбаски, купаты",
+"description":""
+},
+{
+"name":"Фарши",
+"description":""
+},
+{
+"name":"Шашлыки",
+"description":""
+},
+{
+"name":"Копчености ",
+"description":""
+},
+{
+"name":"Сыровяленое мясо",
+"description":""
+},
+{
+"name":"Соленые мясные изделия",
+"description":""
+},
+{
+"name":"Консервы мясные",
+"description":""
+},
+{
+"name":"Колбасы сырокопченые, сыровяленые",
+"description":""
+},
+{
+"name":"Колбасы вареные, варено-копченые",
+"description":""
+},
+{
+"name":"Колбасы из мясопродуктов, паштеты",
+"description":""
+},
+{
+"name":"Сардельки, сосиски",
+"description":""
+},
+{
+"name":"Мясные снеки",
+"description":""
+},
+{
+"name":"Тушки рыбы",
+"description":""
+},
+{
+"name":"Филе и стейки",
+"description":""
+},
+{
+"name":"Фарши и наборы",
+"description":""
+},
+{
+"name":"Рыбные полуфабрикаты",
+"description":""
+},
+{
+"name":"Морепродукты",
+"description":""
+},
+{
+"name":"Креветки",
+"description":""
+},
+{
+"name":"Мидии, моллюски",
+"description":""
+},
+{
+"name":"Кальмары, осьминоги",
+"description":""
+},
+{
+"name":"Чука, морская капуста",
+"description":""
+},
+{
+"name":"Рыба",
+"description":""
+},
+{
+"name":"Рыба слабосолёная",
+"description":""
+},
+{
+"name":"Рыба копченая",
+"description":""
+},
+{
+"name":"Рыбные консервы, пресервы, паштеты",
+"description":""
+},
+{
+"name":"Крабовые палочки, мясо",
+"description":""
+},
+{
+"name":"Икра",
+"description":""
+},
+{
+"name":"Икра имитированная",
+"description":""
+},
+{
+"name":"Кофе",
+"description":""
+},
+{
+"name":"Чай",
+"description":""
+},
+{
+"name":"Горячие напитки",
+"description":""
+},
+{
+"name":"Вода Газированная",
+"description":""
+},
+{
+"name":"Вода Минеральная",
+"description":""
+},
+{
+"name":"Вода Негазированная",
+"description":""
+},
+{
+"name":"Квас",
+"description":""
+},
+{
+"name":"Напитки газированные",
+"description":""
+},
+{
+"name":"Соки, нектары, морсы, компоты",
+"description":""
+},
+{
+"name":"Сокосодержащие напитки",
+"description":""
+},
+{
+"name":"Чай, кофе холодный",
+"description":""
+},
+{
+"name":"Сиропы и топпинги",
+"description":""
+},
+{
+"name":"Энергетические напитки",
+"description":""
+},
+{
+"name":"Рис",
+"description":""
+},
+{
+"name":"Крупа гречневая",
+"description":""
+},
+{
+"name":"Крупы иные",
+"description":""
+},
+{
+"name":"Крупы в варочных пакетах, гарниры",
+"description":""
+},
+{
+"name":"Традиционные макаронные изделия",
+"description":""
+},
+{
+"name":"Макаронные изделия из твердых сортов",
+"description":""
+},
+{
+"name":"Горох",
+"description":""
+},
+{
+"name":"Фасоль",
+"description":""
+},
+{
+"name":"Чечевица",
+"description":""
+},
+{
+"name":"Нут",
+"description":""
+},
+{
+"name":"Хлопья",
+"description":""
+},
+{
+"name":"Каши",
+"description":""
+},
+{
+"name":"Сухие завтраки",
+"description":""
+},
+{
+"name":"Мюсли, батончики",
+"description":""
+},
+{
+"name":"Мука",
+"description":""
+},
+{
+"name":"Бульоны, Супы",
+"description":""
+},
+{
+"name":"Лапша, вермишель",
+"description":""
+},
+{
+"name":"Картофельное пюре",
+"description":""
+},
+{
+"name":"Напитки и десерты быстрого приготовления",
+"description":""
+},
+{
+"name":"Сахар",
+"description":""
+},
+{
+"name":"Соль",
+"description":""
+},
+{
+"name":"Специи, пряности, травы",
+"description":""
+},
+{
+"name":"Желатин, агар",
+"description":""
+},
+{
+"name":"Водоросли",
+"description":""
+},
+{
+"name":"Лапша восточная",
+"description":""
+},
+{
+"name":"Чипсы, снеки",
+"description":""
+},
+{
+"name":"Сухарики",
+"description":""
+},
+{
+"name":"Орехи",
+"description":""
+},
+{
+"name":"Сухофрукты",
+"description":""
+},
+{
+"name":"Семечки",
+"description":""
+},
+{
+"name":"Смеси орехов и сухофруктов",
+"description":""
+}
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

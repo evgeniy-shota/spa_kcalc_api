@@ -39,83 +39,38 @@ class develop extends Command
 
         $filePath = './db_data/products/';
         $fileName = 'Напитки';
+        // $fileName = 'Вода и напитки';
         $fileType  = '.json';
+
         $file = json_decode(file_get_contents($filePath . $fileName . $fileType), JSON_UNESCAPED_UNICODE);
+
         $categories = [
-            'Вода' => [],
-            'Газированные напитки, квас' => [],
-            'Соки, нектары, морсы' => [],
-            'Другие напитки' => [],
-            'Энергетические напитки' => [],
-            'Чай' => [],
-            'Кофе' => [],
-            'Сиропы и топпинги' => [],
-            'Другие горячие напитки' => []
+            'Птица' => [],
+            'Полуфабрикаты'
+        ];
+
+        $dishes = [
+            'Птица' => [],
         ];
 
         // $separaitedProducts = [];
-        $regWater = '/[Вв]ода/';
-        $regTea = '/[Чч]ай/';
-        $regCoffee = '/[Кк]офе/';
-        $regHot = '/[Шш]околад|([Кк]акао)/';
-        $regOqsyWater = '/([Гг]азиров)|([Кк]вас)/';
-        $regNotOqsyWater = '/[Нн]егазиров/';
-        $regEnergy = '/[Ээ]нергети/';
-        $regJuice = '/(\s?[Сс]ок\s?)|(\s?[Нн]ектар\s?)|(\s?[Мм]орс\s?)/';
-        $regSyrup = '/[Сс]ироп/';
+        $regDishes = '//';
 
 
         foreach ($file as $product => $value) {
-
+            // dd($value);
             // strpos($product, 'Энергет') !== false || strpos($product, 'энергет') !== false
-            if (preg_match($regEnergy, $product) === 1) {
-                $categories['Энергетические напитки'][$product] = $value;
+            if (preg_match($regDishes, $product) === 1) {
+                $dishes['Птица'][$product] = ($value[0]);
                 continue;
             }
 
-            // (strpos($product, 'Негазиров') === false && strpos($product, 'негазиров') === false) &&
-            // (strpos($product, 'Газиров') !== false || strpos($product, 'газиров') !== false || strpos($product, 'газиров') !== false || strpos($product, 'газиров') !== false)
-
-            if (
-                preg_match($regNotOqsyWater, $product) === 0 &&
-                preg_match($regOqsyWater, $product) === 1
-            ) {
-                $categories['Газированные напитки, квас'][$product] = $value;
-                // dump($product);
+            if (preg_match($regDishes, $product) === 1) {
+                $dishes['Полуфабрикаты'][$product] = ($value[0]);
                 continue;
             }
 
-            if (preg_match($regJuice, $product) === 1) {
-                $categories['Соки, нектары, морсы'][$product] = $value;
-                continue;
-            }
-
-            if (preg_match($regTea, $product) === 1) {
-                $categories['Чай'][$product] = $value;
-                continue;
-            }
-
-            if (preg_match($regCoffee, $product) === 1) {
-                $categories['Кофе'][$product] = $value;
-                continue;
-            }
-
-            if (preg_match($regSyrup, $product) === 1) {
-                $categories['Сиропы и топпинги'][$product] = $value;
-                continue;
-            }
-
-            if (preg_match($regHot, $product) === 1) {
-                $categories['Другие горячие напитки'][$product] = $value;
-                continue;
-            }
-
-            if (preg_match($regWater, $product) === 1) {
-                $categories['Вода'][$product] = $value;
-                continue;
-            }
-
-            $categories['Другие напитки'][$product] = $value;
+            $categories['Другие напитки'][$product] = ($value[0]);
         }
 
         foreach ($categories as $category => $products) {

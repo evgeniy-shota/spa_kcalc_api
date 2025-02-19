@@ -22,7 +22,7 @@ class ProductController extends Controller
 
         $user_id = Auth::user() ? Auth::user()->id : null;
 
-        $products = Product::where('is_visible', true)->where('is_personal', false)->orWhere('user_id', $user_id)->orderBy('is_personal', 'desc')->get();
+        $products = Product::where('is_enabled', true)->where('is_personal', false)->orWhere('user_id', $user_id)->orderBy('is_personal', 'desc')->get();
 
         return new ProductCollection($products);
     }
@@ -38,7 +38,7 @@ class ProductController extends Controller
         // dd(Product::find($id));
         $product = Product::find($id);
 
-        if ($product && $product->is_visible) {
+        if ($product && $product->is_enabled) {
 
             // $user_id = Auth::user() ? Auth::user()->id : null;
 
@@ -87,7 +87,7 @@ class ProductController extends Controller
             'quantity_to_calculate' => $request->product['quantity'],
             'manufacturer' => $request->product['manufacturer'],
             'country_of_manufacture' => $request->product['country_of_manufacture'],
-            'product_composition' => $request->product['composition'],
+            'composition' => $request->product['composition'],
             'kcalory' => $request->product['kcalory'],
             'proteins' => $request->product['proteins'],
             'carbohydrates' => $request->product['carbohydrates'],

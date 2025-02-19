@@ -21,7 +21,7 @@ class CategoryController extends Controller
         if (Auth::user()) {
             $categories = Category::where('is_personal', false)->orWhere('user_id', Auth::user()->id)->orderBy('is_personal', 'desc')->get();
         } else {
-            $categories = Category::where('is_personal', false)->where('is_visible', true)->get();
+            $categories = Category::where('is_personal', false)->where('is_enabled', true)->get();
         }
 
         return new CategoryCollection($categories);
@@ -34,7 +34,7 @@ class CategoryController extends Controller
     {
         $newCategory = Category::create([
             'name' => $request->str('name'),
-            'is_visible' => $request->boolean('is_visible'),
+            'is_enabled' => $request->boolean('is_enabled'),
         ]);
         return response()->json([$newCategory], 201);
     }
@@ -47,7 +47,7 @@ class CategoryController extends Controller
         // $category = Category::where('is_visible', true)->where('id', $id)->where('is_personal', false)->orWhere('user_id', $user_id)->get();
         $category = Category::find($id);
 
-        if ($category && $category->is_visible) {
+        if ($category && $category->is_enabled) {
 
             $user_id = Auth::user() ? Auth::user()->id : null;
 
@@ -67,7 +67,7 @@ class CategoryController extends Controller
     {
         $updatedCategory = Category::updateOrCreate(
             ['id' => '$id'],
-            ['name' => $request->name, 'is_vilible' => $request->is_visible]
+            ['name' => $request->name, 'is_enabled' => $request->is_enabled]
         );
 
         return response()->json($updatedCategory, 201);

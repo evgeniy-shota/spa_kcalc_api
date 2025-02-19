@@ -24,12 +24,13 @@ return new class extends Migration
             $table->string('country_of_manufacture', 100)->nullable();
             $table->integer('trademark_id')->nullable();
             $table->string('description', 400)->nullable();
-            $table->enum('type', ['solid', 'liquid', 'semi-liquid', 'frozen', 'canned', 'bulk'])->default('solid');
+            $table->foreignId('type_id')->index()->nullable()->constrained('product_types');
+            $table->enum('condition', ['solid', 'liquid', 'semi-liquid', 'bulk'])->default('solid');
             $table->enum('state', ['chilled', 'frozen', 'fresh'])->nullable();
-            $table->enum('units_of_measurement', ['grams', 'milliliters'])->default('grams');
+            $table->enum('units', ['gr', 'ml'])->default('gr');
             $table->integer('quantity_to_calculate')->default(100);
-            $table->integer('quantity')->default(100);
-            $table->string('product_composition', 800)->nullable();
+            $table->integer('quantity')->default(100)->nullable();
+            $table->string('composition', 800)->nullable();
             $table->float('kcalory', 1)->default(0);
             $table->float('proteins', 1)->default(0);
             $table->float('carbohydrates', 1)->default(0);

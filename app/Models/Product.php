@@ -14,6 +14,7 @@ class Product extends Model
     protected $fillable = [
         'user_id',
         'category_id',
+        'type_id',
         'is_personal',
         'is_enabled',
         'is_abstract',
@@ -21,14 +22,14 @@ class Product extends Model
         'thumbnail_image_name',
         'manufacturer',
         'country_of_manufacture',
-        'trademark_id',
+        'trademark',
         'description',
         'units_of_measurement',
-        'type',
+        'condition',
         'state',
         'quantity_to_calculate',
         'quantity',
-        'product_composition',
+        'composition',
         'kcalory',
         'proteins',
         'carbohydrates',
@@ -38,6 +39,7 @@ class Product extends Model
         'carbohydrates_per_unit',
         'fats_per_unit',
         'nutrients_and_vitamins',
+        'data_source',
     ];
 
     protected $hidden = [
