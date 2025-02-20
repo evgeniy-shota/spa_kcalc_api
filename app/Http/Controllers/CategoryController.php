@@ -6,6 +6,8 @@ use App\Models\Category;
 use App\Http\Resources\CategoryCollection;
 use App\Http\Resources\ProductCollection;
 use App\Http\Resources\ProductResource;
+use App\Models\Product;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -34,8 +36,10 @@ class CategoryController extends Controller
     {
         $newCategory = Category::create([
             'name' => $request->str('name'),
+            'name' => $request->group_id,
             'is_enabled' => $request->boolean('is_enabled'),
         ]);
+
         return response()->json([$newCategory], 201);
     }
 
@@ -49,10 +53,17 @@ class CategoryController extends Controller
 
         if ($category && $category->is_enabled) {
 
-            $user_id = Auth::user() ? Auth::user()->id : null;
+            $user_id = Auth::user() ? Auth::user()->id : -1;
 
             if ($category->is_personal == false || $category->user_id == $user_id) {
-                return new ProductCollection($category->products);
+
+                $products = Product::where('category_id', $category->id)->where('is_enabled', true)->where(
+                    function (Builder $query) use ($user_id) {
+                        $query->where('is_personal', false)->orWhere('user_id', $user_id);
+                    }
+                )->get();
+
+                return new ProductCollection($products);
             }
             return response()->json(['message' => 'Unauthorized'], 401);
         }

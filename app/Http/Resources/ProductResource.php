@@ -26,7 +26,13 @@ class ProductResource extends JsonResource
             return [
                 "id" => $this->id,
                 "name" =>  $this->name,
-                "quantity_to_calculate" => $this->quantity_to_calculate,
+                'type_id' => $this->type_id,
+                'is_personal' => $this->is_personal,
+                'is_abstract' => $this->is_abstract,
+                'condition' => $this->condition,
+                'state' => $this->state,
+                'manufacturer' => $this->manufacturer,
+                'country_of_manufacture' => $this->country_of_manufacture,
                 "quantity" => $this->quantity,
                 "kcalory" =>  $this->kcalory,
                 "proteins" => $this->proteins,
@@ -37,24 +43,38 @@ class ProductResource extends JsonResource
 
         return [
             'id' => $this->id,
-            'category_id' => $this->category_id,
+            'type_id' => $this->type_id,
             'is_personal' => $this->is_personal,
+            'is_abstract' => $this->is_abstract,
+            'condition' => $this->condition,
+            'state' => $this->state,
+            'category_id' => $this->category_id,
             'name' => $this->name,
             'manufacturer' => $this->manufacturer,
-            'countryOfManufacture' => $this->country_of_manufacture,
+            'country_of_manufacture' => $this->country_of_manufacture,
             'trademark_id' => $this->trademark_id,
             'description' => $this->description,
             'units' => $this->units,
             'quantity_to_calculate' => $this->quantity_to_calculate,
             'quantity' => $this->quantity,
-            'composition' => json_encode($this->product_composition, JSON_UNESCAPED_UNICODE),
+            'composition' => $this->product_composition,
             'kcalory' => $this->kcalory,
             'proteins' => $this->proteins,
             'carbohydrates' => $this->carbohydrates,
             'fats' => $this->fats,
+            'kcalory_per_unit' => $this->kcalory_per_unit,
+            'proteins_per_unit' => $this->proteins_per_unit,
+            'carbohydrates_per_unit' => $this->carbohydrates_per_unit,
+            'fats_per_unit' => $this->fats_per_unit,
+            'thumbnail_image_name' => $this->thumbnail_image_name,
+            'data_source' => $this->data_source,
             'nutrientAndVitamines' => json_decode($this->nutrients_and_vitamins, JSON_UNESCAPED_UNICODE),
 
             'type' => 'product',
+
+
+
+
         ];
     }
 }
