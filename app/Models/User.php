@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use App\Events\User\CreatedEvent;
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -35,7 +36,7 @@ class User extends Authenticatable
         'password',
         // 'permission',
         'is_banned',
-        'is_admin',
+        // 'is_admin',
     ];
 
     /**
@@ -47,6 +48,7 @@ class User extends Authenticatable
         'password',
         'remember_token',
         'updated_at',
+        'is_admin',
     ];
 
     /**
@@ -59,8 +61,14 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            // 'created_at' => 'datetime:Y-m-d',
         ];
     }
+
+    // public function serializeDate(DateTimeInterface $date): string
+    // {
+    //     return $date->format('Y-m-d');
+    // }
 
     public function profile(): HasOne
     {

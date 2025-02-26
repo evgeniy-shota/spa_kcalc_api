@@ -17,14 +17,14 @@ class Profile extends Model
         'date_of_birth',
         'height',
         'level_of_training',
-        'daily_activity_level',
+        'level_of_daily_activity',
         'weight',
         'target_weight',
         'target_energy_value_ration',
     ];
 
     protected $hidden = [
-        'updated_at',
+        'created_at',
     ];
 
     public function user(): BelongsTo

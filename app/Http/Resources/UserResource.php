@@ -17,10 +17,11 @@ class UserResource extends JsonResource
     {
 
         return [
+            'id' => $this->id,
             'email' => $this->email,
             'name' => $this->name,
             'is_banned' => $this->is_banned,
-            'created_at' => $this->created_at,
+            'date_of_registration' => date_format($this->created_at, 'Y-m-d'),
             'profile' => new ProfileResource($this->profile),
         ];
     }
