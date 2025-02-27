@@ -19,22 +19,9 @@ class ProfileResource extends JsonResource
             'date_of_birth' => $this->date_of_birth,
             'height' => $this->height,
             'level_of_training' => $this->level_of_training,
-            'level_of_daily_activity' => $this->daily_activity_level,
+            'level_of_daily_activity' => $this->level_of_daily_activity,
             // 'weight' => $this->weight,
-            'weight' => [
-                [
-                    'date' => '2025-02-20',
-                    'value' => 117,
-                ],
-                [
-                    'date' => '2025-02-22',
-                    'value' => 115,
-                ],
-                [
-                    'date' => '2025-02-23',
-                    'value' => 114
-                ]
-            ],
+            'weight' => json_decode($this->weight, JSON_UNESCAPED_UNICODE),
             'target_weight' => $this->target_weight,
             'target_energy_value_ration' => $this->target_energy_value_ration,
         ];

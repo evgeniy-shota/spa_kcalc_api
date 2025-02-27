@@ -52,12 +52,12 @@ class UserController extends Controller
 
         // dump($request);
 
-        Profile::where('user_id', $user->id)::update([
+        Profile::where('user_id', $user->id)->update([
             'gender' => $request->gender,
             'date_of_birth' => $request->dateOfBirth,
             'height' => $request->height,
             'level_of_training' => $request->level_of_training,
-            'daily_activity_level' => $request->level_of_activity,
+            'level_of_daily_activity' => $request->level_of_daily_activity,
             'weight' => $request->weight,
             'target_weight' => $request->target_weight,
         ]);
