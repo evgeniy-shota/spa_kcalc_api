@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Category;
 use App\Http\Resources\CategoryCollection;
 use App\Http\Resources\ProductCollection;
@@ -11,20 +12,34 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use App\Http\Requests\CategoryRequest;
+use App\Http\Filters\CategoryFilter;
+
+
 class CategoryController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(CategoryRequest $request)
     {
         // return response()->json(Category::all());
 
-        if (Auth::user()) {
-            $categories = Category::where('is_personal', false)->orWhere('user_id', Auth::user()->id)->orderBy('is_personal', 'desc')->get();
-        } else {
-            $categories = Category::where('is_personal', false)->where('is_enabled', true)->get();
-        }
+        $data = $request->validated();
+
+        dump($data);
+
+        $filter = app()->make(CategoryFilter::class, ['queryParams' => array_filter($data)]);
+
+        $categories = Category::filter($filter);
+        dd($categories);
+
+        // if (Auth::user()) {
+        //     $categories = Category::where('is_personal', false)->orWhere('user_id', Auth::user()->id)->orderBy('is_personal', 'desc')->get();
+        // } else {
+        //     $categories = Category::where('is_personal', false)->where('is_enabled', true)->get();
+        // }
 
         return new CategoryCollection($categories);
     }
@@ -32,11 +47,15 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
+        dd($request);
+
         $newCategory = Category::create([
             'name' => $request->str('name'),
-            'name' => $request->group_id,
+            'category_group_id' => $request->group_id,
+            'user_id' => $request->user_id,
+            'is_personal' => $request->is_personal,
             'is_enabled' => $request->boolean('is_enabled'),
         ]);
 
@@ -74,7 +93,7 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CategoryRequest $request, string $id)
     {
         $updatedCategory = Category::updateOrCreate(
             ['id' => '$id'],

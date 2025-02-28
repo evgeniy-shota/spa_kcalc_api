@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+// use Illuminate\Contracts\Validation\ValidationRule;
 
 class CategoryRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class CategoryRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,11 +23,11 @@ class CategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => 'required|int',
+            'user_id' => 'nullable|int',
             'category_group_id' => 'required|int',
-            'name' => 'require|string|max:255',
-            'is_personal' => 'require|boolean',
-            'is_enabled' => 'require|boolean',
+            'name' => 'required|string|max:255',
+            'is_personal' => 'required|boolean',
+            'is_enabled' => 'required|boolean',
             'icon_path' => 'nullable|string|max:255',
             'thumbnail_image_path' => 'nullable|string|max:255',
         ];
