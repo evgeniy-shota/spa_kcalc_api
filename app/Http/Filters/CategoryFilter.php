@@ -8,13 +8,13 @@ class CategoryFilter extends AbstractFilter
 {
 
     public const NAME = 'name';
-    public const PERSONAL = 'is_personal';
+    public const IS_PERSONAL = 'isPersonal';
 
     protected function getCallbacks(): array
     {
         return [
             self::NAME => [$this, 'name'],
-            self::PERSONAL => [$this, 'is_personal'],
+            self::IS_PERSONAL => [$this, 'isPersonal'],
         ];
     }
 
@@ -23,7 +23,7 @@ class CategoryFilter extends AbstractFilter
         $builder->where('name', 'like', '%' . $value . '%');
     }
 
-    public function personal(Builder $builder, $value)
+    public function isPersonal(Builder $builder, $value)
     {
         $builder->where('is_personal', $value);
     }

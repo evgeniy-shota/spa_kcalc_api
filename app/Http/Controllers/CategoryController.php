@@ -9,12 +9,17 @@ use App\Http\Resources\ProductCollection;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Builder;
+use App\Builders\CustomBuilder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Requests\CategoryRequest;
 use App\Http\Filters\CategoryFilter;
+use App\Http\Resources\CategoryResource;
+use Illuminate\Support\Facades\Validator;
 
+
+use App\Http\CustomValidators\CategoryFilterChecker;
 
 class CategoryController extends Controller
 {
@@ -22,24 +27,28 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(CategoryRequest $request)
+    public function index(Request $request)
     {
-        // return response()->json(Category::all());
+        $data = new CategoryFilterChecker($request->toArray());
+        // dd($data());
 
-        $data = $request->validated();
+        $validatedData = Validator::make($data(), [
+            'name' => 'nullable|string',
+            'isPersonal' => 'nullable|boolean'
+        ]);
 
-        dump($data);
+        $data = $validatedData->validated();
+        // dump(app());
+        // сделат ьпоиск независамым от регистра
+        $filter = app()->make(CategoryFilter::class, ['queryParams' => array_filter($validatedData->validated())]);
 
-        $filter = app()->make(CategoryFilter::class, ['queryParams' => array_filter($data)]);
-
-        $categories = Category::filter($filter);
-        dd($categories);
-
-        // if (Auth::user()) {
-        //     $categories = Category::where('is_personal', false)->orWhere('user_id', Auth::user()->id)->orderBy('is_personal', 'desc')->get();
-        // } else {
-        //     $categories = Category::where('is_personal', false)->where('is_enabled', true)->get();
-        // }
+        // $categories = Category::where('is_enabled', true)->filter($filter)->get();
+        
+        if (Auth::user()) {
+            $categories = Category::whereEnabled()->whereAvailable(Auth::user()->id)->filter($filter)->orderBy('is_personal', 'desc')->get();
+        } else {
+            $categories = Category::whereEnabled()->whereAvailable()->filter($filter)->get();
+        }
 
         return new CategoryCollection($categories);
     }
@@ -76,11 +85,13 @@ class CategoryController extends Controller
 
             if ($category->is_personal == false || $category->user_id == $user_id) {
 
-                $products = Product::where('category_id', $category->id)->where('is_enabled', true)->where(
-                    function (Builder $query) use ($user_id) {
-                        $query->where('is_personal', false)->orWhere('user_id', $user_id);
-                    }
-                )->get();
+                $products = Product::where('category_id', $category->id)->whereEnabled()->whereAvailable($user_id)->get();
+
+                // where(
+                //     function (Builder $q) use ($user_id) {
+                //         $q->where('is_personal', false)->orWhere('user_id', $user_id);
+                //     }
+                // )->
 
                 return new ProductCollection($products);
             }

@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Builders\CustomBuilder;
+use Illuminate\Cache\Events\RetrievingKey;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -56,6 +58,11 @@ class Product extends Model
         ];
 
         return $array;
+    }
+
+    public function newEloquentBuilder($query): CustomBuilder
+    {
+        return new CustomBuilder($query);
     }
 
     public function category(): BelongsTo

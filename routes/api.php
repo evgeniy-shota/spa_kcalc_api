@@ -22,7 +22,15 @@ use Illuminate\Support\Facades\Route;
 // ->middleware('auth:sanctum')
 Route::apiResource('/category-groups', CategoryGroupController::class);
 
-Route::apiResource('/categories', CategoryController::class);
+Route::controller(CategoryController::class)->group(function () {
+    Route::get('/categories', 'index');
+    Route::get('/categories/{id}', 'show');
+    Route::post('/categories', 'store');
+    Route::patch('/categories', 'update');
+    Route::delete('/categories/{id}', 'destroy');
+});
+
+// Route::apiResource('/categories', CategoryController::class);
 
 Route::apiResource('/products', ProductController::class);
 

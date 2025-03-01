@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Builder;
 
 abstract class AbstractFilter implements FilterInterface
 {
-    private $queryParam = [];
+    private $queryParams = [];
 
-    public function __construct(array $queryParam)
+    public function __construct(array $queryParams)
     {
-        $this->queryParam = $queryParam;
+        $this->queryParams = $queryParams;
     }
 
     abstract protected function getCallbacks(): array;
@@ -20,8 +20,8 @@ abstract class AbstractFilter implements FilterInterface
         $this->before($builder);
 
         foreach ($this->getCallbacks() as $name => $callback) {
-            if (isset($this->queryParam[$name])) {
-                call_user_func($callback, $builder, $this->queryParam[$name]);
+            if (isset($this->queryParams[$name])) {
+                call_user_func($callback, $builder, $this->queryParams[$name]);
             }
         }
     }
