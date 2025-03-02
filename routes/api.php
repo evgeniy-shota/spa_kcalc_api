@@ -32,7 +32,15 @@ Route::controller(CategoryController::class)->group(function () {
 
 // Route::apiResource('/categories', CategoryController::class);
 
-Route::apiResource('/products', ProductController::class);
+Route::controller(ProductController::class)->group(function () {
+    Route::post('/products', 'index');
+    Route::get('/products/{id}', 'show');
+    Route::post('/products/create', 'store');
+    Route::patch('/products/{id}', 'update');
+    Route::delete('/products/{id}', 'destroy');
+});
+
+// Route::apiResource('/products', ProductController::class);
 
 Route::apiResource('/activities', ActivityController::class);
 

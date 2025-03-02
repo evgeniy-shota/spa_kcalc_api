@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Filters\ProductFilter;
+use App\Http\Requests\Product\IndexRequest;
 use App\Http\Resources\ProductCollection;
 use App\Http\Resources\ProductResource;
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,15 +17,22 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(IndexRequest $request)
     {
         // return response()->json(
         //     Product::all()
         // );
+        $validate = $request->validated();
+
+        // if (valida)
+        // dd($validate);
 
         $user_id = Auth::user() ? Auth::user()->id : null;
 
-        $products = Product::where('is_enabled', true)->where('is_personal', false)->orWhere('user_id', $user_id)->orderBy('is_personal', 'desc')->get();
+        $filter = app()->make(ProductFilter::class, ['queryParams' => array_filter($validate)]);
+
+        // ->orderBy('is_personal', 'desc')
+        $products = Product::whereEnabled()->whereAvailable($user_id)->filter($filter)->get();
 
         return new ProductCollection($products);
     }
@@ -32,10 +42,6 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        // return response()->json(
-        //     Product::find($id)
-        // );
-        // dd(Product::find($id));
         $product = Product::find($id);
 
         if ($product && $product->is_enabled) {
@@ -109,7 +115,8 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        dump('Update product' . $id);
+        dump($request->toArray());
     }
 
     /**
@@ -117,6 +124,6 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        dump('Destroy product' . $id);
     }
 }

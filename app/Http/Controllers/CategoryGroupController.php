@@ -12,7 +12,7 @@ class CategoryGroupController extends Controller
 {
     public function index()
     {
-        $categoriesGroups = CategoryGroup::where('is_enabled', true)->get();
+        $categoriesGroups = CategoryGroup::whereEnabled()->get();
 
         return new CategoryGroupCollection($categoriesGroups);
     }

@@ -16,9 +16,11 @@ class CategoryGroupResource extends JsonResource
     public function toArray(Request $request): array
     {
         $user = Auth::user();
-        
-        $categories = $user ? new CategoryCollection($this->categories()->where('is_enabled', true)->where('is_personal', false)->orWhere('user_id', $user->id)->get()) :
-            new CategoryCollection($this->categories()->where('is_enabled', true)->where('is_personal', false)->get());
+
+        $categories = new CategoryCollection($this->categories()->whereEnabled()->whereAvailable($user ? $user->id : null)->get());
+
+        // $categories =  new CategoryCollection($this->categories()->where('is_enabled', true)->where('is_personal', false)->orWhere('user_id', $user->id)->get()) :
+        //     new CategoryCollection($this->categories()->where('is_enabled', true)->where('is_personal', false)->get());
 
         return [
             'id' => $this->id,

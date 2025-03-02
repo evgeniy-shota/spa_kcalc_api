@@ -43,7 +43,7 @@ class CategoryController extends Controller
         $filter = app()->make(CategoryFilter::class, ['queryParams' => array_filter($validatedData->validated())]);
 
         // $categories = Category::where('is_enabled', true)->filter($filter)->get();
-        
+
         if (Auth::user()) {
             $categories = Category::whereEnabled()->whereAvailable(Auth::user()->id)->filter($filter)->orderBy('is_personal', 'desc')->get();
         } else {
@@ -51,24 +51,6 @@ class CategoryController extends Controller
         }
 
         return new CategoryCollection($categories);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(CategoryRequest $request)
-    {
-        dd($request);
-
-        $newCategory = Category::create([
-            'name' => $request->str('name'),
-            'category_group_id' => $request->group_id,
-            'user_id' => $request->user_id,
-            'is_personal' => $request->is_personal,
-            'is_enabled' => $request->boolean('is_enabled'),
-        ]);
-
-        return response()->json([$newCategory], 201);
     }
 
     /**
@@ -99,6 +81,24 @@ class CategoryController extends Controller
         }
 
         return response()->json(['message' => 'Not Found'], 404);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(CategoryRequest $request)
+    {
+        dd($request);
+
+        $newCategory = Category::create([
+            'name' => $request->str('name'),
+            'category_group_id' => $request->group_id,
+            'user_id' => $request->user_id,
+            'is_personal' => $request->is_personal,
+            'is_enabled' => $request->boolean('is_enabled'),
+        ]);
+
+        return response()->json([$newCategory], 201);
     }
 
     /**

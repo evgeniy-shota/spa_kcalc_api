@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Builders\CustomBuilder;
+use App\Models\Traits\Filterable;
 use Illuminate\Cache\Events\RetrievingKey;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -49,7 +50,7 @@ class Product extends Model
         // 'updated_at',
     ];
     /** @use HasFactory<\Database\Factories\ProductFactory> */
-    use HasFactory, Searchable;
+    use HasFactory, Searchable, Filterable;
 
     public function toSearchableArray(): array
     {
