@@ -18,6 +18,8 @@ class DataSourceSeeder extends Seeder
 
         $dataSource = json_decode(file_get_contents($filePath . $fileName), JSON_UNESCAPED_UNICODE);
 
+        dump($dataSource);
+        
         for ($i = 0, $size = count($dataSource); $i < $size; $i++) {
 
             DataSource::factory()->create([

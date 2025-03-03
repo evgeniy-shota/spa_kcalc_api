@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\AdditionalProductDataController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CategoryGroupController;
 use App\Http\Controllers\DailyRationController;
@@ -41,6 +42,8 @@ Route::controller(ProductController::class)->group(function () {
 });
 
 // Route::apiResource('/products', ProductController::class);
+
+Route::get('/additional-products-data', [AdditionalProductDataController::class, 'index'])->name('additionalProductData');
 
 Route::apiResource('/activities', ActivityController::class);
 

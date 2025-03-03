@@ -43,7 +43,7 @@ class ProductFilter extends AbstractFilter
 
     public function categoryId(Builder $builder, $value)
     {
-        $builder->where('category_id', $value);
+        $builder->whereIn('category_id', $value);
     }
 
     public function isPersonal(Builder $builder, $value)
@@ -58,12 +58,12 @@ class ProductFilter extends AbstractFilter
 
     public function manufacturer(Builder $builder, $value)
     {
-        $builder->whereLike('manufacturer', '%' . $value . '%');
+        $builder->whereIn('manufacturer', $value);
     }
 
     public function countryOfManufacture(Builder $builder, $value)
     {
-        $builder->whereLike('country_of_manufacture', '%' . $value . '%');
+        $builder->whereIn('country_of_manufacture',  $value);
     }
 
     public function quantity(Builder $builder, $value)

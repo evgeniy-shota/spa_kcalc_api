@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Builders\CustomBuilder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,4 +17,9 @@ class CountryOfManufacture extends Model
         'flag_path',
         'is_enabled',
     ];
+
+    public function newEloquentBuilder($query): CustomBuilder
+    {
+        return new CustomBuilder($query);
+    }
 }

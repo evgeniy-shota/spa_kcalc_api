@@ -22,13 +22,13 @@ class IndexRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'category_id' => 'nullable|integer',
+            'category_id' => 'nullable|array',
             // 'type_id' => 'nullable|integer',
             'is_personal' => 'nullable|boolean',
             'is_abstract' => 'nullable|boolean',
             'name' => 'nullable|string|max:255',
-            'manufacturer' => 'nullable|string|max:255',
-            'country_of_manufacture' => 'nullable|string|max:100',
+            'manufacturer' => 'nullable|array',
+            'country_of_manufacture' => 'nullable|array',
 
             // 'trademark_id' => 'nullable|integer',
             // 'units' => 'nullable|',

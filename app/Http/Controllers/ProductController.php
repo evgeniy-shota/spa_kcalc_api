@@ -26,6 +26,7 @@ class ProductController extends Controller
 
         // if (valida)
         // dd($validate);
+        // dump($validate);
 
         $user_id = Auth::user() ? Auth::user()->id : null;
 
