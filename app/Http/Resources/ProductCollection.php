@@ -30,4 +30,11 @@ class ProductCollection extends ResourceCollection
         //     'label' => 'Продукты'
         // ];
     }
+
+    // public function paginationInformation($request, $paginated, $default)
+    // {
+    //     $default['links']['custom'] = 'some link';
+
+    //     return $default;
+    // }
 }

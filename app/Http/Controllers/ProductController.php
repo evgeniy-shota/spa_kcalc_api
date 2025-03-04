@@ -33,7 +33,7 @@ class ProductController extends Controller
         $filter = app()->make(ProductFilter::class, ['queryParams' => array_filter($validate)]);
 
         // ->orderBy('is_personal', 'desc')
-        $products = Product::whereEnabled()->whereAvailable($user_id)->filter($filter)->get();
+        $products = Product::whereEnabled()->whereAvailable($user_id)->filter($filter)->paginate();
 
         return new ProductCollection($products);
     }
