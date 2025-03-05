@@ -33,7 +33,9 @@ class ProductCollection extends ResourceCollection
 
     // public function paginationInformation($request, $paginated, $default)
     // {
-    //     $default['links']['custom'] = 'some link';
+    //     // dump($paginated);
+    //     $default['links']['prev_cursor'] = $paginated['prev_cursor'];
+    //     $default['links']['next_cursor'] = $paginated['next_cursor'];
 
     //     return $default;
     // }

@@ -33,7 +33,23 @@ class ProductController extends Controller
         $filter = app()->make(ProductFilter::class, ['queryParams' => array_filter($validate)]);
 
         // ->orderBy('is_personal', 'desc')
-        $products = Product::whereEnabled()->whereAvailable($user_id)->filter($filter)->paginate();
+        $products = Product::whereEnabled()->whereAvailable($user_id)->filter($filter)->orderBy('id', 'asc')->cursorPaginate();
+
+        return new ProductCollection($products);
+    }
+
+    public function productsFromCategory(IndexRequest $request, string $category_id)
+    {
+        if (!Category::find($category_id)->is_enabled) {
+            return response()->json(['message' => 'Not Found'], 404);
+        }
+
+        $validate = $request->validated();
+        $user_id = Auth::user() ? Auth::user()->id : null;
+        $filter = app()->make(ProductFilter::class, ['queryParams' => array_filter($validate)]);
+
+        // ->orderBy('is_personal', 'desc')
+        $products = Product::where('category_id', $category_id)->whereEnabled()->whereAvailable($user_id)->filter($filter)->orderBy('id', 'asc')->cursorPaginate();
 
         return new ProductCollection($products);
     }

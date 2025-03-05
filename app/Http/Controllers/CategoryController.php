@@ -67,14 +67,14 @@ class CategoryController extends Controller
 
             if ($category->is_personal == false || $category->user_id == $user_id) {
 
-                $products = Product::where('category_id', $category->id)->whereEnabled()->whereAvailable($user_id)->get();
+                $products = Product::where('category_id', $category->id)->whereEnabled()->whereAvailable($user_id)->orderBy('name', 'asc')->cursorPaginate();
 
                 // where(
                 //     function (Builder $q) use ($user_id) {
                 //         $q->where('is_personal', false)->orWhere('user_id', $user_id);
                 //     }
                 // )->
-
+                // return new CategoryResource($category);
                 return new ProductCollection($products);
             }
             return response()->json(['message' => 'Unauthorized'], 401);
