@@ -33,11 +33,17 @@ class ProductResource extends JsonResource
                 'state' => $this->state,
                 'manufacturer' => $this->manufacturer,
                 'country_of_manufacture' => $this->country_of_manufacture,
-                "quantity" => $this->quantity,
+                "quantity" => $this->quantity ? $this->quantity : 100,
+                'quantity_to_calculate' => $this->quantity_to_calculate,
+                'kcalory_per_unit' => $this->kcalory_per_unit,
+                'proteins_per_unit' => $this->proteins_per_unit,
+                'carbohydrates_per_unit' => $this->carbohydrates_per_unit,
+                'fats_per_unit' => $this->fats_per_unit,
                 "kcalory" =>  $this->kcalory,
                 "proteins" => $this->proteins,
                 "carbohydrates" =>  $this->carbohydrates,
                 "fats" => $this->fats,
+
             ];
         }
 
