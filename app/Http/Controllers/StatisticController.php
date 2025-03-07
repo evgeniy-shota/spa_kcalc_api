@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DailyRation;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,7 +22,7 @@ class StatisticController extends Controller
             $ration_stat[$i] = [
                 'id' => $rations[$i]->id,
                 //date format
-                'date' => date_format($rations[$i]->created_at, 'd-m-Y'),
+                'date' => date_format($rations[$i]->date, 'd-m-Y'),
                 'data' => $calculateForDay ?
                     $this->calculateStatisticsForDay($products) :
                     $this->calculateStatisticsForProducts($products),
@@ -35,13 +36,14 @@ class StatisticController extends Controller
         $ration_stat = [];
 
         for ($j = 0, $sizeJ = count($products); $j < $sizeJ; $j++) {
+            $productData = Product::find($products[$j]['product_id']);
             $ration_stat[$j] = [
                 'id' => $products[$j]['id'],
-                'time' => $products[$j]['time_of_use'],
-                'kcalory' => round($products[$j]['kcalory_per_unit'] * $products[$j]['quantity'], 1),
-                'proteins' => round($products[$j]['proteins_per_unit'] * $products[$j]['quantity'], 1),
-                'carbohydrates' => round($products[$j]['carbohydrates_per_unit'] * $products[$j]['quantity'], 1),
-                'fats' => round($products[$j]['fats_per_unit'] * $products[$j]['quantity'], 1),
+                'time' => $products[$j]['time'],
+                'kcalory' => round($productData->kcalory_per_unit * $products[$j]['quantity'], 1),
+                'proteins' => round($productData->proteins_per_unit * $products[$j]['quantity'], 1),
+                'carbohydrates' => round($productData->carbohydrates_per_unit * $products[$j]['quantity'], 1),
+                'fats' => round($productData->fats_per_unit * $products[$j]['quantity'], 1),
             ];
         }
 
@@ -58,11 +60,12 @@ class StatisticController extends Controller
         ];
 
         for ($j = 0, $sizeJ = count($products); $j < $sizeJ; $j++) {
+            $productData = Product::find($products[$j]['product_id']);
 
-            $ration_stat['kcalory'] += $products[$j]['kcalory_per_unit'] * $products[$j]['quantity'];
-            $ration_stat['proteins'] += $products[$j]['proteins_per_unit'] * $products[$j]['quantity'];
-            $ration_stat['carbohydrates'] += $products[$j]['carbohydrates_per_unit'] * $products[$j]['quantity'];
-            $ration_stat['fats'] += $products[$j]['fats_per_unit'] * $products[$j]['quantity'];
+            $ration_stat['kcalory'] += $productData->kcalory_per_unit * $products[$j]['quantity'];
+            $ration_stat['proteins'] += $productData->proteins_per_unit * $products[$j]['quantity'];
+            $ration_stat['carbohydrates'] += $productData->carbohydrates_per_unit * $products[$j]['quantity'];
+            $ration_stat['fats'] += $productData->fats_per_unit * $products[$j]['quantity'];
         }
 
         return array_map(fn($x) => round($x, 1), $ration_stat);
