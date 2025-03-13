@@ -35,7 +35,7 @@ Route::controller(CategoryController::class)->group(function () {
 
 Route::controller(ProductController::class)->group(function () {
     Route::post('/products', 'index');
-    Route::post('/products/{category_id}','productsFromCategory');
+    Route::post('/products/{category_id}', 'productsFromCategory');
     Route::get('/products/{id}', 'show');
     Route::post('/products/create/', 'store');
     Route::patch('/products/{id}', 'update');
@@ -60,6 +60,7 @@ Route::controller(StatisticController::class)->group(
     function () {
         Route::get('/statistic', 'index');
         Route::get('/statistic/{resource}', 'show');
+        Route::post('/statistic', 'splitByTimeStat');
     }
 )->name('statistic');
 

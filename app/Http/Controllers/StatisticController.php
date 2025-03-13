@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StatisticRequest;
 use App\Models\DailyRation;
 use App\Models\Product;
 use App\Models\User;
@@ -90,12 +91,22 @@ class StatisticController extends Controller
         }
 
         if ($request->fromDay != null) {
-            $rations = DailyRation::where('user_id', 3)->where("created_at", '>=', $request->fromDay)->where("created_at", '<=', $request->toDay)->oldest()->get();
+            // dump($request->fromDay);
+            $rations = DailyRation::where('user_id', 3)->where("date", '>=', $request->fromDay)->where("date", '<=', $request->toDay)->oldest()->get();
 
             return response()->json($this->prepareRationsStatistic($rations), 200);
         }
 
         return response()->json([], 404);
+    }
+
+    public function splitByTimeStat(StatisticRequest $request)
+    {
+        $validate = $request->validated();
+
+        // $ration = DailyRation::where('user_id', 3)->where("date", '>=', $validate->fromDay)->where("date", '<=', $validate->toDay)->oldest()->get();
+
+        return response()->json($validate, 200);
     }
 
     // statistic for one day
