@@ -22,8 +22,9 @@ class StatisticRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'fromDay' => 'required|string|max:10',
-            'toDay' => 'required|string|max:10',
+            'fromDay' => 'required|date_format:Y-m-d',
+            'toDay' => 'required|date_format:Y-m-d',
+            'timeSplits'=>'nullable|array',
         ];
     }
 }

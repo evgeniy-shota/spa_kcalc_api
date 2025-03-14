@@ -9,10 +9,12 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use function PHPUnit\Framework\isNull;
+
 class StatisticController extends Controller
 {
 
-    protected function prepareRationsStatistic($rations, $calculateForDay = true)
+    protected function prepareRationsStatistic($rations, $timeSplits = null, $calculateForDay = true)
     {
         $ration_stat = [];
 
@@ -25,7 +27,7 @@ class StatisticController extends Controller
                 //date format
                 'date' => date_format($rations[$i]->date, 'd-m-Y'),
                 'data' => $calculateForDay ?
-                    $this->calculateStatisticsForDay($products) :
+                    $this->calculateStatisticsForDay($products, $timeSplits) :
                     $this->calculateStatisticsForProducts($products),
             ];
         }
@@ -51,8 +53,11 @@ class StatisticController extends Controller
         return $ration_stat;
     }
 
-    protected function calculateStatisticsForDay($products)
+    protected function calculateStatisticsForDay($products, $timeSplits = null)
     {
+        // if ($timeSplits) {
+        // }
+
         $ration_stat = [
             'kcalory' => 0,
             'proteins' => 0,
@@ -60,16 +65,49 @@ class StatisticController extends Controller
             'fats' => 0,
         ];
 
+        $splitedByTime = $timeSplits ? array_fill(0, count($timeSplits), $ration_stat) : [];
+
+        // if ($timeSplits) {
+        //     $splitedByTime = ;
+        //     // array_map(fn($x) => $x = $ration_stat, $splitedByTime);
+        // }
+
+        // dump($splitedByTime);
+
+        $res = &$ration_stat;
+        // dump($timeSplits);
         for ($j = 0, $sizeJ = count($products); $j < $sizeJ; $j++) {
+
+            if ($timeSplits) {
+                if (key_exists(0, $timeSplits) && ($timeSplits[0][0] < $products[$j]['time']) && ($timeSplits[0][1] > $products[$j]['time'])) {
+                    $res = &$splitedByTime[0];
+                } else if (key_exists(1, $timeSplits) && ($timeSplits[1][0] < $products[$j]['time']) && ($timeSplits[1][1] > $products[$j]['time'])) {
+                    $res = &$splitedByTime[1];
+                } else if (key_exists(2, $timeSplits) && ($timeSplits[2][0] < $products[$j]['time']) && ($timeSplits[2][1] > $products[$j]['time'])) {
+                    $res = &$splitedByTime[2];
+                } else if (key_exists(3, $timeSplits) && ($timeSplits[3][0] < $products[$j]['time']) && ($timeSplits[3][1] > $products[$j]['time'])) {
+                    $res = &$splitedByTime[3];
+                } else if (key_exists(4, $timeSplits) && ($timeSplits[4][0] < $products[$j]['time']) && ($timeSplits[4][1] > $products[$j]['time'])) {
+                    $res = &$splitedByTime[4];
+                } else {
+                    continue;
+                }
+            }
+
             $productData = Product::find($products[$j]['product_id']);
 
-            $ration_stat['kcalory'] += $productData->kcalory_per_unit * $products[$j]['quantity'];
-            $ration_stat['proteins'] += $productData->proteins_per_unit * $products[$j]['quantity'];
-            $ration_stat['carbohydrates'] += $productData->carbohydrates_per_unit * $products[$j]['quantity'];
-            $ration_stat['fats'] += $productData->fats_per_unit * $products[$j]['quantity'];
+            $res['kcalory'] = round($productData->kcalory_per_unit * $products[$j]['quantity'] + $res['kcalory'], 2);
+            $res['proteins'] = round($productData->proteins_per_unit * $products[$j]['quantity'] + $res['proteins'], 2);
+            $res['carbohydrates'] = round($productData->carbohydrates_per_unit * $products[$j]['quantity'] + $res['carbohydrates'], 2);
+            $res['fats'] = round($productData->fats_per_unit * $products[$j]['quantity'] + $res['fats'], 2);
         }
 
-        return array_map(fn($x) => round($x, 1), $ration_stat);
+        if ($timeSplits) {
+            return $splitedByTime;
+        }
+
+        return $ration_stat;
+        // return array_map(fn($x) => round($x, 1), $res);
     }
 
     public function index(Request $request)
@@ -104,9 +142,9 @@ class StatisticController extends Controller
     {
         $validate = $request->validated();
 
-        // $ration = DailyRation::where('user_id', 3)->where("date", '>=', $validate->fromDay)->where("date", '<=', $validate->toDay)->oldest()->get();
+        $rations = DailyRation::where('user_id', 3)->where("date", '>=', $validate['fromDay'])->where("date", '<=', $validate['toDay'])->oldest()->get();
 
-        return response()->json($validate, 200);
+        return response()->json($this->prepareRationsStatistic($rations, $validate['timeSplits'], true), 200);
     }
 
     // statistic for one day
