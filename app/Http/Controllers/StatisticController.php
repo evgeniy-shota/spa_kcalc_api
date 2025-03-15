@@ -79,15 +79,15 @@ class StatisticController extends Controller
         for ($j = 0, $sizeJ = count($products); $j < $sizeJ; $j++) {
 
             if ($timeSplits) {
-                if (key_exists(0, $timeSplits) && ($timeSplits[0][0] < $products[$j]['time']) && ($timeSplits[0][1] > $products[$j]['time'])) {
+                if (key_exists(0, $timeSplits) && (date_create($timeSplits[0][0]) < date_create($products[$j]['time'])) && (date_create($timeSplits[0][1]) > date_create($products[$j]['time']))) {
                     $res = &$splitedByTime[0];
-                } else if (key_exists(1, $timeSplits) && ($timeSplits[1][0] < $products[$j]['time']) && ($timeSplits[1][1] > $products[$j]['time'])) {
+                } else if (key_exists(1, $timeSplits) && (date_create($timeSplits[1][0]) < date_create($products[$j]['time'])) && (date_create($timeSplits[1][1]) > date_create($products[$j]['time']))) {
                     $res = &$splitedByTime[1];
-                } else if (key_exists(2, $timeSplits) && ($timeSplits[2][0] < $products[$j]['time']) && ($timeSplits[2][1] > $products[$j]['time'])) {
+                } else if (key_exists(2, $timeSplits) && (date_create($timeSplits[2][0]) < date_create($products[$j]['time'])) && (date_create($timeSplits[2][1]) > date_create($products[$j]['time']))) {
                     $res = &$splitedByTime[2];
-                } else if (key_exists(3, $timeSplits) && ($timeSplits[3][0] < $products[$j]['time']) && ($timeSplits[3][1] > $products[$j]['time'])) {
+                } else if (key_exists(3, $timeSplits) && (date_create($timeSplits[3][0]) < date_create($products[$j]['time'])) && (date_create($timeSplits[3][1]) > date_create($products[$j]['time']))) {
                     $res = &$splitedByTime[3];
-                } else if (key_exists(4, $timeSplits) && ($timeSplits[4][0] < $products[$j]['time']) && ($timeSplits[4][1] > $products[$j]['time'])) {
+                } else if (key_exists(4, $timeSplits) && (date_create($timeSplits[4][0]) < date_create($products[$j]['time'])) && (date_create($timeSplits[4][1]) > date_create($products[$j]['time']))) {
                     $res = &$splitedByTime[4];
                 } else {
                     continue;
