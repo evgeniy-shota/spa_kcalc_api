@@ -4,14 +4,14 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-class PrepareProductsInWaterCategory extends Command
+class PrepareProductsInBirdCategory extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'app:prepare-products-in-water-category';
+    protected $signature = 'app:prepare-products-in-bird-category';
 
     /**
      * The console command description.
@@ -84,31 +84,6 @@ class PrepareProductsInWaterCategory extends Command
                 continue;
             }
 
-            if (preg_match($regTea, $product) === 1) {
-                $categories['Чай'][$product] = ($value[0]);
-                continue;
-            }
-
-            if (preg_match($regCoffee, $product) === 1) {
-                $categories['Кофе'][$product] = ($value[0]);
-                continue;
-            }
-
-            if (preg_match($regSyrup, $product) === 1) {
-                $categories['Сиропы и топпинги'][$product] = ($value[0]);
-                continue;
-            }
-
-            if (preg_match($regHot, $product) === 1) {
-                $categories['Другие горячие напитки'][$product] = ($value[0]);
-                continue;
-            }
-
-            if (preg_match($regWater, $product) === 1) {
-                $categories['Вода'][$product] = ($value[0]);
-                continue;
-            }
-
             $categories['Другие напитки'][$product] = ($value[0]);
         }
 
@@ -118,7 +93,6 @@ class PrepareProductsInWaterCategory extends Command
             fwrite($file, json_encode($products, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
             fclose($file);
         }
-
 
         // dd($categories['Сиропы и топпинги']);
     }
