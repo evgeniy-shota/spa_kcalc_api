@@ -63,7 +63,7 @@ class CategoryController extends Controller
 
         if ($category && $category->is_enabled) {
 
-            $user_id = Auth::user() ? Auth::user()->id : -1;
+            $user_id = Auth::user() ? Auth::user()->id : null;
 
             if ($category->is_personal == false || $category->user_id == $user_id) {
 

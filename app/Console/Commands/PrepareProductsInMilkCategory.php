@@ -4,14 +4,14 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-class PrepareProductsInBirdCategory extends Command
+class PrepareProductsInMilkCategory extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'app:prepare-products-in-bird-category';
+    protected $signature = 'app:prepare-products-in-milk-category';
 
     /**
      * The console command description.
@@ -27,16 +27,26 @@ class PrepareProductsInBirdCategory extends Command
     {
 
         $filePath = './db_data/products/';
-        $fileName = 'Птица';
+        $fileName = 'Молочные продукты';
         $fileType  = '.json';
         $file = json_decode(file_get_contents($filePath . $fileName . $fileType), JSON_UNESCAPED_UNICODE);
 
         $categories = [
-            'Субпродукты птицы' => ['/([Пп]ечен)/', '/([Сс]ерд)/', '/([Пп]отрох)/', '/([Шш]ейк)/', '/([Жж]елуд)/'],
-            'Индейка' => ['/([Ии]нде)/', '/([Ии]ндюк)/', '/([Ии]ндюш)/'],
-            'Курица' => ['/([Кк]уриц)/', '/([Бб]ройл)/', '/([Кк]урин)/', '/([Цц]ыпл)/'],
-            'Утка' => ['/([Уу]тк)/', '/([Уу]тят)/'],
-            'Другая птица' => ['/.*/'],
+            'Творожные продукты' => ['/[Сс]ырник/', '/[Пп]удинг/'],
+            'Йогурт' => ['/[Йй]огурт/'],
+            'Продукты с заменителем молока' => ['/[Зз]аменител/'],
+            'Сливки' => ['/[Сс]ливки/'],
+            'Масло, маргарин' => ['/[Мм]асло/','/[Мм]аргарин/'],
+            'Мороженое' => ['/[Мм]орожен/'],
+            'Сметана' => ['/[Сс]метана/'],
+            'Творог' => ['/[Тт]ворог/'],
+            'Сыр плавленый' => ['/[Пп]лавлен/'],
+            'Сыры' => ['/[Сс]ыр/', '/[Сс]улугуни/'],
+            'Кефир, кисломолочные продукты' => ['/[Кк]ефир/', '/[Пп]ростокваша/', '/[Рр]яженк/', '/[Сс]ыворотк/','/[Аа]цидофилин/'],
+            'Молоко сгущенное' => ['/[Сс]гущенн/'],
+            'Молочные напитки' => ['/[Нн]апиток/','/[Кк]коктел/'],
+            'Молоко' => ['/[Мм]олоко/'],
+            'Другие молочные продукты' => ['/.*/'],
         ];
 
         $productsRes = [];

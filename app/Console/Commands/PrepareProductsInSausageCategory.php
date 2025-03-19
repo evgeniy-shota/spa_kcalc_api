@@ -4,14 +4,14 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-class PrepareProductsInBirdCategory extends Command
+class PrepareProductsInSausageCategory extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'app:prepare-products-in-bird-category';
+    protected $signature = 'app:prepare-products-in-sausage-category';
 
     /**
      * The console command description.
@@ -27,16 +27,19 @@ class PrepareProductsInBirdCategory extends Command
     {
 
         $filePath = './db_data/products/';
-        $fileName = 'Птица';
+        $fileName = 'Сосиски и колбаса';
         $fileType  = '.json';
         $file = json_decode(file_get_contents($filePath . $fileName . $fileType), JSON_UNESCAPED_UNICODE);
 
         $categories = [
-            'Субпродукты птицы' => ['/([Пп]ечен)/', '/([Сс]ерд)/', '/([Пп]отрох)/', '/([Шш]ейк)/', '/([Жж]елуд)/'],
-            'Индейка' => ['/([Ии]нде)/', '/([Ии]ндюк)/', '/([Ии]ндюш)/'],
-            'Курица' => ['/([Кк]уриц)/', '/([Бб]ройл)/', '/([Кк]урин)/', '/([Цц]ыпл)/'],
-            'Утка' => ['/([Уу]тк)/', '/([Уу]тят)/'],
-            'Другая птица' => ['/.*/'],
+            'Колбасы варено-копченые' => ['/[Вв]арено-копченая/','/[Кк]опчен/'],
+            'Колбасы сырокопченые, сыровяленые' => ['/[Сс]ырокопчен/','/[Сс]ыровялен/'],
+            'Колбасы вареные' => ['/[Вв]арен/', '/[Вв]арён/', '/[Вв]етчин/'],
+            'Сардельки' => ['/[Сс]ардельк/'],
+            'Сосиски' => ['/[Сс]осиск/'],
+            'Колбаса' => ['/[Кк]олбаса/','/[Сс]алями/'],
+
+            'Другие сосиски и колбасы' => ['/.*/'],
         ];
 
         $productsRes = [];

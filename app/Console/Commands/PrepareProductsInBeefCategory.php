@@ -4,14 +4,14 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-class PrepareProductsInBirdCategory extends Command
+class PrepareProductsInBeefCategory extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'app:prepare-products-in-bird-category';
+    protected $signature = 'app:prepare-products-in-beef-category';
 
     /**
      * The console command description.
@@ -27,16 +27,15 @@ class PrepareProductsInBirdCategory extends Command
     {
 
         $filePath = './db_data/products/';
-        $fileName = 'Птица';
+        $fileName = 'Говядина и телятина';
         $fileType  = '.json';
         $file = json_decode(file_get_contents($filePath . $fileName . $fileType), JSON_UNESCAPED_UNICODE);
 
         $categories = [
-            'Субпродукты птицы' => ['/([Пп]ечен)/', '/([Сс]ерд)/', '/([Пп]отрох)/', '/([Шш]ейк)/', '/([Жж]елуд)/'],
-            'Индейка' => ['/([Ии]нде)/', '/([Ии]ндюк)/', '/([Ии]ндюш)/'],
-            'Курица' => ['/([Кк]уриц)/', '/([Бб]ройл)/', '/([Кк]урин)/', '/([Цц]ыпл)/'],
-            'Утка' => ['/([Уу]тк)/', '/([Уу]тят)/'],
-            'Другая птица' => ['/.*/'],
+            'Субпродукты говяжьи' => ['/([Вв]ымя)/','/([Жж]елез)/','/([Гг]олов)/','/([Уу]ши)/','/([Жж]елуд)/', '/([Мм]озг)/', '/([Лл]ёгк)/', '/([Лл]егк)/', '/([Сс]елезен)/', '/([Пп]очк)/', '/([Сс]ердц)/', '/([Хх]вост)/', '/([Яя]зык)/', '/([Пп]ечень)/'],
+            'Фарш из телятины и говядины' => ['/([Фф]арш)/'],
+            'Говядина и телятина' => ['/([Гг]овяд)/', '/([Тт]елят)/'],
+            'Другая продукция из говядины и телятины' => ['/.*/'],
         ];
 
         $productsRes = [];

@@ -4,14 +4,14 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-class PrepareProductsInBirdCategory extends Command
+class PrepareProductsInBeansCategory extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'app:prepare-products-in-bird-category';
+    protected $signature = 'app:prepare-products-in-beans-category';
 
     /**
      * The console command description.
@@ -27,16 +27,20 @@ class PrepareProductsInBirdCategory extends Command
     {
 
         $filePath = './db_data/products/';
-        $fileName = 'Птица';
+        $fileName = 'Бобовые';
         $fileType  = '.json';
         $file = json_decode(file_get_contents($filePath . $fileName . $fileType), JSON_UNESCAPED_UNICODE);
 
         $categories = [
-            'Субпродукты птицы' => ['/([Пп]ечен)/', '/([Сс]ерд)/', '/([Пп]отрох)/', '/([Шш]ейк)/', '/([Жж]елуд)/'],
-            'Индейка' => ['/([Ии]нде)/', '/([Ии]ндюк)/', '/([Ии]ндюш)/'],
-            'Курица' => ['/([Кк]уриц)/', '/([Бб]ройл)/', '/([Кк]урин)/', '/([Цц]ыпл)/'],
-            'Утка' => ['/([Уу]тк)/', '/([Уу]тят)/'],
-            'Другая птица' => ['/.*/'],
+            'Кукуруза-бобовые' => ['/([Кк]укуруз)/'],
+            'Арахисовая-паста'=>['/([Пп]аста)/'],
+            'Арахис'=>['/([Аа]рахис)/'],
+            'Продукты из заменителя мяса'=>['/([Мм]яс)/','/([Сс]осиск)/'],
+            'Соевая мука'=>['/([Мм]ука)/'],
+            'Соевое молоко'=>['/([Мм]олоко)/'],
+            'Фасоль'=>['/([Фф]асоль)/'],
+            'Горох'=>['/([Гг]орох)/', '/([Гг]орош)/'],
+            'Бобовые' => ['/.*/'],
         ];
 
         $productsRes = [];

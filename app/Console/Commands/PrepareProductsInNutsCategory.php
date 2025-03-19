@@ -4,14 +4,14 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-class PrepareProductsInBirdCategory extends Command
+class PrepareProductsInNutsCategory extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'app:prepare-products-in-bird-category';
+    protected $signature = 'app:prepare-products-in-nuts-category';
 
     /**
      * The console command description.
@@ -27,16 +27,25 @@ class PrepareProductsInBirdCategory extends Command
     {
 
         $filePath = './db_data/products/';
-        $fileName = 'Птица';
+        $fileName = 'Орехи и семена';
         $fileType  = '.json';
         $file = json_decode(file_get_contents($filePath . $fileName . $fileType), JSON_UNESCAPED_UNICODE);
 
         $categories = [
-            'Субпродукты птицы' => ['/([Пп]ечен)/', '/([Сс]ерд)/', '/([Пп]отрох)/', '/([Шш]ейк)/', '/([Жж]елуд)/'],
-            'Индейка' => ['/([Ии]нде)/', '/([Ии]ндюк)/', '/([Ии]ндюш)/'],
-            'Курица' => ['/([Кк]уриц)/', '/([Бб]ройл)/', '/([Кк]урин)/', '/([Цц]ыпл)/'],
-            'Утка' => ['/([Уу]тк)/', '/([Уу]тят)/'],
-            'Другая птица' => ['/.*/'],
+            'Паста-орехи' => ['/([Пп]аста)/'],
+            'Мука-орехи' => ['/([Мм]ука)/'],
+            'Молоко-орехи' => ['/([Мм]оло)/'],
+            'Кедровый орех' => ['/([Кк]едр)/'],
+            'Грецкий орех' => ['/([Гг]рецк)/'],
+            'Миндаль' => ['/([Мм]индаль)/'],
+            'Пекан' => ['/([Пп]екан)/'],
+            'Макадамия' => ['/([Мм]акадами)/'],
+            'Фисташки' => ['/([Фф]исташки)/'],
+            'Кешью' => ['/([Кк]ешью)/'],
+            'Каштан' => ['/([Кк]аштан)/'],
+            'Смеси' => ['/([Сс]мес)/'],
+            'Семечки' => ['/([Сс]емеч)/', '/([Сс]емя)/', '/([Сс]емена)/'],
+            'Другие орехи и семена' => ['/.*/'],
         ];
 
         $productsRes = [];

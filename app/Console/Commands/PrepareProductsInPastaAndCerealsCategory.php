@@ -4,14 +4,14 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-class PrepareProductsInBirdCategory extends Command
+class PrepareProductsInPastaAndCerealsCategory extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'app:prepare-products-in-bird-category';
+    protected $signature = 'app:prepare-products-in-pasta-and-cereals-category';
 
     /**
      * The console command description.
@@ -27,16 +27,21 @@ class PrepareProductsInBirdCategory extends Command
     {
 
         $filePath = './db_data/products/';
-        $fileName = 'Птица';
+        $fileName = 'Крупы, мука, макароны';
         $fileType  = '.json';
         $file = json_decode(file_get_contents($filePath . $fileName . $fileType), JSON_UNESCAPED_UNICODE);
 
         $categories = [
-            'Субпродукты птицы' => ['/([Пп]ечен)/', '/([Сс]ерд)/', '/([Пп]отрох)/', '/([Шш]ейк)/', '/([Жж]елуд)/'],
-            'Индейка' => ['/([Ии]нде)/', '/([Ии]ндюк)/', '/([Ии]ндюш)/'],
-            'Курица' => ['/([Кк]уриц)/', '/([Бб]ройл)/', '/([Кк]урин)/', '/([Цц]ыпл)/'],
-            'Утка' => ['/([Уу]тк)/', '/([Уу]тят)/'],
-            'Другая птица' => ['/.*/'],
+            'Мука' => ['/([Мм]ука)/'],
+            'Макароны' => ['/([Мм]акарон)/', '/([Пп]аста)/', '/([Pp]asta)/', '/([Сс]пагетти)/'],
+            'Хлопья, сухие завтраки' => ['/([Зз]автрак)/', '/([Уу]потреблен)/', '/([Хх]лопья)/'],
+            'Рис' => ['/([Рр]ис)/'],
+            'Гречка' => ['/([Гг]реч)/'],
+            'Пшено' => ['/([Пп]шен)/'],
+            'Овсянка' => ['/([Оо]всян)/'],
+            'Кукуруза' => ['/([Кк]укуруз)/'],
+            'Лапша' => ['/([Лл]апша)/'],
+            'Другие крупы' => ['/.*/'],
         ];
 
         $productsRes = [];
