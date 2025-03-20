@@ -26,6 +26,8 @@ class CategoryGroupResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
+            'is_favorite' => false,
+            'is_hidden' => false,
             'categories' => $categories,
         ];
     }
