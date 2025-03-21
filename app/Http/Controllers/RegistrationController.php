@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RegistrationRequest;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -11,19 +12,15 @@ use GuzzleHttp\Psr7\Response;
 
 class RegistrationController extends Controller
 {
-    public function registration(Request $request)
+    public function registration(RegistrationRequest $request)
     {
 
-        $validatedData = $request->validate([
-            'email' => ['required', 'unique:users', 'max:255'],
-            'name' => ['required', 'max:64'],
-            'password' => ['required', 'max:32']
-        ]);
+        $validatedData = $request->validated();
 
         $newUser = User::create([
-            'email' => $request->email,
-            'name' => $request->name,
-            'password' => $request->password,
+            'email' => $validatedData['email'],
+            'name' => $validatedData['name'],
+            'password' => $validatedData['password'],
         ]);
 
         return new UserResource($newUser);
