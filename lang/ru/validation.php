@@ -35,7 +35,7 @@ return [
     'can' => 'The :attribute field contains an unauthorized value.',
     'confirmed' => 'The :attribute field confirmation does not match.',
     'contains' => 'The :attribute field is missing a required value.',
-    'current_password' => 'The password is incorrect.',
+    'current_password' => 'Пароль не верный.',
     'date' => 'Поле :attribute должно содержать допустимую дату.',
     'date_equals' => 'The :attribute field must be a date equal to :date.',
     'date_format' => 'Поле :attribute должно соответствовать формату :format.',

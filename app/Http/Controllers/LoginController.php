@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\loginRequest;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -9,15 +10,11 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    public function authentificate(Request $request) 
+    public function authentificate(loginRequest $request)
     {
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
+        $credentials = $request->validated();
 
-        if (Auth::attempt($credentials)){
-            //при запросе в postman, по какой-то причине, ошибка 'Session store not set on request'
+        if (Auth::attempt($credentials)) {
             // $request->session()->regenerate();
             session()->regenerate();
 
@@ -25,7 +22,7 @@ class LoginController extends Controller
         }
 
         return response()->json([
-            'error'=>"Incorrect email or password"
+            'errors' => ['name' => ["Логин или пароль не верный"], 'password' => ["Логин или пароль не верный"]]
         ], 401);
     }
 

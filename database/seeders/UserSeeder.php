@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
             User::factory()->create([
                 'name' => $userName . $iInStr,
                 'email' => $userName . $iInStr . '@mail.com',
-                'password' => $userName . $iInStr,
+                'password' => $userName . $iInStr . $userName . $iInStr,
             ]);
         }
     }
