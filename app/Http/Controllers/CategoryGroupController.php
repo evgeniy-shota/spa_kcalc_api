@@ -40,8 +40,8 @@ class CategoryGroupController extends Controller
 
     public function update(CategoryGroupRequest $request, string $id)
     {
-        // $user = Auth::user() ? Auth::user() : null;
-        $user = User::find(3);
+        $user = Auth::user() ? Auth::user() : null;
+        // $user = User::find(3);
         // if (!isset($user)) {
         //     return response()->json(['message' => 'Unauthorized'], 401);
         // }
@@ -50,6 +50,7 @@ class CategoryGroupController extends Controller
 
         // authorized user without admin permission can only change is_favorite value
         if ($user->is_admin === false) {
+            // dump($validated);
             if (isset($validated['is_favorite'])) {
                 $favoriteCategoryGroup = UserFavoriteCategoriesGroup::where('user_id', $user->id)->where('category_groups_id', $id)->first();
 

@@ -24,11 +24,14 @@ class CategoryRequest extends FormRequest
     {
         return [
             'user_id' => 'nullable|int',
-            'category_group_id' => 'required|int',
-            'name' => 'required|string|max:255',
-            'is_personal' => 'required|boolean',
-            'is_enabled' => 'required|boolean',
+            'category_group_id' => 'nullable|int',
+            'name' => 'nullable|string|max:255',
+            'description' => 'nullable:string',
+            'is_personal' => 'nullable|boolean',
+            'is_enabled' => 'nullable|boolean',
             'icon_path' => 'nullable|string|max:255',
+            'is_favorite' => 'nullable|boolean',
+            'is_hidden' => 'nullable|boolean',
             'thumbnail_image_path' => 'nullable|string|max:255',
         ];
     }

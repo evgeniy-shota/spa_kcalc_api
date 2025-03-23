@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Validator;
 
 
 use App\Http\CustomValidators\CategoryFilterChecker;
+use App\Models\UserFavoriteCategory;
 
 class CategoryController extends Controller
 {
@@ -75,7 +76,9 @@ class CategoryController extends Controller
                 //     }
                 // )->
                 // return new CategoryResource($category);
-                return new ProductCollection($products);
+                $category->categoryProducts = $products;
+                return new CategoryResource($category);
+                // return response()->json(['data' => new CategoryResource($category), 'category_data' => new ProductCollection($products)], 200);
             }
             return response()->json(['message' => 'Unauthorized'], 401);
         }
@@ -106,12 +109,85 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, string $id)
     {
-        $updatedCategory = Category::updateOrCreate(
-            ['id' => '$id'],
-            ['name' => $request->name, 'is_enabled' => $request->is_enabled]
-        );
+        $user = Auth::user();
 
-        return response()->json($updatedCategory, 201);
+        if (!isset($userId)) {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
+
+        $validate = $request->validated();
+        $category = Category::find($id);
+
+        if (!isset($category)) {
+            return response()->json(['message' => 'Bad Request'], 400);
+        }
+
+        if (
+            $user->is_admin ||
+            ($category->is_enabled && $user->id === $category->user_id && $category->is_personal === true)
+        ) {
+
+            if (array_key_exists('category_group_id', $validate)) {
+                $category->category_group_id = $validate['category_group_id'];
+            }
+
+            if (array_key_exists('name', $validate)) {
+                $category->name = $validate['name'];
+            }
+
+            if (array_key_exists('description', $validate)) {
+                $category->description = $validate['description'];
+            }
+
+            if (array_key_exists('icon_path', $validate)) {
+                $category->icon_path = $validate['icon_path'];
+            }
+
+            if (array_key_exists('thumbnail_image_path', $validate)) {
+                $category->thumbnail_image_path = $validate['thumbnail_image_path'];
+            }
+
+            if ($user->is_admin) {
+                if (array_key_exists('is_personal', $validate)) {
+                    $category->is_personal = $validate['is_personal'];
+                }
+
+                if (array_key_exists('is_enabled', $validate)) {
+                    $category->is_enabled = $validate['is_enabled'];
+                }
+            }
+
+            $category->save();
+        }
+
+        if (array_key_exists('is_favorite', $validate)) {
+            $favoriteCategory = UserFavoriteCategory::where('user_id', $user->id)->where('id', $id)->first();
+
+            if ($validate['is_favorite'] === true) {
+
+                if (isset($favoriteCategory)) {
+                    return response()->json(['message' => 'Bad Request'], 400);
+                }
+
+                UserFavoriteCategory::create([
+                    'user_id' => $user->id,
+                    'category_id' => $id,
+                ]);
+            }
+
+            if ($validate['is_favorite'] === false) {
+                if (!isset($favoriteCategory)) {
+                    return response()->json(['message' => 'Bad Request'], 400);
+                }
+
+                $favoriteCategory->delete();
+            }
+        }
+
+        if (array_key_exists('is_hidden', $validate)) {
+        }
+
+        return response()->json(['message' => 'Ok', 'data' => new CategoryResource($category)], 200);
     }
 
     /**
