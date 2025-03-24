@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CategoryGroupRequest;
 use App\Http\Resources\CategoryGroupCollection;
 use App\Http\Resources\CategoryGroupResource;
+use App\Models\Category;
 use App\Models\CategoryGroup;
 use App\Models\User;
 use App\Models\UserFavoriteCategoriesGroup;
+use App\Models\UserFavoriteCategory;
 use GuzzleHttp\Psr7\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +20,13 @@ class CategoryGroupController extends Controller
     {
         $categoriesGroups = CategoryGroup::whereEnabled()->get();
 
-        return new CategoryGroupCollection($categoriesGroups);
+        if (Auth::user()) {
+            $favoriteCategoriesGroup = UserFavoriteCategoriesGroup::where('user_id', Auth::user()->id)->get();
+            $categories = Category::whereEnabled()->whereAvailable(Auth::user()->id)->groupBy('category_group_id', 'id')->get();
+            // dd($categories);
+        }
+
+        return new CategoryGroupCollection($categoriesGroups, $favoriteCategoriesGroup ?? null, $categories ?? null);
     }
 
     public function show(string $id)
@@ -32,8 +40,8 @@ class CategoryGroupController extends Controller
                 'message' => 'Not Found',
             ], 404);
         }
-
-        return new CategoryGroupResource($categorysGroup);
+        $categories = Category::whereEnabled()->whereAvailable(Auth::user()?->id)->where('category_group_id', $id)->get();
+        return new CategoryGroupResource($categorysGroup, $categories);
     }
 
     public function store(Request $request) {}
@@ -60,14 +68,14 @@ class CategoryGroupController extends Controller
                         'category_groups_id' => $id,
                         'is_favorite' => true,
                     ]);
-                    return response()->json(['message' => 'Success'], 200);
+                    return response()->json(new CategoryGroupResource(CategoryGroup::find($id)), 200);
                 }
 
                 if ($validated['is_favorite'] == false && isset($favoriteCategoryGroup)) {
 
                     UserFavoriteCategoriesGroup::find($favoriteCategoryGroup->id)->delete();
 
-                    return response()->json(['message' => 'Success'], 200);
+                    return response()->json(new CategoryGroupResource(CategoryGroup::find($id)), 200);
                 }
             }
             return response()->json(['message' => 'Bad Request'], 402);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Filters\ProductFilter;
 use App\Http\Requests\Product\IndexRequest;
+use App\Http\Requests\Product\UpdateRequest;
 use App\Http\Resources\ProductCollection;
 use App\Http\Resources\ProductResource;
 use App\Models\Category;
@@ -130,10 +131,156 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateRequest $request, string $id)
     {
-        dump('Update product' . $id);
-        dump($request->toArray());
+        $user = Auth::user();
+        if (!$user) {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
+
+        $product = Product::find($id);
+        if (!$product) {
+            return response()->json(['message' => 'Bad Request'], 400);
+        }
+
+        $validate = $request->validated();
+        $excludedForUser = ['is_enabled', 'is_personal', 'user_id'];
+
+        if ($user->is_admin || ($product->is_enabled && $product->user_id == $user->id)) {
+
+            $validateForUser = array_filter($validate, function ($key, $val) use ($excludedForUser) {
+                if (array_key_exists($key, $excludedForUser)) {
+                    return false;
+                }
+                return true;
+            });
+
+            dd($validateForUser);
+
+            if (array_key_exists('category_id', $validate)) {
+                $product->category_id = $validate['category_id'];
+            }
+
+            if (array_key_exists('type_id', $validate)) {
+                $product->type_id = $validate['type_id'];
+            }
+
+            if (array_key_exists('is_abstract', $validate)) {
+                $product->is_abstract = $validate['is_abstract'];
+            }
+
+            if (array_key_exists('name', $validate)) {
+                $product->name = $validate['name'];
+            }
+
+            if (array_key_exists('thumbnail_image_name', $validate)) {
+                $product->thumbnail_image_name = $validate['thumbnail_image_name'];
+            }
+
+            if (array_key_exists('manufacturer', $validate)) {
+                $product->manufacturer = $validate['manufacturer'];
+            }
+
+            if (array_key_exists('country_of_manufacture', $validate)) {
+                $product->country_of_manufacture = $validate['country_of_manufacture'];
+            }
+
+            if (array_key_exists('trademark_id', $validate)) {
+                $product->trademark_id = $validate['trademark_id'];
+            }
+
+            if (array_key_exists('description', $validate)) {
+                $product->description = $validate['description'];
+            }
+
+            if (array_key_exists('units', $validate)) {
+                $product->units = $validate['units'];
+            }
+
+            if (array_key_exists('condition', $validate)) {
+                $product->condition = $validate['condition'];
+            }
+
+            if (array_key_exists('state', $validate)) {
+                $product->state = $validate['state'];
+            }
+
+            if (array_key_exists('quantity_to_calculate', $validate)) {
+                $product->quantity_to_calculate = $validate['quantity_to_calculate'];
+            }
+
+            if (array_key_exists('quantity', $validate)) {
+                $product->quantity = $validate['quantity'];
+            }
+
+            if (array_key_exists('composition', $validate)) {
+                $product->composition = $validate['composition'];
+            }
+
+            if (array_key_exists('kcalory', $validate)) {
+                $product->kcalory = $validate['kcalory'];
+            }
+
+            if (array_key_exists('proteins', $validate)) {
+                $product->proteins = $validate['proteins'];
+            }
+
+            if (array_key_exists('carbohydrates', $validate)) {
+                $product->carbohydrates = $validate['carbohydrates'];
+            }
+
+            if (array_key_exists('fats', $validate)) {
+                $product->fats = $validate['fats'];
+            }
+
+            if (array_key_exists('kcalory_per_unit', $validate)) {
+                $product->kcalory_per_unit = $validate['kcalory_per_unit'];
+            }
+
+            if (array_key_exists('proteins_per_unit', $validate)) {
+                $product->proteins_per_unit = $validate['proteins_per_unit'];
+            }
+
+            if (array_key_exists('carbohydrates_per_unit', $validate)) {
+                $product->carbohydrates_per_unit = $validate['carbohydrates_per_unit'];
+            }
+
+            if (array_key_exists('fats_per_unit', $validate)) {
+                $product->fats_per_unit = $validate['fats_per_unit'];
+            }
+
+            if (array_key_exists('nutrients_and_vitamins', $validate)) {
+                $product->nutrients_and_vitamins = $validate['nutrients_and_vitamins'];
+            }
+
+            if (array_key_exists('data_source', $validate)) {
+                $product->data_source = $validate['data_source'];
+            }
+
+            if (array_key_exists('is_favorite', $validate)) {
+                $product->is_favorite = $validate['is_favorite'];
+            }
+
+            if (array_key_exists('is_hidden', $validate)) {
+                $product->is_hidden = $validate['is_hidden'];
+            }
+
+
+            if ($user->is_admin) {
+                if (array_key_exists('is_personal', $validate)) {
+                    $product->is_personal = $validate['is_personal'];
+                }
+
+                if (array_key_exists('is_enabled', $validate)) {
+                    $product->is_enabled = $validate['is_enabled'];
+                }
+            }
+
+            $product->save();
+
+            return new ProductResource($product);
+        } else {
+        }
     }
 
     /**

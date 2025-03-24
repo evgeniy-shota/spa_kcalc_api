@@ -111,7 +111,7 @@ class CategoryController extends Controller
     {
         $user = Auth::user();
 
-        if (!isset($userId)) {
+        if (!isset($user)) {
             return response()->json(['message' => 'Unauthorized'], 401);
         }
 
@@ -161,7 +161,7 @@ class CategoryController extends Controller
         }
 
         if (array_key_exists('is_favorite', $validate)) {
-            $favoriteCategory = UserFavoriteCategory::where('user_id', $user->id)->where('id', $id)->first();
+            $favoriteCategory = UserFavoriteCategory::where('user_id', $user->id)->where('category_id', $id)->first();
 
             if ($validate['is_favorite'] === true) {
 
