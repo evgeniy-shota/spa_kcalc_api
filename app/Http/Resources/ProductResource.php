@@ -2,8 +2,11 @@
 
 namespace App\Http\Resources;
 
+use App\Models\HiddenProduct;
+use App\Models\UserFavoriteProduct;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Auth;
 
 class ProductResource extends JsonResource
 {
@@ -21,6 +24,13 @@ class ProductResource extends JsonResource
         $currentRout = $request->route()->getName();
         // dump($request->short_output);
         // return parent::toArray($request);
+        $isFavorite = false;
+        $isHidden = false;
+
+        if (Auth::user()) {
+            $isFavorite = UserFavoriteProduct::where('user_id', Auth::user()->id)->where('product_id', $this->id)->first() ? true : false;
+            $isHidden = HiddenProduct::where('user_id', Auth::user()->id)->where('product_id', $this->id)->first() ? true : false;
+        }
 
         if (in_array($currentRout, ['products.index', 'categories.show', 'search'])) {
             return [
@@ -43,7 +53,8 @@ class ProductResource extends JsonResource
                 "proteins" => $this->proteins,
                 "carbohydrates" =>  $this->carbohydrates,
                 "fats" => $this->fats,
-
+                'is_favorite' => $isFavorite,
+                'is_hidden' => $isHidden,
             ];
         }
 
@@ -77,7 +88,8 @@ class ProductResource extends JsonResource
             'nutrientAndVitamines' => json_decode($this->nutrients_and_vitamins, JSON_UNESCAPED_UNICODE),
 
             'type' => 'product',
-
+            'is_favorite' => $isFavorite,
+            'is_hidden' => $isHidden,
 
 
 

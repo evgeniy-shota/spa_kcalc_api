@@ -2,7 +2,11 @@
 
 namespace App\Http\Filters;
 
+use App\Models\HiddenProduct;
+use App\Models\UserFavoriteProduct;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ProductFilter extends AbstractFilter
 {
@@ -19,6 +23,9 @@ class ProductFilter extends AbstractFilter
     public const CARBOHYDRATES = 'carbohydrates';
     public const FATS = 'fats';
 
+    public const IS_FAVORITE = 'is_favorite';
+    public const IS_HIDDEN = 'is_hidden';
+
     public function getCallbacks(): array
     {
         return [
@@ -33,6 +40,9 @@ class ProductFilter extends AbstractFilter
             self::PROTEINS => [$this, 'proteins'],
             self::CARBOHYDRATES => [$this, 'carbohydrates'],
             self::FATS => [$this, 'fats'],
+
+            self::IS_FAVORITE => [$this, 'isFavorite'],
+            self::IS_HIDDEN => [$this, 'isHidden'],
         ];
     }
 
@@ -89,5 +99,35 @@ class ProductFilter extends AbstractFilter
     public function fats(Builder $builder, $value)
     {
         $builder->whereBetween('fats', $value);
+    }
+
+    public function isFavorite(Builder $builder, $value)
+    {
+        if ($value === true) {
+            $builder->whereExists(function ($query) {
+                $query->select(DB::raw(1))->from('user_favorite_products')->where('user_id', Auth::user()->id)->whereColumn('user_favorite_products.product_id', 'products.id');
+            });
+        } else if ($value === false) {
+            $builder->whereNotExists(function ($query) {
+                $query->select(DB::raw(1))->from('user_favorite_products')->where('user_id', Auth::user()->id)->whereColumn('user_favorite_products.product_id', 'products.id');
+            });
+        } else {
+            $builder;
+        }
+    }
+
+    public function isHidden(Builder $builder, $value)
+    {
+        if ($value) {
+            $builder->whereExists(function ($query) {
+                $query->select(DB::raw(1))->from('hidden_products')->where('user_id', Auth::user()->id)->whereColumn('hidden_products.product_id', 'products.id');
+            });
+        } else if ($value === false) {
+            $builder->whereNotExists(function ($query) {
+                $query->select(DB::raw(1))->from('hidden_products')->where('user_id', Auth::user()->id)->whereColumn('hidden_products.product_id', 'products.id');
+            });
+        } else {
+            $builder;
+        }
     }
 }

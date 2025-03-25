@@ -8,7 +8,9 @@ use App\Http\Requests\Product\UpdateRequest;
 use App\Http\Resources\ProductCollection;
 use App\Http\Resources\ProductResource;
 use App\Models\Category;
+use App\Models\HiddenProduct;
 use App\Models\Product;
+use App\Models\UserFavoriteProduct;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,12 +28,22 @@ class ProductController extends Controller
         $validate = $request->validated();
 
         // if (valida)
-        // dd($validate);
-        // dump($validate);
+        // dd(array_filter($validate, function ($val, $key) {
+        //     if (in_array($key, ['is_favorite', 'is_hidden'])) {
+        //         return true;
+        //     };
+        //     return !empty($val);
+        // }, ARRAY_FILTER_USE_BOTH));
+
 
         $user_id = Auth::user() ? Auth::user()->id : null;
-
-        $filter = app()->make(ProductFilter::class, ['queryParams' => array_filter($validate)]);
+        $filter = app()->make(ProductFilter::class, ['queryParams' => array_filter($validate, function ($val, $key) {
+            //  'is_personal', 'is_abstract'
+            if (in_array($key, ['is_favorite', 'is_hidden'])) {
+                return true;
+            };
+            return !empty($val);
+        }, ARRAY_FILTER_USE_BOTH)]);
 
         // ->orderBy('is_personal', 'desc')
         $products = Product::whereEnabled()->whereAvailable($user_id)->filter($filter)->orderBy('id', 'asc')->cursorPaginate();
@@ -146,7 +158,7 @@ class ProductController extends Controller
         $validate = $request->validated();
         $excludedForUser = ['is_enabled', 'is_personal', 'user_id'];
 
-        if ($user->is_admin || ($product->is_enabled && $product->user_id == $user->id)) {
+        if ($user->is_admin || ($product->is_enabled && $product->user_id === $user->id)) {
 
             $validateForUser = array_filter($validate, function ($key, $val) use ($excludedForUser) {
                 if (array_key_exists($key, $excludedForUser)) {
@@ -257,15 +269,6 @@ class ProductController extends Controller
                 $product->data_source = $validate['data_source'];
             }
 
-            if (array_key_exists('is_favorite', $validate)) {
-                $product->is_favorite = $validate['is_favorite'];
-            }
-
-            if (array_key_exists('is_hidden', $validate)) {
-                $product->is_hidden = $validate['is_hidden'];
-            }
-
-
             if ($user->is_admin) {
                 if (array_key_exists('is_personal', $validate)) {
                     $product->is_personal = $validate['is_personal'];
@@ -275,12 +278,52 @@ class ProductController extends Controller
                     $product->is_enabled = $validate['is_enabled'];
                 }
             }
-
             $product->save();
-
-            return new ProductResource($product);
-        } else {
+            // return new ProductResource($product);
         }
+
+        if (array_key_exists('is_favorite', $validate)) {
+            $favoriteProduct = UserFavoriteProduct::where('user_id', $user->id)->where('product_id', $id)->first();
+
+            if ($validate['is_favorite'] === true) {
+                if ($favoriteProduct) {
+                    return response()->json(['message' => 'Bad Request'], 400);
+                }
+                UserFavoriteProduct::create([
+                    'user_id' => $user->id,
+                    'product_id' => $id,
+                ]);
+            }
+
+            if ($validate['is_favorite'] === false) {
+                if (!$favoriteProduct) {
+                    return response()->json(['message' => 'Bad Request'], 400);
+                }
+                $favoriteProduct->delete();
+            }
+        }
+
+        if (array_key_exists('is_hidden', $validate)) {
+            $hiddenProduct = HiddenProduct::where('user_id', $user->id)->where('product_id', $id)->first();
+            if ($validate['is_hidden'] === true) {
+                if ($hiddenProduct) {
+                    return response()->json(['message' => 'Bad request'], 400);
+                }
+                HiddenProduct::create([
+                    'user_id' => $user->id,
+                    'product_id' => $id,
+                ]);
+            }
+
+            if ($validate['is_hidden'] === false) {
+                if (!$hiddenProduct) {
+                    return response()->json(['message' => 'Bad request'], 400);
+                }
+                $hiddenProduct->delete();
+            }
+        }
+
+        return new ProductResource($product);
     }
 
     /**

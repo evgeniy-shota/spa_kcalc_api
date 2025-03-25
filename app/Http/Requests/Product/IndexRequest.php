@@ -26,6 +26,8 @@ class IndexRequest extends FormRequest
             // 'type_id' => 'nullable|integer',
             'is_personal' => 'nullable|boolean',
             'is_abstract' => 'nullable|boolean',
+            'is_favorite' => 'nullable|boolean',
+            'is_hidden' => 'nullable|boolean',
             'name' => 'nullable|string|max:255',
             'manufacturer' => 'nullable|array',
             'country_of_manufacture' => 'nullable|array',
