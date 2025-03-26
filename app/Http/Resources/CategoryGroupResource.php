@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\HiddenCategoryGroup;
 use App\Models\UserFavoriteCategoriesGroup;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -35,14 +36,14 @@ class CategoryGroupResource extends JsonResource
         $categories = new CategoryCollection($categories);
 
         $is_favorite = $this->is_favorite ?? UserFavoriteCategoriesGroup::where('user_id', $user?->id)->where('category_groups_id', $this->id)->first() ? true : false;
-
+        $is_hidden = $this->is_hidden ?? HiddenCategoryGroup::where('user_id', $user->id)->where('category_group_id', $this->id)->exists();
         return [
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
             // 'is_favorite' => $categryGroupFavoriteStatus ? true : false,
             'is_favorite' => $this->when($is_favorite !== null, $is_favorite),
-            'is_hidden' => $this->when($this->is_hidden, $this->is_hidden),
+            'is_hidden' => $this->when($is_hidden !== null, $is_hidden),
             'categories' => $this->when($categories, $categories),
             // 'categories' => $this->when($categories, ['count' => count($categories), 'data' => $categories]),
         ];

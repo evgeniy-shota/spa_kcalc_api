@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Validator;
 
 
 use App\Http\CustomValidators\CategoryFilterChecker;
+use App\Models\HiddenCategory;
 use App\Models\UserFavoriteCategory;
 
 class CategoryController extends Controller
@@ -156,7 +157,6 @@ class CategoryController extends Controller
                     $category->is_enabled = $validate['is_enabled'];
                 }
             }
-
             $category->save();
         }
 
@@ -164,11 +164,9 @@ class CategoryController extends Controller
             $favoriteCategory = UserFavoriteCategory::where('user_id', $user->id)->where('category_id', $id)->first();
 
             if ($validate['is_favorite'] === true) {
-
                 if (isset($favoriteCategory)) {
                     return response()->json(['message' => 'Bad Request'], 400);
                 }
-
                 UserFavoriteCategory::create([
                     'user_id' => $user->id,
                     'category_id' => $id,
@@ -184,10 +182,28 @@ class CategoryController extends Controller
             }
         }
 
-        if (array_key_exists('is_hidden', $validate)) {
-        }
+        if (isset($validate['is_hidden'])) {
+            $hiddenCategory = HiddenCategory::where('user_id', $user->id)->where('category_id', $id)->first();
 
-        return response()->json(['message' => 'Ok', 'data' => new CategoryResource($category)], 200);
+            if ($validate['is_hidden'] === true) {
+                if ($hiddenCategory) {
+                    return response()->json(['message' => 'Bad Request'], 400);
+                }
+                HiddenCategory::create([
+                    'user_id' => $user->id,
+                    'category_id' => $id,
+                ]);
+            }
+
+            if ($validate['is_hidden'] === false) {
+                if (!$hiddenCategory) {
+                    return response()->json(['message' => 'Bad Request'], 400);
+                }
+                $hiddenCategory->delete();
+            }
+        }
+        return new CategoryResource($category);
+        // return response()->json(['message' => 'Ok', 'data' => new CategoryResource($category)], 200);
     }
 
     /**

@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CategoryGroupRequest;
 use App\Http\Resources\CategoryGroupCollection;
 use App\Http\Resources\CategoryGroupResource;
+use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 use App\Models\CategoryGroup;
+use App\Models\HiddenCategoryGroup;
 use App\Models\User;
 use App\Models\UserFavoriteCategoriesGroup;
 use App\Models\UserFavoriteCategory;
@@ -48,11 +50,17 @@ class CategoryGroupController extends Controller
 
     public function update(CategoryGroupRequest $request, string $id)
     {
-        $user = Auth::user() ? Auth::user() : null;
+        $user = Auth::user();
         // $user = User::find(3);
-        // if (!isset($user)) {
-        //     return response()->json(['message' => 'Unauthorized'], 401);
-        // }
+        if (!$user) {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
+
+        $categoryGroup = CategoryGroup::find($id);
+
+        if (!$categoryGroup) {
+            return response()->json(['message' => 'Bad Request'], 400);
+        }
 
         $validated = $request->validated();
 
@@ -62,27 +70,50 @@ class CategoryGroupController extends Controller
             if (isset($validated['is_favorite'])) {
                 $favoriteCategoryGroup = UserFavoriteCategoriesGroup::where('user_id', $user->id)->where('category_groups_id', $id)->first();
 
-                if ($validated['is_favorite'] == true && !isset($favoriteCategoryGroup)) {
+                if ($validated['is_favorite'] === true) {
+                    if ($favoriteCategoryGroup) {
+                        return response()->json(['message' => 'Bad Request'], 400);
+                    }
                     UserFavoriteCategoriesGroup::create([
                         'user_id' => $user->id,
                         'category_groups_id' => $id,
                         'is_favorite' => true,
                     ]);
-                    return response()->json(new CategoryGroupResource(CategoryGroup::find($id)), 200);
                 }
 
-                if ($validated['is_favorite'] == false && isset($favoriteCategoryGroup)) {
-
-                    UserFavoriteCategoriesGroup::find($favoriteCategoryGroup->id)->delete();
-
-                    return response()->json(new CategoryGroupResource(CategoryGroup::find($id)), 200);
+                if ($validated['is_favorite'] == false) {
+                    if (!$favoriteCategoryGroup) {
+                        return response()->json(['message' => 'Bad Request'], 400);
+                    }
+                    $favoriteCategoryGroup->delete();
                 }
             }
-            return response()->json(['message' => 'Bad Request'], 402);
+
+            if (isset($validated['is_hidden'])) {
+                $hiddenCategoryGroup  = HiddenCategoryGroup::where('user_id', $user->id)->where('category_group_id', $id)->first();
+
+                if ($validated['is_hidden'] === true) {
+                    if ($hiddenCategoryGroup) {
+                        return response()->json(['message' => 'Bad Request'], 400);
+                    }
+                    HiddenCategoryGroup::create([
+                        'user_id' => $user->id,
+                        'category_group_id' => $id,
+                    ]);
+                }
+
+                if ($validated['is_hidden'] === false) {
+                    if (!$hiddenCategoryGroup) {
+                        return response()->json(['message' => 'Bad Request'], 400);
+                    }
+                    $hiddenCategoryGroup->delete();
+                }
+            }
+
+            return response()->json(new CategoryGroupResource($categoryGroup), 200);
         }
 
         //admin logic
-        $categoryGroup = CategoryGroup::find($id);
         // $categoryGroup = CategoryGroup::where('id', $id)->update([
         //     'name' => $validated['name'],
         //     'description' => $validated['description'],
@@ -103,8 +134,8 @@ class CategoryGroupController extends Controller
 
         $categoryGroup->save();
 
-        return response()->json([$categoryGroup], 200);
+        return  new CategoryResource($categoryGroup);
     }
 
-    public function destroy() {}
+    public function destroy(string $id) {}
 }

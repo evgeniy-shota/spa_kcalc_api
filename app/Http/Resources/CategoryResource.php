@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\HiddenCategory;
 use App\Models\UserFavoriteCategory;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -17,9 +18,13 @@ class CategoryResource extends JsonResource
     public function toArray(Request $request): array
     {
         $user = Auth::user();
-        $isFavorite = $user ? UserFavoriteCategory::where('user_id', $user->id)->where('category_id', $this->id)->first() : null;
-        $isHidden = false;
-        // dump($this->products);
+        $isFavorite = null;
+        $isHidden = null;
+        if ($user) {
+            $isFavorite = UserFavoriteCategory::where('user_id', $user->id)->where('category_id', $this->id)->first() ? true : false;
+            $isHidden = HiddenCategory::where('user_id', $user->id)->where('category_id', $this->id)->first() ? true : false;
+        }
+
         return [
             "id" => $this->id,
             "category_group_id" => $this->category_group_id,
@@ -28,8 +33,8 @@ class CategoryResource extends JsonResource
             "is_personal" => $this->is_personal,
             "icon_path" => $this->icon_path,
             "thumbnail_image_path" => $this->thumbnail_image_path,
-            'is_favorite' => $isFavorite ? true : false,
-            'is_hidden' => $isHidden ? true : false,
+            'is_favorite' => $this->when($isFavorite !== null, $isFavorite),
+            'is_hidden' => $this->when($isHidden !== null, $isHidden),
             'products' => $this->whenNotNull($this->categoryProducts),
         ];
     }

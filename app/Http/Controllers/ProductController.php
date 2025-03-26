@@ -35,7 +35,6 @@ class ProductController extends Controller
         //     return !empty($val);
         // }, ARRAY_FILTER_USE_BOTH));
 
-
         $user_id = Auth::user() ? Auth::user()->id : null;
         $filter = app()->make(ProductFilter::class, ['queryParams' => array_filter($validate, function ($val, $key) {
             //  'is_personal', 'is_abstract'
@@ -59,7 +58,13 @@ class ProductController extends Controller
 
         $validate = $request->validated();
         $user_id = Auth::user() ? Auth::user()->id : null;
-        $filter = app()->make(ProductFilter::class, ['queryParams' => array_filter($validate)]);
+        $filter = app()->make(ProductFilter::class, ['queryParams' => array_filter($validate, function ($val, $key) {
+            //  'is_personal', 'is_abstract'
+            if (in_array($key, ['is_favorite', 'is_hidden'])) {
+                return true;
+            };
+            return !empty($val);
+        }, ARRAY_FILTER_USE_BOTH)]);
 
         // ->orderBy('is_personal', 'desc')
         $products = Product::where('category_id', $category_id)->whereEnabled()->whereAvailable($user_id)->filter($filter)->orderBy('id', 'asc')->cursorPaginate();
