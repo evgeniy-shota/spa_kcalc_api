@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Builders\CustomBuilder;
 use App\Models\Traits\Filterable;
+use App\Models\Traits\Sorterable;
 use Illuminate\Cache\Events\RetrievingKey;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,7 +14,6 @@ use Laravel\Scout\Searchable;
 
 class Product extends Model
 {
-
     protected $fillable = [
         'user_id',
         'category_id',
@@ -50,7 +50,7 @@ class Product extends Model
         // 'updated_at',
     ];
     /** @use HasFactory<\Database\Factories\ProductFactory> */
-    use HasFactory, Searchable, Filterable;
+    use HasFactory, Searchable, Filterable, Sorterable;
 
     public function toSearchableArray(): array
     {

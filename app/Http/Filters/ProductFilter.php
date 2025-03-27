@@ -58,7 +58,9 @@ class ProductFilter extends AbstractFilter
 
     public function isPersonal(Builder $builder, $value)
     {
-        $builder->where('is_personal', $value);
+        if (Auth::user()) {
+            $builder->where('is_personal', $value);
+        }
     }
 
     public function isAbstract(Builder $builder, $value)
@@ -103,31 +105,39 @@ class ProductFilter extends AbstractFilter
 
     public function isFavorite(Builder $builder, $value)
     {
-        if ($value === true) {
-            $builder->whereExists(function ($query) {
-                $query->select(DB::raw(1))->from('user_favorite_products')->where('user_id', Auth::user()->id)->whereColumn('user_favorite_products.product_id', 'products.id');
-            });
-        } else if ($value === false) {
-            $builder->whereNotExists(function ($query) {
-                $query->select(DB::raw(1))->from('user_favorite_products')->where('user_id', Auth::user()->id)->whereColumn('user_favorite_products.product_id', 'products.id');
-            });
-        } else {
-            $builder;
+        if (Auth::user()) {
+            if ($value === true) {
+                $builder->whereExists(function ($query) {
+                    $query->select(DB::raw(1))->from('user_favorite_products')->where('user_id', Auth::user()->id)->whereColumn('user_favorite_products.product_id', 'products.id');
+                });
+            } else if ($value === false) {
+                $builder->whereNotExists(function ($query) {
+                    $query->select(DB::raw(1))->from('user_favorite_products')->where('user_id', Auth::user()->id)->whereColumn('user_favorite_products.product_id', 'products.id');
+                });
+            }
         }
+
+        // else {
+        //     $builder;
+        // }
     }
 
     public function isHidden(Builder $builder, $value)
     {
-        if ($value) {
-            $builder->whereExists(function ($query) {
-                $query->select(DB::raw(1))->from('hidden_products')->where('user_id', Auth::user()->id)->whereColumn('hidden_products.product_id', 'products.id');
-            });
-        } else if ($value === false) {
-            $builder->whereNotExists(function ($query) {
-                $query->select(DB::raw(1))->from('hidden_products')->where('user_id', Auth::user()->id)->whereColumn('hidden_products.product_id', 'products.id');
-            });
-        } else {
-            $builder;
+        if (Auth::user()) {
+            if ($value) {
+                $builder->whereExists(function ($query) {
+                    $query->select(DB::raw(1))->from('hidden_products')->where('user_id', Auth::user()->id)->whereColumn('hidden_products.product_id', 'products.id');
+                });
+            } else if ($value === false) {
+                $builder->whereNotExists(function ($query) {
+                    $query->select(DB::raw(1))->from('hidden_products')->where('user_id', Auth::user()->id)->whereColumn('hidden_products.product_id', 'products.id');
+                });
+            }
         }
+
+        // else {
+        //     $builder;
+        // }
     }
 }

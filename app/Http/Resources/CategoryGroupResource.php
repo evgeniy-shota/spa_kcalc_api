@@ -35,8 +35,14 @@ class CategoryGroupResource extends JsonResource
         $categories = $this->categories ?? $this->categoriesCollection;
         $categories = new CategoryCollection($categories);
 
-        $is_favorite = $this->is_favorite ?? UserFavoriteCategoriesGroup::where('user_id', $user?->id)->where('category_groups_id', $this->id)->first() ? true : false;
-        $is_hidden = $this->is_hidden ?? HiddenCategoryGroup::where('user_id', $user->id)->where('category_group_id', $this->id)->exists();
+        $is_favorite = null;
+        $is_hidden = null;
+
+        if ($user) {
+            $is_favorite = $this->is_favorite ?? UserFavoriteCategoriesGroup::where('user_id', $user?->id)->where('category_groups_id', $this->id)->first() ? true : false;
+            $is_hidden = $this->is_hidden ?? HiddenCategoryGroup::where('user_id', $user->id)->where('category_group_id', $this->id)->exists();
+        }
+
         return [
             'id' => $this->id,
             'name' => $this->name,
