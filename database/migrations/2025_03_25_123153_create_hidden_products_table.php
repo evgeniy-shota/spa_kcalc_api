@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('hidden_products', function (Blueprint $table) {
             $table->id();
+
             $table->foreignId('user_id')->cascadeOnDelete()->constrained('users');
             $table->foreignId('product_id')->cascadeOnDelete()->constrained('products');
+            
             $table->timestamps();
         });
     }

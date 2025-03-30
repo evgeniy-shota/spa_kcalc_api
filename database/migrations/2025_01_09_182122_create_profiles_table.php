@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->index()->constrained('users');
+            
+            $table->foreignId('user_id')->index()->cascadeOnDelete()->constrained('users');
             $table->enum('gender', ['man', 'woman', 'unknow'])->default('unknow');
             $table->date('date_of_birth')->nullable();
             $table->float('height', 1)->nullable();
@@ -22,6 +23,7 @@ return new class extends Migration
             $table->json('weight')->nullable();
             $table->float('target_weight', 1)->nullable();
             $table->json('target_energy_value_ration')->nullable();
+            $table->json('settings')->nullable();
 
             $table->timestamps();
         });

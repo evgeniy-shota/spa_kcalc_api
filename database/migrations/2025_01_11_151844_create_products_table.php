@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            
             $table->foreignId('category_id')->index()->constrained('categories');
             $table->foreignId('user_id')->nullable()->index()->constrained('users');
             $table->boolean('is_personal')->default(false);
@@ -20,8 +21,8 @@ return new class extends Migration
             $table->boolean('is_abstract')->default(true);
             $table->string('name', 255);
             $table->string('thumbnail_image_name', 255)->nullable();
-            $table->string('manufacturer', 255)->nullable();
-            $table->string('country_of_manufacture', 100)->nullable();
+            $table->foreignId('manufacturer_id')->nullable()->constrained('manufacturers');
+            $table->foreignId('country_of_manufacture_id')->nullable()->constrained('country_of_manufactures');
             $table->integer('trademark_id')->nullable();
             $table->string('description', 400)->nullable();
             $table->foreignId('type_id')->index()->nullable()->constrained('product_types');

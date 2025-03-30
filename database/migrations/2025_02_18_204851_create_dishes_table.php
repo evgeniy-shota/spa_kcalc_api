@@ -14,22 +14,22 @@ return new class extends Migration
         Schema::create('dishes', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('dish_category_id')->index()->constrained('dish_categories');
+            $table->foreignId('dish_category_id')->index()->nullOnDelete()->constrained('dish_categories');
             $table->foreignId('user_id')->index()->nullable()->constrained('users');
             $table->string('name', 255);
             $table->boolean('is_personal')->default(false);
             $table->boolean('is_enabled')->default(true);
             $table->string('description', 800)->nullable();
-            $table->integer('quantity_to_calculate')->default(100)->nullable();
-            $table->integer('quantity')->default(100)->nullable();
-            $table->float('kcalory', 1)->default(0)->nullable();
-            $table->float('proteins', 1)->default(0)->nullable();
-            $table->float('carbohydrates', 1)->default(0)->nullable();
-            $table->float('fats', 1)->default(0)->nullable();
-            $table->float('kcalory_per_unit', 2)->default(0)->nullable();
-            $table->float('proteins_per_unit', 2)->default(0)->nullable();
-            $table->float('carbohydrates_per_unit', 2)->default(0)->nullable();
-            $table->float('fats_per_unit', 2)->default(0)->nullable();
+            $table->integer('quantity_to_calculate')->default(100);
+            $table->integer('quantity')->default(100);
+            $table->float('kcalory', 1)->default(0);
+            $table->float('proteins', 1)->default(0);
+            $table->float('carbohydrates', 1)->default(0);
+            $table->float('fats', 1)->default(0);
+            $table->float('kcalory_per_unit', 2)->default(0);
+            $table->float('proteins_per_unit', 2)->default(0);
+            $table->float('carbohydrates_per_unit', 2)->default(0);
+            $table->float('fats_per_unit', 2)->default(0);
             $table->foreignId('data_source')->index()->nullable()->constrained();
             $table->json('nutrients_and_vitamins')->nullable();
             // $table->integer('tags');

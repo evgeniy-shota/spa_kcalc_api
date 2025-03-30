@@ -13,14 +13,11 @@ return new class extends Migration
     {
         Schema::create('diet_products', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('diet_id')->index()->constrained('diets');
+
+            $table->foreignId('diet_id')->index()->cascadeOnDelete()->constrained('diets');
             $table->foreignId('product_id')->index()->constrained('products');
-            // $table->string('name', 255);
             $table->integer('quantity')->default(100);
-            // $table->float('kcalory_per_unit', 1)->default(0);
-            // $table->float('proteins_per_unit', 1)->default(0);
-            // $table->float('carbohydrates_per_unit', 1)->default(0);
-            // $table->float('fats_per_unit', 1)->default(0);
+
             $table->timestamps();
         });
     }

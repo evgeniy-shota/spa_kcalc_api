@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('daily_activities', function (Blueprint $table) {
             $table->id();
+
             $table->foreignId('user_id')->index()->constrained('users');
             $table->foreignId('activity_id')->index()->constrained('activities');
             $table->date('date');
@@ -20,6 +21,7 @@ return new class extends Migration
             $table->string('description', 255)->nullable();
             $table->integer('duration_sec')->default(60);
             $table->integer('quantity')->default(1);
+            
             $table->timestamps();
         });
     }

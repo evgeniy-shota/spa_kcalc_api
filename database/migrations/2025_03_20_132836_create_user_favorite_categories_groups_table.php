@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('user_favorite_categories_groups', function (Blueprint $table) {
             $table->id();
+
             $table->foreignId('user_id')->index()->constrained('users');
             $table->foreignId('category_groups_id')->index()->constrained('category_groups');
+            
             $table->timestamps();
         });
     }

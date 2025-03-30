@@ -13,9 +13,11 @@ class CategoryGroup extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'name',
         'description',
         'is_enabled',
+        'is_personal',
     ];
 
     public function newEloquentBuilder($query): CustomBuilder

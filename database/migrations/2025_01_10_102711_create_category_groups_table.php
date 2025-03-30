@@ -13,9 +13,13 @@ return new class extends Migration
     {
         Schema::create('category_groups', function (Blueprint $table) {
             $table->id();
+
+            $table->foreignId('user_id')->nullable()->constrained('users');
             $table->string('name', 100);
             $table->string('description', 400)->nullable();
             $table->boolean('is_enabled')->default(true);
+            $table->boolean('is_personal')->default(false);
+            
             $table->timestamps();
         });
     }

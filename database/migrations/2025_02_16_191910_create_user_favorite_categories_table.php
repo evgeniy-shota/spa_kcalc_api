@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('user_favorite_categories', function (Blueprint $table) {
             $table->id();
+
             $table->foreignId('user_id')->index()->constrained('users');
             $table->foreignId('category_id')->index()->constrained('categories');
+            
             $table->timestamps();
         });
     }

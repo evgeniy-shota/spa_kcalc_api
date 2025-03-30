@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('activities', function (Blueprint $table) {
             $table->id();
+            
             $table->foreignId('user_id')->index()->nullable()->constrained('users');
             $table->foreignId('activity_category_id')->index()->constrained('activity_categories');
             $table->boolean('is_personal')->default(false);

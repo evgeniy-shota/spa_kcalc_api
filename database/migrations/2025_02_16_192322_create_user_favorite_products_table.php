@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('user_favorite_products', function (Blueprint $table) {
             $table->id();
+            
             $table->foreignId('user_id')->index()->constrained('users');
             $table->foreignId('product_id')->index()->constrained('products');
 

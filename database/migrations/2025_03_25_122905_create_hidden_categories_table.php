@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('hidden_categories', function (Blueprint $table) {
             $table->id();
+
             $table->foreignId('user_id')->cascadeOnDelete()->constrained('users');
             $table->foreignId('category_id')->cascadeOnDelete()->constrained('categories');
+            
             $table->timestamps();
         });
     }

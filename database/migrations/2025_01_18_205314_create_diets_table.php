@@ -19,10 +19,6 @@ return new class extends Migration
             $table->boolean('is_enabled')->default(true);
             $table->boolean('is_personal')->default(false);
             $table->string('description', 400)->nullable();
-            // $table->float('kcalory', 1)->default(0);
-            // $table->float('proteins', 1)->default(0);
-            // $table->float('carbohydrates', 1)->default(0);
-            // $table->float('fats', 1)->default(0);
             $table->string('thumbnail_image_path', 255)->nullable();
             // $table->('tags');
 
