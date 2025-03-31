@@ -5,27 +5,33 @@ namespace App\Enums;
 enum TypeOfFoodProcessing: string
 {
     // Варка
-    case Boiling = 'Boiling';
+    case Boiling = 'Варка';
         // Жарка
-    case Frying = 'Frying';
+    case Frying = 'Жарка';
         // Запекание
-    case Baking = 'Baking';
+    case Baking = 'Запекание';
         // Тушение
-    case Stewing = 'Stewing';
+    case Stewing = 'Тушение';
         // Пастеризация
-    case Pasteurization = 'Pasteurization';
+    case Pasteurization = 'Пастеризация';
         // Стерилизация
-    case Sterilization = 'Sterilization';
+    case Sterilization = 'Стерилизация';
         // Заморозка
-    case Freezing = 'Freezing';
+    case Freezing = 'Заморозка';
         // Сушка
-    case Drying = 'Drying';
+    case Drying = 'Сушка';
         // Ферментация
-    case Fermentation = 'Fermentation';
+    case Fermentation = 'Ферментация';
         // Консервирование
-    case Canning = 'Canning';
+    case Canning = 'Консервирование';
         // Маринование
-    case Pickling = 'Pickling';
+    case Pickling = 'Маринование';
         // Копчение
-    case Smoking = 'Smoking';
+    case Smoking = 'Копчение';
+
+
+    public static function list(): array
+    {
+        return self::cases();
+    }
 }

@@ -15,7 +15,8 @@ return new class extends Migration
         Schema::create('type_food_processings', function (Blueprint $table) {
             $table->id();
 
-            $table->string('name', 100);
+            $table->string('name_ru', 100);
+            $table->string('name_en', 100);
             $table->string('description', 400)->nullable();
             $table->boolean('is_enabled')->default(true);
 

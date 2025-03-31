@@ -192,8 +192,10 @@ class ProductController extends Controller
         $user = Auth::user();
 
         if (!$user) {
-            return response()->json('Unauthorized request...', 401);
+            return response()->json(['message' => 'Unauthorized request...'], 401);
         }
+
+        dd($request);
 
         $category = Category::create([
             'name' => $request->category['name'],

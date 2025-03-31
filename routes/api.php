@@ -34,10 +34,10 @@ Route::controller(CategoryController::class)->group(function () {
 // Route::apiResource('/categories', CategoryController::class);
 
 Route::controller(ProductController::class)->group(function () {
+    Route::post('/products/create/', 'store');
     Route::post('/products', 'index');
     Route::post('/products/{category_id}', 'productsFromCategory');
     Route::get('/products/{id}', 'show');
-    Route::post('/products/create/', 'store');
     Route::patch('/products/{id}', 'update');
     Route::delete('/products/{id}', 'destroy');
 });

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\CategoryCollection;
+use App\Http\Resources\CategoryGroupCollection;
 use App\Http\Resources\CountryOfManufactureCollection;
 use App\Http\Resources\DataSourceCollection;
 use App\Models\Category;
+use App\Models\CategoryGroup;
 use App\Models\CountryOfManufacture;
 use App\Models\DataSource;
 use App\Models\Product;
@@ -18,6 +20,7 @@ class AdditionalProductDataController extends Controller
     {
         $user_id = Auth::user() ? Auth::user()->id : null;
 
+        $categoriesGroup = CategoryGroup::whereEnabled()->whereAvailable($user_id)->get();
         $categories = Category::whereEnabled()->whereAvailable($user_id)->get();
         $countries = CountryOfManufacture::whereEnabled()->get();
         $dataSource = DataSource::where('is_enabled', true)->get();
@@ -36,7 +39,8 @@ class AdditionalProductDataController extends Controller
         $maxFats = ceil(Product::whereEnabled()->whereAvailable($user_id)->max('fats'));
 
         return [
-            'categories' => new CategoryCollection($categories),
+            'categoriesGroup' => new CategoryGroupCollection($categoriesGroup, null, $categories),
+            // 'categories' => new CategoryCollection($categories),
             'country_of_manufactory' => new CountryOfManufactureCollection($countries),
             'data_source' => new DataSourceCollection($dataSource),
             'kcalory_limits' => ['min' => $minCalory, 'max' => $maxCalory],

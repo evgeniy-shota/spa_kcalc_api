@@ -24,16 +24,15 @@ class CategoryGroupController extends Controller
 
         if (Auth::user()) {
             $favoriteCategoriesGroup = UserFavoriteCategoriesGroup::where('user_id', Auth::user()->id)->get();
-            $categories = Category::whereEnabled()->whereAvailable(Auth::user()->id)->groupBy('category_group_id', 'id')->get();
             // dd($categories);
         }
+        $categories = Category::whereEnabled()->whereAvailable(Auth::user() ? Auth::user()->id : null)->groupBy('category_group_id', 'id')->get();
 
         return new CategoryGroupCollection($categoriesGroups, $favoriteCategoriesGroup ?? null, $categories ?? null);
     }
 
     public function show(string $id)
     {
-
         $categorysGroup = CategoryGroup::find($id);
         // dd($categorysGroup);
 

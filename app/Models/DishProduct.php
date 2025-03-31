@@ -13,6 +13,7 @@ class DishProduct extends Model
     protected $fillable = [
         'dish_id',
         'product_id',
+        'type_food_processing_id',
         'quantity',
     ];
 }

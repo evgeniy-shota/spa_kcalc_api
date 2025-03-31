@@ -33,7 +33,7 @@ class CategoryGroupResource extends JsonResource
         // $categories = $this->categories()->whereEnabled()->whereAvailable($user ? $user->id : null)->get();
         // $categryGroupFavoriteStatus = $user ? UserFavoriteCategoriesGroup::where('user_id', $user->id)->where('category_groups_id', $this->id)->first() : null;
         $categories = $this->categories ?? $this->categoriesCollection;
-        $categories = new CategoryCollection($categories);
+        $categories = $categories !== null ? new CategoryCollection($categories) : null;
 
         $is_favorite = null;
         $is_hidden = null;
@@ -50,7 +50,7 @@ class CategoryGroupResource extends JsonResource
             // 'is_favorite' => $categryGroupFavoriteStatus ? true : false,
             'is_favorite' => $this->when($is_favorite !== null, $is_favorite),
             'is_hidden' => $this->when($is_hidden !== null, $is_hidden),
-            'categories' => $this->when($categories, $categories),
+            'categories' => $this->when($categories !== null, $categories),
             // 'categories' => $this->when($categories, ['count' => count($categories), 'data' => $categories]),
         ];
     }
