@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\ProductSortParams;
 use App\Http\Filters\ProductFilter;
 use App\Http\Requests\Product\IndexRequest;
+use App\Http\Requests\Product\StoreRequest;
 use App\Http\Requests\Product\UpdateRequest;
 use App\Http\Resources\ProductCollection;
 use App\Http\Resources\ProductResource;
@@ -187,7 +188,7 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
         $user = Auth::user();
 
@@ -195,7 +196,9 @@ class ProductController extends Controller
             return response()->json(['message' => 'Unauthorized request...'], 401);
         }
 
-        dd($request);
+        $validated = $request->validated();
+
+        dd($validated);
 
         $category = Category::create([
             'name' => $request->category['name'],

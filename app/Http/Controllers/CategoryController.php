@@ -92,14 +92,16 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        dd($request);
+        // dd($request);
+        $validated = $request->validated();
 
         $newCategory = Category::create([
-            'name' => $request->str('name'),
-            'category_group_id' => $request->group_id,
-            'user_id' => $request->user_id,
-            'is_personal' => $request->is_personal,
-            'is_enabled' => $request->boolean('is_enabled'),
+            'user_id' => Auth::user()->id,
+            'name' => $validated['name'],
+            'category_group_id' => $validated['category_group_id'],
+            'description' => $validated['description'],
+            // 'is_personal' => $validated->is_personal,
+            // 'is_enabled' => $validated->boolean('is_enabled'),
         ]);
 
         return response()->json([$newCategory], 201);
@@ -110,6 +112,7 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, string $id)
     {
+        // dd($request);
         $user = Auth::user();
 
         if (!isset($user)) {

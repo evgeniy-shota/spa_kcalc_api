@@ -16,6 +16,7 @@ class Category extends Model
         'user_id',
         'category_group_id',
         'name',
+        'description',
         'is_personal',
         'is_enabled',
         'icon_path',
