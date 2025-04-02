@@ -3,10 +3,10 @@
 namespace App\Builders;
 
 use Illuminate\Database\Eloquent\Builder;
+use Laravel\Pail\ValueObjects\Origin\Console;
 
 class CustomBuilder extends Builder
 {
-
     public function whereEnabled(): self
     {
         return $this->where('is_enabled', true);

@@ -41,7 +41,8 @@ class CategoryGroupController extends Controller
                 'message' => 'Not Found',
             ], 404);
         }
-        $categories = Category::whereEnabled()->whereAvailable(Auth::user()?->id)->where('category_group_id', $id)->get();
+        $categories = Category::where('category_group_id', $id)->whereEnabled()->whereAvailable(Auth::user()?->id)->get();
+        // dd($categories);
         return new CategoryGroupResource($categorysGroup, $categories);
     }
 

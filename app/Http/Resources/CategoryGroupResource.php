@@ -23,18 +23,14 @@ class CategoryGroupResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        // the query time increases to >250 ms when using the category collection, 
-        // without the category collection the query time is ~140-170 ms, 
-        // if you transfer categories from the controller, 
-        // the query time decreases to ~120-140 ms
-
         $user = Auth::user();
         // $categories = new CategoryCollection($this->categories()->whereEnabled()->whereAvailable($user ? $user->id : null)->get());
         // $categories = $this->categories()->whereEnabled()->whereAvailable($user ? $user->id : null)->get();
         // $categryGroupFavoriteStatus = $user ? UserFavoriteCategoriesGroup::where('user_id', $user->id)->where('category_groups_id', $this->id)->first() : null;
-        $categories = $this->categories ?? $this->categoriesCollection;
+        // dump($this->categories);
+        $categories = $this->availableCategories ?? $this->categoriesCollection;
         $categories = $categories !== null ? new CategoryCollection($categories) : null;
-
+        // dd($categories);
         $is_favorite = null;
         $is_hidden = null;
 

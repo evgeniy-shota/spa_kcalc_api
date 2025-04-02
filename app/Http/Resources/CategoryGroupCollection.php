@@ -28,7 +28,7 @@ class CategoryGroupCollection extends ResourceCollection
         // dump($this->collection);
         $newGroupsCollection = $this->collection->map(function ($item) {
             $item['is_favorite'] = $this->favoriteGroups->keyBy('category_groups_id')->has($item['id']);
-            $item['categories'] = $this->categroies->filter(function ($catItem) use ($item) {
+            $item['availableCategories'] = $this->categroies->filter(function ($catItem) use ($item) {
                 if ($catItem['category_group_id'] === $item['id']) {
                     return $catItem;
                 }

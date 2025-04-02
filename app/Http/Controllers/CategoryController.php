@@ -32,7 +32,6 @@ class CategoryController extends Controller
     public function index(Request $request)
     {
         $data = new CategoryFilterChecker($request->toArray());
-        // dd($data());
 
         $validatedData = Validator::make($data(), [
             'name' => 'nullable|string',
@@ -100,11 +99,11 @@ class CategoryController extends Controller
             'name' => $validated['name'],
             'category_group_id' => $validated['category_group_id'],
             'description' => $validated['description'],
-            // 'is_personal' => $validated->is_personal,
+            'is_personal' => $validated->is_personal ?? true,
             // 'is_enabled' => $validated->boolean('is_enabled'),
         ]);
 
-        return response()->json([$newCategory], 201);
+        return response()->json(new CategoryResource($newCategory), 201);
     }
 
     /**
@@ -180,7 +179,6 @@ class CategoryController extends Controller
                 if (!isset($favoriteCategory)) {
                     return response()->json(['message' => 'Bad Request'], 400);
                 }
-
                 $favoriteCategory->delete();
             }
         }
@@ -214,6 +212,8 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
+        // dd('try to destroy');
+
         return response()->json(Category::destroy($id), 200);
     }
 }
