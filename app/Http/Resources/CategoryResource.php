@@ -25,6 +25,13 @@ class CategoryResource extends JsonResource
         //     $isFavorite = UserFavoriteCategory::where('user_id', $user->id)->where('category_id', $this->id)->first() ? true : false;
         //     $isHidden = HiddenCategory::where('user_id', $user->id)->where('category_id', $this->id)->first() ? true : false;
         // }
+        $isFavorite = null;
+        $isHidden = null;
+
+        if (Auth::user() !== null) {
+            $isFavorite = $this->is_favorite !== null ? $this->is_favorite : UserFavoriteCategory::where('user_id', Auth::user()->id)->where('category_id', $this->id)->exists();
+            $isHidden = $this->is_hidden !== null ? $this->is_hidden : HiddenCategory::where('user_id', Auth::user()->id)->where('category_id', $this->id)->exists();
+        }
 
         return [
             "id" => $this->id,
@@ -34,8 +41,8 @@ class CategoryResource extends JsonResource
             "is_personal" => $this->is_personal,
             "icon_path" => $this->icon_path,
             "thumbnail_image_path" => $this->thumbnail_image_path,
-            'is_favorite' => $this->when($this->is_favorite, $this->is_favorite),
-            'is_hidden' => $this->when($this->is_hidden, $this->is_hidden),
+            'is_favorite' => $this->when(Auth::user() !== null, $isFavorite),
+            'is_hidden' => $this->when(Auth::user() !== null, $isHidden),
             'products' => $this->whenNotNull($this->categoryProducts),
         ];
     }
