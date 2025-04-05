@@ -12,11 +12,11 @@ class CustomBuilder extends Builder
         return $this->where('is_enabled', true);
     }
 
-    public function whereAvailable($user_id = null): self
+    public function whereAvailable($user_id = null, $tableName = ''): self
     {
         if (isset($user_id)) {
-            return $this->where(function (Builder $query) use ($user_id) {
-                $query->where('is_personal', false)->orWhere('user_id', $user_id);
+            return $this->where(function (Builder $query) use ($user_id, $tableName) {
+                $query->where('is_personal', false)->orWhere(($tableName ? $tableName . '.' : '') . 'user_id', $user_id);
             });
         }
         return $this->where('is_personal', false);

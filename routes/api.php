@@ -2,8 +2,17 @@
 
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\AdditionalProductDataController;
+
+use App\Http\Controllers\Category\CategoryIndexController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\CategoryGroupController;
+
+use App\Http\Controllers\CategoryGroup\CategoryGroupDestroyController;
+use App\Http\Controllers\CategoryGroup\CategoryGroupIndexController;
+use App\Http\Controllers\CategoryGroup\CategoryGroupShowController;
+use App\Http\Controllers\CategoryGroup\CategoryGroupStoreController;
+use App\Http\Controllers\CategoryGroup\CategoryGroupUpdateController;
+
+// use App\Http\Controllers\CategoryGroupController;
 use App\Http\Controllers\DailyRationController;
 use App\Http\Controllers\DietController;
 use App\Http\Controllers\LoginController;
@@ -21,10 +30,19 @@ use Illuminate\Support\Facades\Route;
 
 // Route::post('/login', [LoginController::class,'authentificate']);
 // ->middleware('auth:sanctum')
-Route::apiResource('/category-groups', CategoryGroupController::class);
+
+Route::get('/category-groups/{id}', CategoryGroupShowController::class)->name('categoryGroup.show');
+Route::get('/category-groups/', CategoryGroupIndexController::class)->name('categoryGroup.index');
+Route::post('/category-groups/{id}', CategoryGroupUpdateController::class)->name('categoryGroup.update');
+Route::post('/category-groups/', CategoryGroupStoreController::class)->name('categoryGroup.store');
+Route::delete('/category-groups/{id}', CategoryGroupDestroyController::class)->name('categoryGroup.destroy');
+
+// Route::apiResource('/category-groups', CategoryGroupController::class);
+
+Route::get('/categories/',CategoryIndexController::class)->name('');
 
 Route::controller(CategoryController::class)->group(function () {
-    Route::get('/categories', 'index');
+    // Route::get('/categories', 'index');
     Route::get('/categories/{id}', 'show');
     Route::post('/categories', 'store');
     Route::patch('/categories/{id}', 'update');

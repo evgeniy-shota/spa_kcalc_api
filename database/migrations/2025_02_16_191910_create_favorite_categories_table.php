@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_favorite_categories_groups', function (Blueprint $table) {
+        Schema::create('favorite_categories', function (Blueprint $table) {
             $table->id();
 
             $table->foreignId('user_id')->index()->constrained('users');
-            $table->foreignId('category_groups_id')->index()->constrained('category_groups');
+            $table->foreignId('category_id')->index()->constrained('categories');
             
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_favorite_categories_groups');
+        Schema::dropIfExists('favorite_categories');
     }
 };

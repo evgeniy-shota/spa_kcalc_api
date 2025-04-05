@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_favorite_categories', function (Blueprint $table) {
+        Schema::create('favorite_products', function (Blueprint $table) {
             $table->id();
-
-            $table->foreignId('user_id')->index()->constrained('users');
-            $table->foreignId('category_id')->index()->constrained('categories');
             
+            $table->foreignId('user_id')->index()->constrained('users');
+            $table->foreignId('product_id')->index()->constrained('products');
+
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_favorite_categories');
+        Schema::dropIfExists('favorite_products');
     }
 };

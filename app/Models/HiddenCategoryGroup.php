@@ -10,4 +10,6 @@ class HiddenCategoryGroup extends Model
         'user_id',
         'category_group_id',
     ];
+
+    protected $table = 'hidden_category_groups';
 }

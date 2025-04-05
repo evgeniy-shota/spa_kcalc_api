@@ -7,14 +7,16 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class CategoryGroupCollection extends ResourceCollection
 {
-    private $favoriteGroups;
-    private $categroies;
+    private $favoriteCategoryGroups;
+    private $hiddenCategoryGroups;
+    private $availableCategroies;
 
-    public function __construct($resource, $favoriteGroups, $categories)
+    public function __construct($resource, $favoriteGroups = null, $hiddenGroups = null, $availableCategroies = null)
     {
         parent::__construct($resource);
-        $this->favoriteGroups = $favoriteGroups ??  collect([]);
-        $this->categroies = $categories ?? collect([]);
+        $this->favoriteCategoryGroups = $favoriteGroups;
+        $this->hiddenCategoryGroups = $hiddenGroups;
+        $this->availableCategroies = $availableCategroies;
     }
 
     /**
@@ -24,27 +26,33 @@ class CategoryGroupCollection extends ResourceCollection
      */
     public function toArray(Request $request): array
     {
-        // dump($this->additionalData);
-        // dump($this->collection);
-        $newGroupsCollection = $this->collection->map(function ($item) {
-            $item['is_favorite'] = $this->favoriteGroups->keyBy('category_groups_id')->has($item['id']);
-            $item['availableCategories'] = $this->categroies->filter(function ($catItem) use ($item) {
-                if ($catItem['category_group_id'] === $item['id']) {
-                    return $catItem;
-                }
-            })->values();
-            return $item;
-        });
 
-        // $newCategories = collections
-        // dd($newGroupsCollection);
-        // dump($this->additionalData->keyBy('category_groups_id'));
-        // dump($newCollection);
-        // $this->collection->additionalData = $this->additionalData;
+        if ($this->favoriteCategoryGroups !== null || $this->hiddenCategoryGroups !== null || $this->availableCategroies !== null) {
+            $newGroupsCollection = $this->collection->map(function ($item) {
+                if ($this->favoriteCategoryGroups !== null) {
+                    $item['is_favorite'] = $this->favoriteCategoryGroups->keyBy('category_group_id')->has($item['id']);
+                }
+
+                if ($this->hiddenCategoryGroups !== null) {
+                    $item['is_hidden'] = $this->hiddenCategoryGroups->keyBy('category_group_id')->has($item['id']);
+                }
+
+                if ($this->availableCategroies !== null) {
+                    $item['availableCategories'] = $this->availableCategroies->filter(function ($catItem) use ($item) {
+                        if ($catItem['category_group_id'] === $item['id']) {
+                            return $catItem;
+                        }
+                    })->values();
+                }
+                return $item;
+            });
+            $this->collection = $newGroupsCollection;
+        }
+
         return [
             'count' => count($this->collection),
-            // 'data' => $this->collection,
-            'data' => $newGroupsCollection,
+            'data' => $this->collection,
+            // 'data' => $newGroupsCollection,
         ];
     }
 }
