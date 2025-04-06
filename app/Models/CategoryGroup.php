@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Builders\CustomBuilder;
+use App\Models\Traits\Filterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class CategoryGroup extends Model
 {
     /** @use HasFactory<\Database\Factories\CategoryGroupFactory> */
-    use HasFactory;
+    use HasFactory, Filterable;
 
     protected $fillable = [
         'user_id',

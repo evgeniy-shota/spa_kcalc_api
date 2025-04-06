@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\CategoryGroup;
 
 use App\Http\Controllers\Controller;
+use App\Http\Filters\CategoryGroupFilter;
+use App\Http\Requests\CategoryGroup\IndexRequest;
 use App\Http\Resources\CategoryGroupCollection;
 use App\Models\CategoryGroup;
 use Illuminate\Database\Query\JoinClause;
@@ -14,11 +16,12 @@ class CategoryGroupIndexController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Request $request)
+    public function __invoke(IndexRequest $request)
     {
         $categoryGroups = CategoryGroup::whereEnabled()->whereAvailable(Auth::user() ? Auth::user()->id : null, 'category_groups');
 
         if (Auth::user()) {
+            $validated = $request->validated();
             $categoryGroups = $categoryGroups->leftjoin('favorite_category_groups', function (JoinClause $join) {
                 $join->on('category_groups.id', 'favorite_category_groups.category_group_id')
                     ->where('favorite_category_groups.user_id', Auth::user()->id);
@@ -34,6 +37,8 @@ class CategoryGroupIndexController extends Controller
             $categoryGroups = $categoryGroups->selectRaw(
                 'CASE WHEN hidden_category_groups.category_group_id is not null THEN true ELSE false END as is_hidden'
             );
+            $filter = app()->make(CategoryGroupFilter::class, ['queryParams' => array_filter($validated)]);
+            $categoryGroups = $categoryGroups->filter($filter);
         }
         $categoryGroups = $categoryGroups->get();
         // $categories = Category::whereEnabled()->whereAvailable(Auth::user() ? Auth::user()->id : null)->groupBy('category_group_id', 'id')->get();

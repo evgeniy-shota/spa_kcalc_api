@@ -2,9 +2,13 @@
 
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\AdditionalProductDataController;
-
-use App\Http\Controllers\Category\CategoryIndexController;
 use App\Http\Controllers\CategoryController;
+
+use App\Http\Controllers\Category\CategoryDestroyController;
+use App\Http\Controllers\Category\CategoryIndexController;
+use App\Http\Controllers\Category\CategoryShowController;
+use App\Http\Controllers\Category\CategoryStoreController;
+use App\Http\Controllers\Category\CategoryUpdateController;
 
 use App\Http\Controllers\CategoryGroup\CategoryGroupDestroyController;
 use App\Http\Controllers\CategoryGroup\CategoryGroupIndexController;
@@ -33,19 +37,26 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/category-groups/{id}', CategoryGroupShowController::class)->name('categoryGroup.show');
 Route::get('/category-groups/', CategoryGroupIndexController::class)->name('categoryGroup.index');
+// ->middleware('auth:sanctum')
 Route::post('/category-groups/{id}', CategoryGroupUpdateController::class)->name('categoryGroup.update');
 Route::post('/category-groups/', CategoryGroupStoreController::class)->name('categoryGroup.store');
 Route::delete('/category-groups/{id}', CategoryGroupDestroyController::class)->name('categoryGroup.destroy');
 
 // Route::apiResource('/category-groups', CategoryGroupController::class);
 
-Route::get('/categories/',CategoryIndexController::class)->name('');
+Route::get('/categories/{id}', CategoryShowController::class)->name('category.show');
+Route::get('/categories/', CategoryIndexController::class)->name('category.index');
+// ->middleware('auth:sanctum')
+Route::post('/categories/{id}', CategoryUpdateController::class)->name('category.update');
+Route::post('/categories/', CategoryStoreController::class)->name('category.store');
+Route::delete('/categories/{id}', CategoryDestroyController::class)->name('category.destroy');
+
 
 Route::controller(CategoryController::class)->group(function () {
     // Route::get('/categories', 'index');
-    Route::get('/categories/{id}', 'show');
-    Route::post('/categories', 'store');
-    Route::patch('/categories/{id}', 'update');
+    // Route::get('/categories/{id}', 'show');
+    // Route::post('/categories', 'store');
+    // Route::patch('/categories/{id}', 'update');
     Route::delete('/categories/{id}', 'destroy');
 });
 

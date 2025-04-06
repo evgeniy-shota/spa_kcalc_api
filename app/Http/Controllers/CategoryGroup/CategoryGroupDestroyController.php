@@ -17,23 +17,21 @@ class CategoryGroupDestroyController extends Controller
     {
         $categoryGroup = CategoryGroup::find($id);
 
-        if ($categoryGroup === null) {
+        if (
+            $categoryGroup === null ||
+            ($categoryGroup->is_enabled !== true && Auth::user()->is_admin !== true)
+        ) {
             return response()->json(['message' => 'Not Found'], 404);
         }
 
-        if ($categoryGroup->is_enabled !== true && Auth::user()->is_admin !== true) {
-            return response()->json(['message' => 'Not Found'], 404);
-        }
-
-        if (Auth::user()->is_admin === true) {
+        if (
+            Auth::user()->is_admin === true ||
+            ($categoryGroup->is_personal === true && $categoryGroup->user_id === Auth::user()->id)
+        ) {
             $categoryGroup->delete();
             return new CategoryGroupRequest($categoryGroup);
         } else {
-            if ($categoryGroup->is_personal === true && $categoryGroup->user_id === Auth::user()->id) {
-                $categoryGroup->delete();
-                return new CategoryGroupRequest($categoryGroup);
-            }
-            return response()->json(['message' => 'You don\'t have permission'], 400);
+            return response()->json(['message' => 'You do not have permission to delete this resource'], 400);
         }
         return response()->json(['message' => 'Bad request'], 400);
     }

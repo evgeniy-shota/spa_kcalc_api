@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Category;
 
 use App\Http\Controllers\Controller;
+use App\Http\Filters\CategoryFilter;
+use App\Http\Requests\Category\IndexRequest;
 use App\Http\Resources\CategoryCollection;
 use App\Models\Category;
 use Illuminate\Database\Query\JoinClause;
@@ -14,9 +16,8 @@ class CategoryIndexController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Request $request)
+    public function __invoke(IndexRequest $request)
     {
-        dd($request->query());
         $categories = Category::whereEnabled()->whereAvailable(Auth::user() ? Auth::user()->id : null);
 
         if (Auth::user()) {
@@ -29,6 +30,10 @@ class CategoryIndexController extends Controller
             $categories = $categories->select('categories.*');
             $categories = $categories->selectRaw('CASE WHEN favorite_categories.category_id is not null THEN true ELSE false END is_favorite');
             $categories = $categories->selectRaw('CASE WHEN hidden_categories.category_id is not null THEN true ELSE false END is_hidden');
+            
+            $validated = $request->validated();
+            $filter = app()->make(CategoryFilter::class, ['queryParams' => array_filter($validated)]);
+            $categories = $categories->filter($filter);
         }
         $categories = $categories->get();
         return new CategoryCollection($categories);
