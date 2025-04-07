@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\CategoryGroup;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CategoryGroupRequest;
+use App\Http\Requests\CategoryGroup\StoreRequest;
 use App\Http\Resources\CategoryGroupResource;
 use App\Models\CategoryGroup;
 use App\Models\FavoriteCategoryGroup;
@@ -16,13 +16,16 @@ class CategoryGroupStoreController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(CategoryGroupRequest $request)
+    public function __invoke(StoreRequest $request)
     {
         $validated = $request->validated();
 
         $categoryGroup = CategoryGroup::create([
             'name' => $validated['name'],
             'description' => $validated['description'],
+            // 'is_enabled' =>  true,
+            // 'is_personal' =>  true,
+            // 'user_id' => 11,
             'is_enabled' => Auth::user()->is_admin ? $validated['is_enabled'] : true,
             'is_personal' => Auth::user()->is_admin ? $validated['is_personal'] : true,
             'user_id' => Auth::user()->is_admin ? $validated['user_id'] : Auth::user()->id,

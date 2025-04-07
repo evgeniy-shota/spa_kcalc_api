@@ -18,7 +18,7 @@ class CategoryIndexController extends Controller
      */
     public function __invoke(IndexRequest $request)
     {
-        $categories = Category::whereEnabled()->whereAvailable(Auth::user() ? Auth::user()->id : null);
+        $categories = Category::whereEnabled()->whereAvailable(Auth::user() ? Auth::user()->id : null, 'categories');
 
         if (Auth::user()) {
             $categories = $categories->leftJoin('favorite_categories', function (JoinClause $join) {
@@ -30,7 +30,7 @@ class CategoryIndexController extends Controller
             $categories = $categories->select('categories.*');
             $categories = $categories->selectRaw('CASE WHEN favorite_categories.category_id is not null THEN true ELSE false END is_favorite');
             $categories = $categories->selectRaw('CASE WHEN hidden_categories.category_id is not null THEN true ELSE false END is_hidden');
-            
+
             $validated = $request->validated();
             $filter = app()->make(CategoryFilter::class, ['queryParams' => array_filter($validated)]);
             $categories = $categories->filter($filter);

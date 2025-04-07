@@ -14,12 +14,19 @@ class CategoryDestroyController extends Controller
      */
     public function __invoke(Request $request, string $id)
     {
-        $category = Category::find($id);
+        if (!filter_var($id, FILTER_VALIDATE_INT)) {
+            return response()->json(['message' => 'Bad request'], 400);
+        }
+        $category = Category::where('id', $id);
 
-        if (
-            $category === null ||
-            ($category->is_enabled !== true && Auth::user()->is_admin !== true)
-        ) {
+        if (Auth::user()->is_admin !== true) {
+            $category = $category->whereEnabled()->whereAvailable(Auth::user()->id);
+        }
+        $category = $category->first();
+
+        if (!isset($category)) {
+            // ||($category->is_enabled !== true && Auth::user()->is_admin !== true)
+
             return response()->json(['message' => 'Not Found'], 404);
         }
 

@@ -2,8 +2,8 @@
 
 namespace App\Http\Resources;
 
+use App\Models\FavoriteCategory;
 use App\Models\HiddenCategory;
-use App\Models\UserFavoriteCategory;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
@@ -29,7 +29,7 @@ class CategoryResource extends JsonResource
         $isHidden = null;
 
         if (Auth::user() !== null) {
-            $isFavorite = $this->is_favorite !== null ? $this->is_favorite : UserFavoriteCategory::where('user_id', Auth::user()->id)->where('category_id', $this->id)->exists();
+            $isFavorite = $this->is_favorite !== null ? $this->is_favorite : FavoriteCategory::where('user_id', Auth::user()->id)->where('category_id', $this->id)->exists();
             $isHidden = $this->is_hidden !== null ? $this->is_hidden : HiddenCategory::where('user_id', Auth::user()->id)->where('category_id', $this->id)->exists();
         }
 

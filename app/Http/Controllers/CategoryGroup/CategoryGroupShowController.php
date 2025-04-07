@@ -18,10 +18,17 @@ class CategoryGroupShowController extends Controller
      */
     public function __invoke(Request $request, string $id)
     {
-        $categoryGroup = CategoryGroup::find($id);
-        // dd($categorysGroup);
+        if (!filter_var($id, FILTER_VALIDATE_INT)) {
+            return response()->json(['message' => 'Bad request'], 400);
+        }
+        $categoryGroup = CategoryGroup::where('id', $id);
 
-        if (!isset($categoryGroup) || !$categoryGroup->is_enabled) {
+        if (Auth::user() === null || Auth::user()->is_admin !== true) {
+            $categoryGroup = $categoryGroup->whereEnabled()->whereAvailable(Auth::user() ? Auth::user()->id : null);
+        }
+        $categoryGroup = $categoryGroup->first();
+
+        if (!isset($categoryGroup)) {
             return response()->json([
                 'message' => 'Not Found',
             ], 404);

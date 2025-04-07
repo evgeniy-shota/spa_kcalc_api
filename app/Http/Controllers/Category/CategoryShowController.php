@@ -15,19 +15,27 @@ class CategoryShowController extends Controller
      */
     public function __invoke(Request $request, string $id)
     {
-        $category = Category::find($id);
+        if (!filter_var($id, FILTER_VALIDATE_INT)) {
+            return response()->json(['message' => 'Bad request'], 400);
+        }
+        $category = Category::where('id', $id);
+        
+        if (Auth::user() === null || Auth::user()->is_admin !== true) {
+            $category = $category->whereEnabled()->whereAvailable(Auth::user() ? Auth::user()->id : null);
+        }
+        $category = $category->first();
 
-        if ($category === null) {
+        if (!isset($category)) {
             return response()->json(['message' => 'Not Found'], 404);
         }
 
-        if ($category->is_enabled !== true && (Auth::user() === null || Auth::user()->is_admin !== true)) {
-            return response()->json(['message' => 'Not Found'], 404);
-        }
+        // if ($category->is_enabled !== true && (Auth::user() === null || Auth::user()->is_admin !== true)) {
+        //     return response()->json(['message' => 'Not Found'], 404);
+        // }
 
         if (
-            $category->is_personal === true &&
-            (Auth::user() === null || $category->user_id !== Auth::user()->id || Auth::user()->is_admin !== true)
+            Auth::user()->is_admin !== true && $category->is_personal === true &&
+            (Auth::user() === null || $category->user_id !== Auth::user()->id)
         ) {
             return response()->json(['message' => 'You don\'t have permission'], 400);
         }
