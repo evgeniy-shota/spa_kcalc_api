@@ -12,10 +12,11 @@ class ProductFilter extends AbstractFilter
 {
 
     public const NAME = 'name';
-    public const CATEGORY_ID = 'category_id';
-    public const IS_PERSONAL = 'is_personal';
-    public const IS_ABSTRACT = 'is_abstract';
-    public const MANUFACTURER = 'manufacturer';
+    // public const CATEGORY_ID = 'category_id';
+    public const CATEGORY_ID = 'categories';
+    public const IS_PERSONAL = 'isPersonal';
+    public const IS_ABSTRACT = 'isAbstract';
+    public const MANUFACTURER = 'manufacturers';
     public const COUNTRY_OF_MANUFACTURE = 'country_of_manufacture';
     public const QUANTITY = 'quantity';
     public const KCALORY = 'kcalory';
@@ -23,8 +24,8 @@ class ProductFilter extends AbstractFilter
     public const CARBOHYDRATES = 'carbohydrates';
     public const FATS = 'fats';
 
-    public const IS_FAVORITE = 'is_favorite';
-    public const IS_HIDDEN = 'is_hidden';
+    public const IS_FAVORITE = 'isFavorite';
+    public const IS_HIDDEN = 'isHidden';
 
     public function getCallbacks(): array
     {
@@ -108,11 +109,11 @@ class ProductFilter extends AbstractFilter
         if (Auth::user()) {
             if ($value === true) {
                 $builder->whereExists(function ($query) {
-                    $query->select(DB::raw(1))->from('user_favorite_products')->where('user_id', Auth::user()->id)->whereColumn('user_favorite_products.product_id', 'products.id');
+                    $query->select(DB::raw(1))->from('favorite_products')->where('user_id', Auth::user()->id)->whereColumn('favorite_products.product_id', 'products.id');
                 });
             } else if ($value === false) {
                 $builder->whereNotExists(function ($query) {
-                    $query->select(DB::raw(1))->from('user_favorite_products')->where('user_id', Auth::user()->id)->whereColumn('user_favorite_products.product_id', 'products.id');
+                    $query->select(DB::raw(1))->from('favorite_products')->where('user_id', Auth::user()->id)->whereColumn('favorite_products.product_id', 'products.id');
                 });
             }
         }

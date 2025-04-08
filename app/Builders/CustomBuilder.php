@@ -7,9 +7,12 @@ use Laravel\Pail\ValueObjects\Origin\Console;
 
 class CustomBuilder extends Builder
 {
-    public function whereEnabled(): self
+    public function whereEnabled($value = true): self
     {
-        return $this->where('is_enabled', true);
+        if ($value === null) {
+            return $this;
+        }
+        return $this->where('is_enabled', $value);
     }
 
     public function whereAvailable($user_id = null, $tableName = ''): self

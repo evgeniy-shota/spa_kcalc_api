@@ -14,6 +14,44 @@ class IndexRequest extends FormRequest
         return true;
     }
 
+    protected function convertQueryStringToArray($data, $reg, bool $abortIfRegMatch = true): array|null
+    {
+        if (!isset($data) || strlen($data) === 0) {
+            return null;
+        }
+
+        if (preg_match($reg, $data)) {
+            if ($abortIfRegMatch) {
+                return null;
+            }
+            return explode(',', $data);
+        } else {
+            if ($abortIfRegMatch) {
+                return explode(',', $data);
+            }
+        }
+        return null;
+    }
+
+    protected function prepareForValidation()
+    {
+        $regNoDigitsAndComma = '/[^,\d]/';
+        $this->merge([
+            'isPersonal' => $this->query('isPersonal') ? filter_var($this->query('isPersonal'), FILTER_VALIDATE_BOOL, FILTER_NULL_ON_FAILURE) : null,
+            'isAbstract' => $this->query('isAbstract') ? filter_var($this->query('isAbstract'), FILTER_VALIDATE_BOOL, FILTER_NULL_ON_FAILURE) : null,
+            'isFavorite' => $this->query('isFavorite') ? filter_var($this->query('isFavorite'), FILTER_VALIDATE_BOOL, FILTER_NULL_ON_FAILURE) : null,
+            'isHidden' => $this->query('isHidden') ? filter_var($this->query('isHidden'), FILTER_VALIDATE_BOOL, FILTER_NULL_ON_FAILURE) : null,
+            'categories' => $this->convertQueryStringToArray($this->query('categories'), $regNoDigitsAndComma),
+            'manufacturer' => $this->convertQueryStringToArray($this->query('manufacturer'), $regNoDigitsAndComma),
+            'countryOfManufacture' => $this->convertQueryStringToArray($this->query('country_of_manufacture'), $regNoDigitsAndComma),
+            'quantity' => $this->convertQueryStringToArray($this->query('quantity'), $regNoDigitsAndComma),
+            'kcalory' => $this->convertQueryStringToArray($this->query('kcalory'), $regNoDigitsAndComma),
+            'proteins' => $this->convertQueryStringToArray($this->query('proteins'), $regNoDigitsAndComma),
+            'carbohydrates' => $this->convertQueryStringToArray($this->query('carbohydrates'), $regNoDigitsAndComma),
+            'fats' => $this->convertQueryStringToArray($this->query('fats'), $regNoDigitsAndComma),
+        ]);
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -22,12 +60,14 @@ class IndexRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'category_id' => 'nullable|array',
+            'sort' => 'nullable|string',
+
+            'categories' => 'nullable|array',
             // 'type_id' => 'nullable|integer',
-            'is_personal' => 'nullable|boolean',
-            'is_abstract' => 'nullable|boolean',
-            'is_favorite' => 'nullable|boolean',
-            'is_hidden' => 'nullable|boolean',
+            'isPersonal' => 'nullable|boolean',
+            'isAbstract' => 'nullable|boolean',
+            'isFavorite' => 'nullable|boolean',
+            'isHidden' => 'nullable|boolean',
             'name' => 'nullable|string|max:255',
             'manufacturer' => 'nullable|array',
             'country_of_manufacture' => 'nullable|array',

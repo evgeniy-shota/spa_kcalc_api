@@ -2,16 +2,14 @@
 
 namespace App\Http\Resources;
 
+use App\Models\FavoriteProduct;
 use App\Models\HiddenProduct;
-use App\Models\UserFavoriteProduct;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
 
 class ProductResource extends JsonResource
 {
-
-
     /**
      * Transform the resource into an array.
      *
@@ -24,12 +22,16 @@ class ProductResource extends JsonResource
         $currentRout = $request->route()->getName();
         // dump($request->short_output);
         // return parent::toArray($request);
-        $isFavorite = false;
-        $isHidden = false;
+        $isFavorite = $this->is_favorite ?? null;
+        $isHidden = $this->is_hidden ?? null;
 
         if (Auth::user()) {
-            $isFavorite = UserFavoriteProduct::where('user_id', Auth::user()->id)->where('product_id', $this->id)->first() ? true : false;
-            $isHidden = HiddenProduct::where('user_id', Auth::user()->id)->where('product_id', $this->id)->first() ? true : false;
+            if (!isset($isFavorite)) {
+                $isFavorite = FavoriteProduct::where('user_id', Auth::user()->id)->where('product_id', $this->id)->first() ? true : false;
+            }
+            if (!isset($isHidden)) {
+                $isHidden = HiddenProduct::where('user_id', Auth::user()->id)->where('product_id', $this->id)->first() ? true : false;
+            }
         }
 
         if (in_array($currentRout, ['products.index', 'categories.show', 'search'])) {
@@ -90,9 +92,6 @@ class ProductResource extends JsonResource
             'type' => 'product',
             'is_favorite' => $isFavorite,
             'is_hidden' => $isHidden,
-
-
-
         ];
     }
 }

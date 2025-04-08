@@ -11,6 +11,7 @@ use App\Http\Resources\ProductCollection;
 use App\Http\Resources\ProductResource;
 use App\Http\Sorters\ProductSorter;
 use App\Models\Category;
+use App\Models\FavoriteProduct;
 use App\Models\HiddenProduct;
 use App\Models\Product;
 use App\Models\UserFavoriteProduct;
@@ -50,81 +51,7 @@ class ProductController extends Controller
         $sortParams = $request->query('sort');
 
         $sorter = app()->make(ProductSorter::class, ['queryParams' => $sortParams]);
-        // $orderCol = 'id';
-        // $orderDirection = 'asc';
 
-        // if ($sortParams) {
-        //     switch ($sortParams) {
-        //         case ProductSortParams::NameAsc->value:
-        //             $orderCol = 'name';
-        //             $orderDirection = 'asc';
-        //             break;
-        //         case ProductSortParams::NameDesc->value:
-        //             $orderCol = 'name';
-        //             $orderDirection = 'desc';
-        //             break;
-        //         case ProductSortParams::FavoriteAsc->value:
-        //             $orderCol = 'is_favoritre';
-        //             $orderDirection = 'asc';
-        //             break;
-        //         case ProductSortParams::FavoriteDesc->value:
-        //             $orderCol = 'is_favoritre';
-        //             $orderDirection = 'desc';
-        //             break;
-        //         case ProductSortParams::PersonalAsc->value:
-        //             $orderCol = 'is_personal';
-        //             $orderDirection = 'asc';
-        //             break;
-        //         case ProductSortParams::PersonalDesc->value:
-        //             $orderCol = 'is_personal';
-        //             $orderDirection = 'desc';
-        //             break;
-        //         case ProductSortParams::AbstractAsc->value:
-        //             $orderCol = 'is_abstract';
-        //             $orderDirection = 'asc';
-        //             break;
-        //         case ProductSortParams::AbstractDesc->value:
-        //             $orderCol = 'is_abstract';
-        //             $orderDirection = 'desc';
-        //             break;
-        //         case ProductSortParams::KcaloryAsc->value:
-        //             $orderCol = 'kcalory';
-        //             $orderDirection = 'asc';
-        //             break;
-        //         case ProductSortParams::KcaloryDesc->value:
-        //             $orderCol = 'kcalory';
-        //             $orderDirection = 'desc';
-        //             break;
-        //         case ProductSortParams::ProteinsAsc->value:
-        //             $orderCol = 'proteins';
-        //             $orderDirection = 'asc';
-        //             break;
-        //         case ProductSortParams::ProteinsDesc->value:
-        //             $orderCol = 'proteins';
-        //             $orderDirection = 'desc';
-        //             break;
-        //         case ProductSortParams::CarbohydratesAsc->value:
-        //             $orderCol = 'carbohydrates';
-        //             $orderDirection = 'asc';
-        //             break;
-        //         case ProductSortParams::CarbohydratesDesc->value:
-        //             $orderCol = 'carbohydrates';
-        //             $orderDirection = 'desc';
-        //             break;
-        //         case ProductSortParams::FatsAsc->value:
-        //             $orderCol = 'fast';
-        //             $orderDirection = 'asc';
-        //             break;
-        //         case ProductSortParams::FatsDesc->value:
-        //             $orderCol = 'fast';
-        //             $orderDirection = 'desc';
-        //             break;
-        //         default:
-        //             $orderCol = 'id';
-        //             $orderDirection = 'asc';
-        //             break;
-        //     }
-        // }
 
         // ->orderBy('is_personal', 'desc')
         // $products = Product::whereEnabled()->whereAvailable($user_id)->filter($filter)->orderBy($orderCol, $orderDirection)->cursorPaginate();
@@ -379,13 +306,13 @@ class ProductController extends Controller
         }
 
         if (array_key_exists('is_favorite', $validate)) {
-            $favoriteProduct = UserFavoriteProduct::where('user_id', $user->id)->where('product_id', $id)->first();
+            $favoriteProduct = FavoriteProduct::where('user_id', $user->id)->where('product_id', $id)->first();
 
             if ($validate['is_favorite'] === true) {
                 if ($favoriteProduct) {
                     return response()->json(['message' => 'Bad Request'], 400);
                 }
-                UserFavoriteProduct::create([
+                FavoriteProduct::create([
                     'user_id' => $user->id,
                     'product_id' => $id,
                 ]);
