@@ -10,4 +10,6 @@ class HiddenProduct extends Model
         'user_id',
         'product_id',
     ];
+
+    protected $table='hidden_products';
 }

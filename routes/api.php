@@ -22,6 +22,8 @@ use App\Http\Controllers\DietController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\Product\ProductIndexController;
+use App\Http\Controllers\Product\ProductShowController;
+use App\Http\Controllers\Product\ProductStoreController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\SearchController;
@@ -64,11 +66,13 @@ Route::delete('/categories/{id}', CategoryDestroyController::class)->name('categ
 // Route::apiResource('/categories', CategoryController::class);
 
 Route::get('/products/', ProductIndexController::class)->name('products.index');
+Route::get('/products/{product}', ProductShowController::class)->name('products.show');
+Route::post('/products/', ProductStoreController::class)->name('products.store')->middleware('auth:sanctum');
 
 Route::controller(ProductController::class)->group(function () {
-    Route::post('/products/create/', 'store');
-    Route::post('/products', 'index');
-    Route::post('/products/{category_id}', 'productsFromCategory');
+    // Route::post('/products/create/', 'store');
+    // Route::post('/products', 'index');
+    // Route::post('/products/{category_id}', 'productsFromCategory');
     // Route::get('/products/{id}', 'show');
     Route::patch('/products/{id}', 'update');
     Route::delete('/products/{id}', 'destroy');

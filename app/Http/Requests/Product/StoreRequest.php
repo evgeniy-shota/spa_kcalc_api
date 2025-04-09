@@ -32,7 +32,7 @@ class StoreRequest extends FormRequest
             'manufacturer_id' => 'numeric|integer|nullable',
             'country_of_manufacture_id' => 'numeric|integer|nullable',
             'trademark_id' => 'numeric|integer|nullable',
-            'description' => 'string"nullable',
+            'description' => 'string|nullable',
             'type_id' => 'numeric|integer|nullable',
             'condition' => 'enum|nullable',
             'state' => 'enum|nullable',

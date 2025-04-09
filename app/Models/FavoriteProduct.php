@@ -11,5 +11,5 @@ class FavoriteProduct extends Model
         'product_id',
     ];
 
-    protected $table = 'FavoriteProduct';
+    protected $table = 'favorite_products';
 }

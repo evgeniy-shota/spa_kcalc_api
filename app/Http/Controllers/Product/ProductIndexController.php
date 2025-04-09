@@ -74,7 +74,6 @@ class ProductIndexController extends Controller
             if (isset($availableSortTypes[$validated['sort']])) {
                 $sorter = app()->make(ProductSorter::class, ['queryParams' => $validated['sort']]);
                 $products = $products->sorter($sorter);
-                dump('sort');
             }
             unset($validated['sort']);
         }
@@ -91,8 +90,8 @@ class ProductIndexController extends Controller
             $products = $products->filter($filter);
         }
 
-        // $products =  $products->cursorPaginate();
-        dd($products =  $products->ddRawSql());
+        $products =  $products->cursorPaginate();
+        // dd($products =  $products->ddRawSql());
         // $products = Product::whereEnabled()->whereAvailable($user_id)->filter($filter)->sorter($sorter)->cursorPaginate();
         return new ProductCollection($products);
     }

@@ -7,23 +7,23 @@ use Illuminate\Database\Eloquent\Builder;
 
 class ProductSorter extends AbstractSorter
 {
-    const DEFAULT = ProductSortParams::Default->value;
-    const NAME_ASC = ProductSortParams::NameAsc->value;
-    const NAME_DESC = ProductSortParams::NameDesc->value;
+    const DEFAULT = ProductSortParams::Default->name;
+    const NAME_ASC = ProductSortParams::NameAsc->name;
+    const NAME_DESC = ProductSortParams::NameDesc->name;
     // const FAVORITE_ASC = ProductSortParams::FavoriteAsc->value;
     // const FAVORITE_DESC = ProductSortParams::FavoriteDesc->value;
     // const PERSONAL_ASC = ProductSortParams::PersonalAsc->value;
     // const PERSONAL_DESC = ProductSortParams::PersonalDesc->value;
-    const ABSTRACT_ASC = ProductSortParams::AbstractAsc->value;
-    const ABSTRACT_DESC = ProductSortParams::AbstractDesc->value;
-    const KCALORY_ASC = ProductSortParams::KcaloryAsc->value;
-    const KCALORY_DESC = ProductSortParams::KcaloryDesc->value;
-    const PROTEINS_ASC = ProductSortParams::ProteinsAsc->value;
-    const PROTEINS_DESC = ProductSortParams::ProteinsDesc->value;
-    const CARBOHYDRATES_ASC = ProductSortParams::CarbohydratesAsc->value;
-    const CARBOHYDRATES_DESC = ProductSortParams::CarbohydratesDesc->value;
-    const FATS_ASC = ProductSortParams::FatsAsc->value;
-    const FATS_DESC = ProductSortParams::FatsDesc->value;
+    const ABSTRACT_ASC = ProductSortParams::AbstractAsc->name;
+    const ABSTRACT_DESC = ProductSortParams::AbstractDesc->name;
+    const KCALORY_ASC = ProductSortParams::KcaloryAsc->name;
+    const KCALORY_DESC = ProductSortParams::KcaloryDesc->name;
+    const PROTEINS_ASC = ProductSortParams::ProteinsAsc->name;
+    const PROTEINS_DESC = ProductSortParams::ProteinsDesc->name;
+    const CARBOHYDRATES_ASC = ProductSortParams::CarbohydratesAsc->name;
+    const CARBOHYDRATES_DESC = ProductSortParams::CarbohydratesDesc->name;
+    const FATS_ASC = ProductSortParams::FatsAsc->name;
+    const FATS_DESC = ProductSortParams::FatsDesc->name;
 
     function getCallback(): array
     {
