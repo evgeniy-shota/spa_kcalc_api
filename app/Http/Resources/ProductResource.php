@@ -18,7 +18,6 @@ class ProductResource extends JsonResource
     public function toArray(Request $request): array
     {
         // dd($request->route()->getName());
-
         $currentRout = $request->route()->getName();
         // dump($request->short_output);
         // return parent::toArray($request);
@@ -45,7 +44,7 @@ class ProductResource extends JsonResource
                 'state' => $this->state,
                 'manufacturer' => $this->manufacturer,
                 'country_of_manufacture' => $this->country_of_manufacture,
-                "quantity" => $this->quantity ? $this->quantity : 100,
+                "quantity" => $this->quantity ?? 100,
                 'quantity_to_calculate' => $this->quantity_to_calculate,
                 'kcalory_per_unit' => $this->kcalory_per_unit,
                 'proteins_per_unit' => $this->proteins_per_unit,
@@ -87,7 +86,7 @@ class ProductResource extends JsonResource
             'fats_per_unit' => $this->fats_per_unit,
             'thumbnail_image_name' => $this->thumbnail_image_name,
             'data_source' => $this->data_source,
-            'nutrientAndVitamines' => json_decode($this->nutrients_and_vitamins, JSON_UNESCAPED_UNICODE),
+            'nutrientAndVitamines' => $this->nutrients_and_vitamins ? json_decode($this->nutrients_and_vitamins, JSON_UNESCAPED_UNICODE) : null,
 
             'type' => 'product',
             'is_favorite' => $isFavorite,

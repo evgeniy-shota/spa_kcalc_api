@@ -30,22 +30,22 @@ class ProductIndexController extends Controller
     public function __invoke(IndexRequest $request)
     {
         $validated = $request->validated();
-        $availableFilters = null;
+        $notAvailableFilters = null;
         $availableSortTypes = array_flip(array_column(ProductSortParams::cases(), 'name'));
 
         if (Auth::user() === null) {
-            $availableFilters = array_merge(self::NOT_AVAILABLE_FILTERS_FOR_NON_ADMIN, self::NOT_AVAILABLE_FILTERS_FOR_NON_AUTHORIZED);
+            $notAvailableFilters = array_merge(self::NOT_AVAILABLE_FILTERS_FOR_NON_ADMIN, self::NOT_AVAILABLE_FILTERS_FOR_NON_AUTHORIZED);
             $availableSortTypes = array_filter(
                 $availableSortTypes,
                 fn($key) => !in_array($key, self::NOT_AVAILABLE_SORT_TYPES_FOR_NON_AUTHORIZED),
                 ARRAY_FILTER_USE_KEY
             );
         } else if (Auth::user()->is_admin !== true) {
-            $availableFilters = self::NOT_AVAILABLE_FILTERS_FOR_NON_ADMIN;
+            $notAvailableFilters = self::NOT_AVAILABLE_FILTERS_FOR_NON_ADMIN;
         }
 
-        $validated = array_filter($validated, function ($item, $key) use ($availableFilters) {
-            if ($availableFilters && in_array($key, $availableFilters)) {
+        $validated = array_filter($validated, function ($item, $key) use ($notAvailableFilters) {
+            if ($notAvailableFilters && in_array($key, $notAvailableFilters)) {
                 return false;
             }
             return $item !== null;

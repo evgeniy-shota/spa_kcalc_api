@@ -25,7 +25,7 @@ return new class extends Migration
             $table->foreignId('country_of_manufacture_id')->nullable()->constrained('country_of_manufactures');
             $table->integer('trademark_id')->nullable();
             $table->string('description', 400)->nullable();
-            $table->foreignId('type_id')->index()->nullable()->constrained('product_types');
+            $table->foreignId('type_id')->nullable()->constrained('product_types');
             $table->enum('condition', ['solid', 'liquid', 'semi-liquid', 'bulk'])->default('solid');
             $table->enum('state', ['chilled', 'frozen', 'fresh'])->nullable();
             $table->enum('units', ['gr', 'ml'])->default('gr');
@@ -40,7 +40,7 @@ return new class extends Migration
             $table->float('proteins_per_unit', 2)->default(0);
             $table->float('carbohydrates_per_unit', 2)->default(0);
             $table->float('fats_per_unit', 2)->default(0);
-            $table->foreignId('data_source')->index()->nullable()->constrained();
+            $table->foreignId('data_source')->nullable()->constrained();
             $table->json('nutrients_and_vitamins')->nullable();
 
             $table->timestamps();
