@@ -17,6 +17,8 @@ class IndexRequest extends FormRequest
     protected function prepareForValidation(): void
     {
         $this->merge([
+            'categoryGroupId' => $this->query('categoryGroupId') !== null && !preg_match('/[^\d,]/', $this->query('categoryGroupId')) ? array_filter(explode(',', $this->query('categoryGroupId'))) : null,
+            'categoryId' => $this->query('categoryId') !== null && !preg_match('/[^\d,]/', $this->query('categoryId')) ? array_filter((explode(',', $this->query('categoryId')))) : null,
             'isFavorite' => filter_var($this->query('isFavorite'), FILTER_VALIDATE_BOOL, FILTER_NULL_ON_FAILURE),
             'isHidden' => filter_var($this->query('isHidden'), FILTER_VALIDATE_BOOL, FILTER_NULL_ON_FAILURE),
             'isPersonal' => filter_var($this->query('isPersonal'), FILTER_VALIDATE_BOOL, FILTER_NULL_ON_FAILURE),
@@ -31,6 +33,8 @@ class IndexRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'categoryGroupId' => 'nullable|array',
+            'categoryId' => 'nullable|array',
             'isFavorite' => 'nullable|boolean',
             'isHidden' => 'nullable|boolean',
             'isPersonal' => 'nullable|boolean',

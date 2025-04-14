@@ -39,7 +39,7 @@ class AdditionalProductDataController extends Controller
         $maxFats = ceil(Product::whereEnabled()->whereAvailable($user_id)->max('fats'));
 
         return [
-            'categoriesGroup' => new CategoryGroupCollection($categoriesGroup, null, $categories),
+            'categoriesGroup' => new CategoryGroupCollection($categoriesGroup, null, null, $categories),
             // 'categories' => new CategoryCollection($categories),
             'country_of_manufactory' => new CountryOfManufactureCollection($countries),
             'data_source' => new DataSourceCollection($dataSource),

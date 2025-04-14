@@ -71,14 +71,14 @@ Route::patch('/products/{id}', ProductUpdateController::class)->name('products.u
 Route::post('/products/', ProductStoreController::class)->name('products.store')->middleware('auth:sanctum');
 Route::delete('/products/{id}', ProductDestroyController::class)->name('products.destroy')->middleware('auth:sanctum');
 
-Route::controller(ProductController::class)->group(function () {
+// Route::controller(ProductController::class)->group(function () {
     // Route::post('/products/create/', 'store');
     // Route::post('/products', 'index');
     // Route::post('/products/{category_id}', 'productsFromCategory');
     // Route::get('/products/{id}', 'show');
     // Route::patch('/products/{id}', 'update');
     // Route::delete('/products/{id}', 'destroy');
-});
+// });
 
 // Route::apiResource('/products', ProductController::class);
 

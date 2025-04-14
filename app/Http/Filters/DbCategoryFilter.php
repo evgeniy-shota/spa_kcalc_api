@@ -2,9 +2,10 @@
 
 namespace App\Http\Filters;
 
-use Illuminate\Database\Eloquent\Builder;
+// use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Query\Builder;
 
-class CategoryFilter extends AbstractFilter
+class DbCategoryFilter extends DbAbstractFilter
 {
     public const CATEGORY_GROUP_ID = 'categoryGroupId';
     public const CATEGORY_ID = 'categoryId';
@@ -30,7 +31,7 @@ class CategoryFilter extends AbstractFilter
 
     public function categoryId(Builder $builder, $value)
     {
-        $builder->whereIn('categories.id', $value);
+        $builder->whereIn('id', $value);
     }
 
     public function isPersonal(Builder $builder, $value)
@@ -40,11 +41,11 @@ class CategoryFilter extends AbstractFilter
 
     public function isFavorite(Builder $builder, $value)
     {
-        $builder->having('is_favorite', $value);
+        $builder->where('is_favorite', $value);
     }
 
     public function isHidden(Builder $builder, $value)
     {
-        $builder->having('is_hidden', $value);
+        $builder->where('is_hidden', $value);
     }
 }

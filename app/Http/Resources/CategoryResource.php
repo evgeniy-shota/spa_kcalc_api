@@ -43,7 +43,7 @@ class CategoryResource extends JsonResource
             "thumbnail_image_path" => $this->thumbnail_image_path,
             'is_favorite' => $this->when(Auth::user() !== null, $isFavorite),
             'is_hidden' => $this->when(Auth::user() !== null, $isHidden),
-            'products' => $this->whenNotNull($this->categoryProducts),
+            // 'products' => $this->whenNotNull($this->categoryProducts),
         ];
     }
 }
