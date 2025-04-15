@@ -3,13 +3,11 @@
 namespace App\Builders;
 
 use Illuminate\Database\Query\Builder;
-use Laravel\Pail\ValueObjects\Origin\Console;
 
 use App\Models\Traits\DbFilterable;
 
 class CustomDbBuilder extends Builder
 {
-
     use DbFilterable;
 
     public function whereEnabled($value = true): self

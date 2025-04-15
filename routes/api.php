@@ -39,10 +39,9 @@ use Illuminate\Support\Facades\Route;
 
 // Route::post('/login', [LoginController::class,'authentificate']);
 // ->middleware('auth:sanctum')
-
 Route::get('/category-groups/{id}', CategoryGroupShowController::class)->name('categoryGroup.show');
 Route::get('/category-groups/', CategoryGroupIndexController::class)->name('categoryGroup.index');
-Route::post('/category-groups/{id}', CategoryGroupUpdateController::class)->name('categoryGroup.update')->middleware('auth:sanctum');
+Route::put('/category-groups/{id}', CategoryGroupUpdateController::class)->name('categoryGroup.update')->middleware('auth:sanctum');
 Route::post('/category-groups/', CategoryGroupStoreController::class)->name('categoryGroup.store')->middleware('auth:sanctum');
 Route::delete('/category-groups/{id}', CategoryGroupDestroyController::class)->name('categoryGroup.destroy')->middleware('auth:sanctum');
 
@@ -50,7 +49,7 @@ Route::delete('/category-groups/{id}', CategoryGroupDestroyController::class)->n
 
 Route::get('/categories/{id}', CategoryShowController::class)->name('category.show');
 Route::get('/categories/', CategoryIndexController::class)->name('category.index');
-Route::post('/categories/{id}', CategoryUpdateController::class)->name('category.update')->middleware('auth:sanctum');
+Route::put('/categories/{id}', CategoryUpdateController::class)->name('category.update')->middleware('auth:sanctum');
 Route::post('/categories/', CategoryStoreController::class)->name('category.store')->middleware('auth:sanctum');
 Route::delete('/categories/{id}', CategoryDestroyController::class)->name('category.destroy')->middleware('auth:sanctum');
 
@@ -67,7 +66,7 @@ Route::delete('/categories/{id}', CategoryDestroyController::class)->name('categ
 
 Route::get('/products/{product}', ProductShowController::class)->name('products.show');
 Route::get('/products/', ProductIndexController::class)->name('products.index');
-Route::patch('/products/{id}', ProductUpdateController::class)->name('products.update')->middleware('auth:sanctum');
+Route::put('/products/{id}', ProductUpdateController::class)->name('products.update')->middleware('auth:sanctum');
 Route::post('/products/', ProductStoreController::class)->name('products.store')->middleware('auth:sanctum');
 Route::delete('/products/{id}', ProductDestroyController::class)->name('products.destroy')->middleware('auth:sanctum');
 

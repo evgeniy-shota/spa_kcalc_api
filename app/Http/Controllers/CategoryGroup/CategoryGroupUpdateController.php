@@ -22,7 +22,6 @@ class CategoryGroupUpdateController extends Controller
      */
     public function __invoke(UpdateRequest $request, string $id)
     {
-
         if (!filter_var($id, FILTER_VALIDATE_INT)) {
             return response()->json(['message' => 'Bad request'], 400);
         }
@@ -32,18 +31,23 @@ class CategoryGroupUpdateController extends Controller
         if (Auth::user()->is_admin !== true) {
             $categoryGroup->whereEnabled()->whereAvailable(Auth::user()->id);
         }
+
         $categoryGroup = $categoryGroup->first();
 
         if (!isset($categoryGroup)) {
-            // ||($categoryGroup->is_enabled !== true && Auth::user()->is_admin !== true)
             return response()->json(['message' => 'Not Found'], 404);
         }
+
         $validated = $request->validated();
+        $isFavorite = isset($validated['is_favorite']) ? $validated['is_favorite'] : null;
+        $isHidden = isset($validated['is_hidden']) ? $validated['is_hidden'] : null;
 
-        if (isset($validated['is_favorite'])) {
-            $favoriteCategoryGroup = FavoriteCategoryGroup::where('user_id', Auth::user()->id)->where('category_group_id', $id)->first();
+        if (isset($isFavorite)) {
+            $favoriteCategoryGroup =
+                FavoriteCategoryGroup::where('user_id', Auth::user()->id)
+                ->where('category_group_id', $id)->first();
 
-            if ($validated['is_favorite'] === true) {
+            if ($isFavorite === true) {
                 if ($favoriteCategoryGroup === null) {
                     FavoriteCategoryGroup::create([
                         'user_id' =>  Auth::user()->id,
@@ -52,7 +56,7 @@ class CategoryGroupUpdateController extends Controller
                 }
             }
 
-            if ($validated['is_favorite'] == false) {
+            if ($isFavorite == false) {
                 if ($favoriteCategoryGroup !== null) {
                     $favoriteCategoryGroup->delete();
                 }
@@ -60,10 +64,10 @@ class CategoryGroupUpdateController extends Controller
             // $categoryGroup->is_favorite = $validated['is_favorite'];
         }
 
-        if (isset($validated['is_hidden'])) {
+        if (isset($isHidden)) {
             $hiddenCategoryGroup  = HiddenCategoryGroup::where('user_id',  Auth::user()->id)->where('category_group_id', $id)->first();
 
-            if ($validated['is_hidden'] == true) {
+            if ($isHidden == true) {
                 if ($hiddenCategoryGroup === null) {
                     HiddenCategoryGroup::create([
                         'user_id' =>  Auth::user()->id,
@@ -72,13 +76,14 @@ class CategoryGroupUpdateController extends Controller
                 }
             }
 
-            if ($validated['is_hidden'] === false) {
+            if ($isHidden === false) {
                 if ($hiddenCategoryGroup !== null) {
                     $hiddenCategoryGroup->delete();
                 }
             }
             // $categoryGroup->is_favorite = $validated['is_hidden'];
         }
+
         $paramsForFiltering = self::NOT_AVAILABLE_FOR_MASS_ASSIGNMENT;
 
         if (Auth::user()->is_admin !== true) {
@@ -89,11 +94,19 @@ class CategoryGroupUpdateController extends Controller
                 // return response()->json(['message' => 'You do not have permission to update this resource'], 400);
             }
         }
-        $validated = array_filter($validated, fn($key) => !in_array($key, $paramsForFiltering), ARRAY_FILTER_USE_KEY);
+
+        $validated = array_filter($validated, function ($value, $key) use ($paramsForFiltering) {
+            if (in_array($key, $paramsForFiltering)) {
+                return false;
+            }
+            return $value !== null;
+        }, ARRAY_FILTER_USE_BOTH);
 
         if (count($validated) > 0) {
             $categoryGroup->update($validated);
         }
+        $categoryGroup->is_favorite = $isFavorite;
+        $categoryGroup->is_hidden = $isHidden;
         return new CategoryGroupResource($categoryGroup);
     }
 }

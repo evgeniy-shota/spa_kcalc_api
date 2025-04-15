@@ -22,19 +22,16 @@ class CategoryIndexController extends Controller
     {
         // $categories = Category::whereEnabled()->whereAvailable(Auth::user() ? Auth::user()->id : null, 'categories');
         $tableToQuery = null;
-
-        $validated = $request->validated();
-
-        $filter = count($validated) > 0 ?
-            app()->make(
-                DbCategoryFilter::class,
-                ['queryParams' => array_filter($validated)]
-            ) : null;
-
+        $filter = null;
 
         if (Auth::user()) {
+            $validated = $request->validated();
+            $filter = count($validated) > 0 ?
+                app()->make(
+                    DbCategoryFilter::class,
+                    ['queryParams' => array_filter($validated)]
+                ) : null;
             // $filter = app()->make(CategoryFilter::class, ['queryParams' => array_filter($validated)]);
-
             $tableToQuery = function ($query) {
                 $query->from('categories')
                     ->select('categories.*')
@@ -64,8 +61,8 @@ class CategoryIndexController extends Controller
         } else {
             $tableToQuery = 'categories';
         }
-        // dump(DB::connection());
-        $categories = DB::table($tableToQuery, 'cat')->whereEnabled()->whereAvailable(Auth::user() ? Auth::user()->id : null);
+
+        $categories = DB::table($tableToQuery, 'categories')->whereEnabled()->whereAvailable(Auth::user() ? Auth::user()->id : null);
 
         if ($filter !== null) {
             $categories = $categories->where(function ($query) use ($filter) {

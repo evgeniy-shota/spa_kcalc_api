@@ -14,6 +14,21 @@ class IndexRequest extends FormRequest
         return true;
     }
 
+    protected function validateArray(array $data, int $minCount, int $maxCount, callable $fnForValidate)
+    {
+        if (!isset($data) || count($data) < $minCount || count($data) > $maxCount) {
+            return false;
+        }
+
+        for ($i = 0, $size = count($data); $i < $size; $i++) {
+            if (!$fnForValidate($data[$i])) {
+                return null;
+            }
+        }
+
+        return $data;
+    }
+
     protected function convertQueryStringToArray($data, $reg, bool $abortIfRegMatch = true): array|null
     {
         if (!isset($data) || strlen($data) === 0) {
@@ -35,6 +50,19 @@ class IndexRequest extends FormRequest
 
     protected function prepareForValidation()
     {
+        $arrayValidationCall = function ($value) {
+
+            if (filter_var($value, FILTER_VALIDATE_INT) !== false) {
+                return true;
+            }
+
+            if (filter_var($value, FILTER_VALIDATE_FLOAT) !== false) {
+                return true;
+            }
+
+            return false;
+        };
+
         $regNoDigitsAndComma = '/[^,\d]/';
         $this->merge([
             'isPersonal' => $this->query('isPersonal') ? filter_var($this->query('isPersonal'), FILTER_VALIDATE_BOOL, FILTER_NULL_ON_FAILURE) : null,
@@ -44,11 +72,16 @@ class IndexRequest extends FormRequest
             'categories' => $this->convertQueryStringToArray($this->query('categories'), $regNoDigitsAndComma),
             'manufacturer' => $this->convertQueryStringToArray($this->query('manufacturer'), $regNoDigitsAndComma),
             'countryOfManufacture' => $this->convertQueryStringToArray($this->query('country_of_manufacture'), $regNoDigitsAndComma),
-            'quantity' => $this->convertQueryStringToArray($this->query('quantity'), $regNoDigitsAndComma),
-            'kcalory' => $this->convertQueryStringToArray($this->query('kcalory'), $regNoDigitsAndComma),
-            'proteins' => $this->convertQueryStringToArray($this->query('proteins'), $regNoDigitsAndComma),
-            'carbohydrates' => $this->convertQueryStringToArray($this->query('carbohydrates'), $regNoDigitsAndComma),
-            'fats' => $this->convertQueryStringToArray($this->query('fats'), $regNoDigitsAndComma),
+            'quantity' => $this->query('quantity') !== null ? $this->validateArray($this->query('quantity'), 2, 2, $arrayValidationCall) : null,
+            'kcalory' => $this->query('kcalory') !== null ? $this->validateArray($this->query('kcalory'), 2, 2, $arrayValidationCall) : null,
+            'proteins' => $this->query('proteins') !== null ? $this->validateArray($this->query('proteins'), 2, 2, $arrayValidationCall) : null,
+            'carbohydrates' => $this->query('carbohydrates') !== null ? $this->validateArray($this->query('carbohydrates'), 2, 2, $arrayValidationCall) : null,
+            'fats' => $this->query('fats') !== null ? $this->validateArray($this->query('fats'), 2, 2, $arrayValidationCall) : null,
+            // 'quantity' => $this->convertQueryStringToArray($this->query('quantity'), $regNoDigitsAndComma),
+            // 'kcalory' => $this->convertQueryStringToArray($this->query('kcalory'), $regNoDigitsAndComma),
+            // 'proteins' => $this->convertQueryStringToArray($this->query('proteins'), $regNoDigitsAndComma),
+            // 'carbohydrates' => $this->convertQueryStringToArray($this->query('carbohydrates'), $regNoDigitsAndComma),
+            // 'fats' => $this->convertQueryStringToArray($this->query('fats'), $regNoDigitsAndComma),
         ]);
     }
 

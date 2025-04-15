@@ -19,9 +19,9 @@ class IndexRequest extends FormRequest
     {
         $this->merge([
             'categoryGroupId' => $this->query('categoryGroupId') !== null && !preg_match('/[^\d,]/', $this->query('categoryGroupId')) ? explode(',', $this->query('categoryGroupId')) : null,
-            'isFavorite' => filter_var($this->query('isFavorite'), FILTER_VALIDATE_BOOL, FILTER_NULL_ON_FAILURE),
-            'isHidden' => filter_var($this->query('isHidden'), FILTER_VALIDATE_BOOL, FILTER_NULL_ON_FAILURE),
-            'isPersonal' => filter_var($this->query('isPersonal'), FILTER_VALIDATE_BOOL, FILTER_NULL_ON_FAILURE),
+            'isFavorite' => $this->query('isFavorite') !== null ? filter_var($this->query('isFavorite'), FILTER_VALIDATE_BOOL, FILTER_NULL_ON_FAILURE) : null,
+            'isHidden' => $this->query('isHidden') !== null ? filter_var($this->query('isHidden'), FILTER_VALIDATE_BOOL, FILTER_NULL_ON_FAILURE) : null,
+            'isPersonal' => $this->query('isPersonal') !== null ? filter_var($this->query('isPersonal'), FILTER_VALIDATE_BOOL, FILTER_NULL_ON_FAILURE) : null,
         ]);
     }
 
