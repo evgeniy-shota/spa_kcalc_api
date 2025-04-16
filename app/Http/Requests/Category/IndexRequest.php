@@ -2,10 +2,13 @@
 
 namespace App\Http\Requests\Category;
 
+use App\Http\Requests\Traits\ValidateArray;
+use App\Utils\FilterVar;
 use Illuminate\Foundation\Http\FormRequest;
 
 class IndexRequest extends FormRequest
 {
+    use ValidateArray;
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -13,15 +16,35 @@ class IndexRequest extends FormRequest
     {
         return true;
     }
+
     // filter query params by type
     protected function prepareForValidation(): void
     {
         $this->merge([
-            'categoryGroupId' => $this->query('categoryGroupId') !== null && !preg_match('/[^\d,]/', $this->query('categoryGroupId')) ? array_filter(explode(',', $this->query('categoryGroupId'))) : null,
-            'categoryId' => $this->query('categoryId') !== null && !preg_match('/[^\d,]/', $this->query('categoryId')) ? array_filter((explode(',', $this->query('categoryId')))) : null,
-            'isFavorite' => filter_var($this->query('isFavorite'), FILTER_VALIDATE_BOOL, FILTER_NULL_ON_FAILURE),
-            'isHidden' => filter_var($this->query('isHidden'), FILTER_VALIDATE_BOOL, FILTER_NULL_ON_FAILURE),
-            'isPersonal' => filter_var($this->query('isPersonal'), FILTER_VALIDATE_BOOL, FILTER_NULL_ON_FAILURE),
+            'categoryGroupId' => $this->query('categoryGroupId') !== null ?
+                $this->validateArray(
+                    $this->query('categoryGroupId'),
+                    0,
+                    9999,
+                    [FilterVar::class, 'filterInt']
+                ) : null,
+
+            'categoryId' => $this->query('categoryId') !== null  ?
+                $this->validateArray(
+                    $this->query('categoryId'),
+                    0,
+                    9999,
+                    [FilterVar::class, 'filterInt']
+                ) : null,
+
+            'isFavorite' => $this->query('isFavorite') !== null ?
+                FilterVar::filterBool($this->query('isFavorite')) : null,
+
+            'isHidden' => $this->query('isHidden') !== null ?
+                FilterVar::filterBool($this->query('isHidden')) : null,
+
+            'isPersonal' => $this->query('isPersonal') !== null ?
+                FilterVar::filterBool($this->query('isPersonal')) : null,
         ]);
     }
 

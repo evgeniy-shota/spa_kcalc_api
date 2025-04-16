@@ -23,8 +23,8 @@ class UpdateRequest extends FormRequest
     {
         return [
             'user_id' => 'nullable|numeric|integer',
-            'category_group_id' => 'required|numeric|integer',
-            'name' => 'required|string|max:255',
+            'category_group_id' => 'nullable|numeric|integer',
+            'name' => 'nullable|string|max:255',
             'description' => 'nullable:string|max:400',
             'is_personal' => 'nullable|boolean',
             'is_enabled' => 'nullable|boolean',

@@ -22,7 +22,14 @@ class CategoryIndexController extends Controller
     {
         // $categories = Category::whereEnabled()->whereAvailable(Auth::user() ? Auth::user()->id : null, 'categories');
         $tableToQuery = null;
-        $filter = null;
+        // $filter = null;
+
+        $validated = $request->validated();
+        $filter = count($validated) > 0 ?
+            app()->make(
+                DbCategoryFilter::class,
+                ['queryParams' => array_filter($validated)]
+            ) : null;
 
         if (Auth::user()) {
             $validated = $request->validated();

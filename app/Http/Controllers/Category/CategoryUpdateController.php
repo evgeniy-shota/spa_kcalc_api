@@ -34,17 +34,20 @@ class CategoryUpdateController extends Controller
         if (!filter_var($id, FILTER_VALIDATE_INT)) {
             return response()->json(['message' => 'Bad request'], 400);
         }
+
         $category = Category::where('id', $id);
 
         if (Auth::user()->is_admin !== true) {
             $category = $category->whereEnabled()->whereAvailable(Auth::user()->id);
         }
+
         $category = $category->first();
 
         if (!isset($category)) {
             // ||($category->is_enabled !== true && Auth::user()->is_admin !== true)
             return response()->json(['message' => 'Resource for update not Found'], 404);
         }
+
         $validated = $request->validated();
 
         if (isset($validated['is_favorite'])) {
@@ -82,18 +85,25 @@ class CategoryUpdateController extends Controller
             }
             // $category->is_hidden = $validated['is_hidden'];
         }
+
         $paramsForFilter = self::NOT_AVAILABLE_FOR_MASS_ASSIGNMENT;
 
         if (Auth::user()->is_admin !== true) {
             $paramsForFilter = array_merge($paramsForFilter, self::NOT_AVAILABLE_FOR_NON_ADMIN);
-            
+
             if ($category->is_personal !== true) {
                 // ||($category->is_personal === true && $category->user_id !== Auth::user()->id)
                 $paramsForFilter = array_merge($paramsForFilter, self::NOT_AVAILABLE_FOR_NON_PERSONAL);
                 // return response()->json(['message' => 'You do not have permission to update this resource'], 400);
             }
         }
-        $validated = array_filter($validated, fn($key) => !in_array($key, $paramsForFilter), ARRAY_FILTER_USE_KEY);
+
+        $validated = array_filter($validated, function ($value, $key) use ($paramsForFilter) {
+            if ($value === null) {
+                return false;
+            }
+            return !in_array($key, $paramsForFilter);
+        }, ARRAY_FILTER_USE_BOTH);
 
         if (count($validated) > 0) {
             $category->update($validated);
