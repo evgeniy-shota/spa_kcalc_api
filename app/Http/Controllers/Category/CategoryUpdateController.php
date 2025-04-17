@@ -49,13 +49,16 @@ class CategoryUpdateController extends Controller
         }
 
         $validated = $request->validated();
+        $isFavorite = FavoriteCategory::where('user_id', Auth::user()->id)
+            ->where('category_id', $id)->first();
+        $isHidden = HiddenCategory::where('user_id', Auth::user()->id)
+            ->where('category_id', $id)->first();
 
         if (isset($validated['is_favorite'])) {
-            $isFavorite = FavoriteCategory::where('user_id', Auth::user()->id)->where('category_id', $id)->first();
 
             if ($validated['is_favorite'] === true) {
                 if ($isFavorite === null) {
-                    FavoriteCategory::create([
+                    $isFavorite = FavoriteCategory::create([
                         'user_id' => Auth::user()->id,
                         'category_id' => $id,
                     ]);
@@ -63,6 +66,7 @@ class CategoryUpdateController extends Controller
             } else if ($validated['is_favorite'] === false) {
                 if ($isFavorite !== null) {
                     $isFavorite->delete();
+                    $isFavorite = null;
                 }
             }
             // $category->is_favorite = $validated['is_favorite'];
@@ -70,10 +74,9 @@ class CategoryUpdateController extends Controller
         }
 
         if (isset($validated['is_hidden'])) {
-            $isHidden = HiddenCategory::where('user_id', Auth::user()->id)->where('category_id', $id)->first();
             if ($validated['is_hidden'] === true) {
                 if ($isHidden === null) {
-                    HiddenCategory::create([
+                    $isHidden = HiddenCategory::create([
                         'user_id' => Auth::user()->id,
                         'category_id' => $id,
                     ]);
@@ -81,6 +84,7 @@ class CategoryUpdateController extends Controller
             } else if ($validated['is_hidden'] === false) {
                 if ($isHidden !== null) {
                     $isHidden->delete();
+                    $isHidden = null;
                 }
             }
             // $category->is_hidden = $validated['is_hidden'];
@@ -108,6 +112,9 @@ class CategoryUpdateController extends Controller
         if (count($validated) > 0) {
             $category->update($validated);
         }
+
+        $category->is_favorite =  $isFavorite !== null ? true : false;
+        $category->is_hidden =  $isHidden !== null ? true : false;
 
         return new CategoryResource($category);
     }

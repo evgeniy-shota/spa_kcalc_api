@@ -39,46 +39,46 @@ class CategoryGroupUpdateController extends Controller
         }
 
         $validated = $request->validated();
-        $isFavorite = isset($validated['is_favorite']) ? $validated['is_favorite'] : null;
-        $isHidden = isset($validated['is_hidden']) ? $validated['is_hidden'] : null;
+        $isFavorite = FavoriteCategoryGroup::where('user_id', Auth::user()->id)
+            ->where('category_group_id', $id)->first();
+        $isHidden = HiddenCategoryGroup::where('user_id',  Auth::user()->id)
+            ->where('category_group_id', $id)->first();
 
-        if (isset($isFavorite)) {
-            $favoriteCategoryGroup =
-                FavoriteCategoryGroup::where('user_id', Auth::user()->id)
-                ->where('category_group_id', $id)->first();
+        if (isset($validated['is_favorite'])) {
 
-            if ($isFavorite === true) {
-                if ($favoriteCategoryGroup === null) {
-                    FavoriteCategoryGroup::create([
+            if ($validated['is_favorite'] === true) {
+
+                if ($isFavorite === null) {
+                    $isFavorite = FavoriteCategoryGroup::create([
                         'user_id' =>  Auth::user()->id,
                         'category_group_id' => $id,
                     ]);
                 }
-            }
+            } else if ($validated['is_favorite'] === false) {
 
-            if ($isFavorite == false) {
-                if ($favoriteCategoryGroup !== null) {
-                    $favoriteCategoryGroup->delete();
+                if ($isFavorite !== null) {
+                    $isFavorite->delete();
+                    $isFavorite = null;
                 }
             }
             // $categoryGroup->is_favorite = $validated['is_favorite'];
         }
 
-        if (isset($isHidden)) {
-            $hiddenCategoryGroup  = HiddenCategoryGroup::where('user_id',  Auth::user()->id)->where('category_group_id', $id)->first();
+        if (isset($validated['is_hidden'])) {
 
-            if ($isHidden == true) {
-                if ($hiddenCategoryGroup === null) {
-                    HiddenCategoryGroup::create([
+            if ($validated['is_hidden'] === true) {
+
+                if ($isHidden === null) {
+                    $isHidden = HiddenCategoryGroup::create([
                         'user_id' =>  Auth::user()->id,
                         'category_group_id' => $id,
                     ]);
                 }
-            }
+            } else if ($validated['is_hidden'] === false) {
 
-            if ($isHidden === false) {
-                if ($hiddenCategoryGroup !== null) {
-                    $hiddenCategoryGroup->delete();
+                if ($isHidden !== null) {
+                    $isHidden->delete();
+                    $isHidden = null;
                 }
             }
             // $categoryGroup->is_favorite = $validated['is_hidden'];
@@ -105,8 +105,8 @@ class CategoryGroupUpdateController extends Controller
         if (count($validated) > 0) {
             $categoryGroup->update($validated);
         }
-        $categoryGroup->is_favorite = $isFavorite;
-        $categoryGroup->is_hidden = $isHidden;
+        $categoryGroup->is_favorite = $isFavorite !== null ? true : false;
+        $categoryGroup->is_hidden = $isHidden !== null ? true : false;
         return new CategoryGroupResource($categoryGroup);
     }
 }
