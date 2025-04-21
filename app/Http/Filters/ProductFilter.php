@@ -13,7 +13,7 @@ class ProductFilter extends AbstractFilter
 
     public const NAME = 'name';
     // public const CATEGORY_ID = 'category_id';
-    public const CATEGORY_ID = 'categories';
+    public const CATEGORIES_ID = 'categoriesId';
     public const IS_PERSONAL = 'isPersonal';
     public const IS_ABSTRACT = 'isAbstract';
     public const MANUFACTURER = 'manufacturers';
@@ -31,7 +31,7 @@ class ProductFilter extends AbstractFilter
     {
         return [
             self::NAME => [$this, 'name'],
-            self::CATEGORY_ID => [$this, 'categoryId'],
+            self::CATEGORIES_ID => [$this, 'categoriesId'],
             self::IS_PERSONAL => [$this, 'isPersonal'],
             self::IS_ABSTRACT => [$this, 'isAbstract'],
             self::MANUFACTURER => [$this, 'manufacturer'],
@@ -52,7 +52,7 @@ class ProductFilter extends AbstractFilter
         $builder->whereLike('name', '%' . $value . '%');
     }
 
-    public function categoryId(Builder $builder, $value)
+    public function categoriesId(Builder $builder, $value)
     {
         $builder->whereIn('category_id', $value);
     }

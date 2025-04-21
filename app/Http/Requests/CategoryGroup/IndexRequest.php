@@ -21,9 +21,9 @@ class IndexRequest extends FormRequest
     protected function prepareForValidation(): void
     {
         $this->merge([
-            'categoryGroupId' => $this->query('categoryGroupId') !== null ?
+            'categoryGroupsId' => $this->query('categoryGroupsId') !== null ?
                 $this->validateArray(
-                    $this->query('categoryGroupId'),
+                    $this->query('categoryGroupsId'),
                     0,
                     9999,
                     [FilterVar::class, 'filterInt']
@@ -31,13 +31,13 @@ class IndexRequest extends FormRequest
 
             'isFavorite' => $this->query('isFavorite') !== null ?
                 FilterVar::filterBool($this->query('isFavorite')) : null,
-                
+
             'isHidden' => $this->query('isHidden') !== null ?
                 FilterVar::filterBool($this->query('isHidden')) : null,
-                
+
             'isPersonal' => $this->query('isPersonal') !== null ?
                 FilterVar::filterBool($this->query('isPersonal')) : null,
-                
+
         ]);
     }
 
@@ -49,7 +49,7 @@ class IndexRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'categoryGroupId' => 'nullable|array',
+            'categoryGroupsId' => 'nullable|array',
             'isFavorite' => 'nullable|boolean',
             'isHidden' => 'nullable|boolean',
             'isPersonal' => 'nullable|boolean',

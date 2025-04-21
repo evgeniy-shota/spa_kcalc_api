@@ -33,9 +33,9 @@ class IndexRequest extends FormRequest
                 FilterVar::filterBool($this->query('isHidden')) : null,
 
 
-            'categories' => $this->query('categories') !== null ?
+            'categoriesId' => $this->query('categoriesId') !== null ?
                 $this->validateArray(
-                    $this->query('categories'),
+                    $this->query('categoriesId'),
                     0,
                     9999,
                     [FilterVar::class, 'filterInt']
@@ -109,7 +109,7 @@ class IndexRequest extends FormRequest
         return [
             'sort' => 'nullable|string',
 
-            'categories' => 'nullable|array',
+            'categoriesId' => 'nullable|array',
             // 'type_id' => 'nullable|integer',
             'isPersonal' => 'nullable|boolean',
             'isAbstract' => 'nullable|boolean',

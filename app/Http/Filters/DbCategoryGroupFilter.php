@@ -8,7 +8,7 @@ use Illuminate\Database\Query\Builder;
 
 class DbCategoryGroupFilter extends DbAbstractFilter
 {
-    public const CATEGORY_GROUPS_ID = 'categoryGroupId';
+    public const CATEGORY_GROUPS_ID = 'categoryGroupsId';
     public const IS_PERSONAL = 'isPersonal';
     public const IS_FAVORITE = 'isFavorite';
     public const IS_HIDDEN = 'isHidden';
@@ -16,14 +16,14 @@ class DbCategoryGroupFilter extends DbAbstractFilter
     protected function getCallbacks(): array
     {
         return [
-            self::CATEGORY_GROUPS_ID => [$this, 'categoryGroupId'],
+            self::CATEGORY_GROUPS_ID => [$this, 'categoryGroupsId'],
             self::IS_PERSONAL => [$this, 'isPersonal'],
             self::IS_FAVORITE => [$this, 'isFavorite'],
             self::IS_HIDDEN => [$this, 'isHidden'],
         ];
     }
 
-    public function categoryGroupId(Builder $builder, $value)
+    public function categoryGroupsId(Builder $builder, $value)
     {
         $builder->whereIn('category_groups.id', $value);
     }

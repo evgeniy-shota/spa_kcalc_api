@@ -21,18 +21,16 @@ class CategoryGroupIndexController extends Controller
     public function __invoke(IndexRequest $request)
     {
         $tableQuery = null;
-        $filter = null;
+        $validated = $request->validated();
+        $filter = count($validated) > 0 ?
+            app()->make(
+                DbCategoryGroupFilter::class,
+                ['queryParams' => array_filter($validated, function ($value) {
+                    return $value !== null;
+                })]
+            ) : null;
 
         if (Auth::user()) {
-            $validated = $request->validated();
-            $filter = count($validated) > 0 ?
-                app()->make(
-                    DbCategoryGroupFilter::class,
-                    ['queryParams' => array_filter($validated, function ($value) {
-                        return $value !== null;
-                    })]
-                ) : null;
-
             $tableQuery = function ($query) {
                 $query->from('category_groups')
                     ->select('category_groups.*')
