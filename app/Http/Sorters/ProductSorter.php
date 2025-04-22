@@ -50,86 +50,86 @@ class ProductSorter extends AbstractSorter
 
     public function default(Builder $builder)
     {
-        $builder->orderBy('id', 'asc');
+        $builder->orderBy('products.id', 'asc');
     }
 
     public function nameAsc(Builder $builder)
     {
-        $builder->orderBy('name', 'asc');
+        $builder->orderBy('products.name', 'asc');
     }
 
     public function nameDesc(Builder $builder)
     {
-        $builder->orderBy('name', 'desc');
+        $builder->orderBy('products.name', 'desc');
     }
 
     function favoriteAsc(Builder $builder)
     {
-        $builder->orderBy('is_favorite', 'asc');
+        $builder->orderBy('products.is_favorite', 'asc');
     }
 
     function favoriteDesc(Builder $builder)
     {
-        $builder->orderBy('is_favorite', 'desc');
+        $builder->orderBy('products.is_favorite', 'desc');
     }
 
     function personalAsc(Builder $builder)
     {
-        $builder->orderBy('is_personal', 'asc');
+        $builder->orderBy('products.is_personal', 'asc');
     }
 
     function personalDesc(Builder $builder)
     {
-        $builder->orderBy('is_personal', 'desc');
+        $builder->orderBy('products.is_personal', 'desc');
     }
 
     function abstractAsc(Builder $builder)
     {
-        $builder->orderBy('is_abstract', 'asc');
+        $builder->orderBy('products.is_abstract', 'asc');
     }
 
     function abstractDesc(Builder $builder)
     {
-        $builder->orderBy('is_abstract', 'desc');
+        $builder->orderBy('products.is_abstract', 'desc');
     }
 
     function kcaloryAsc(Builder $builder)
     {
-        $builder->orderBy('kcalory', 'asc');
+        $builder->orderBy('products.kcalory', 'asc');
     }
 
     function kcaloryDesc(Builder $builder)
     {
-        $builder->orderBy('kcalory', 'desc');
+        $builder->orderBy('products.kcalory', 'desc');
     }
 
     function proteinsAsc(Builder $builder)
     {
-        $builder->orderBy('proteins', 'asc');
+        $builder->orderBy('products.proteins', 'asc');
     }
 
     function proteinsDesc(Builder $builder)
     {
-        $builder->orderBy('proteins', 'desc');
+        $builder->orderBy('products.proteins', 'desc');
     }
 
     function carbohydratesAsc(Builder $builder)
     {
-        $builder->orderBy('carbohydrates', 'asc');
+        $builder->orderBy('products.carbohydrates', 'asc');
     }
 
     function carbohydratesDesc(Builder $builder)
     {
-        $builder->orderBy('carbohydrates', 'desc');
+        $builder->orderBy('products.carbohydrates', 'desc');
     }
 
     function fatsAsc(Builder $builder)
     {
-        $builder->orderBy('fats', 'asc');
+        $builder->orderBy('products.fats', 'asc');
     }
 
     function fatsDesc(Builder $builder)
     {
-        $builder->orderBy('fats', 'desc');
+        $builder->orderBy('products.fats', 'desc');
     }
 }

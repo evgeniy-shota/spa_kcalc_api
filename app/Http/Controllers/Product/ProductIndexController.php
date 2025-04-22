@@ -55,6 +55,9 @@ class ProductIndexController extends Controller
 
         if (Auth::user()) {
             if (Auth::user()->is_admin !== true) {
+                $products = $products->select('products.*');
+                $products = $products->selectRaw('CASE WHEN favorite_products.product_id is not null THEN true ELSE false END is_favorite');
+                $products = $products->selectRaw('CASE WHEN hidden_products.product_id is not null THEN true ELSE false END is_hidden');
                 $products = $products->leftJoin('favorite_products', function (JoinClause $join) {
                     $join->on('products.id', 'favorite_products.product_id')->where('favorite_products.user_id', Auth::user()->id);
                 });
@@ -62,9 +65,6 @@ class ProductIndexController extends Controller
                     $join->on('products.id', 'hidden_products.product_id')->where('hidden_products.user_id', Auth::user()->id);
                 });
                 $products = $products->whereAvailable(Auth::user()->id, 'products');
-                $products = $products->select('products.*');
-                $products = $products->selectRaw('CASE WHEN favorite_products.product_id is not null THEN true ELSE false END is_favorite');
-                $products = $products->selectRaw('CASE WHEN hidden_products.product_id is not null THEN true ELSE false END is_hidden');
             }
         } else {
             $products = $products->whereAvailable();
@@ -90,7 +90,8 @@ class ProductIndexController extends Controller
             $products = $products->filter($filter);
         }
 
-        $products =  $products->cursorPaginate();
+        $products = $products->cursorPaginate();
+        // 
         // dd($products =  $products->ddRawSql());
         // $products = Product::whereEnabled()->whereAvailable($user_id)->filter($filter)->sorter($sorter)->cursorPaginate();
         return new ProductCollection($products);
