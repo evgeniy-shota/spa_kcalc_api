@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('diets', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('user_id')->index()->constrained('users');
+            $table->foreignId('user_id')->index()->constrained('users')->cascadeOnDelete();
             $table->string('name', 255);
             $table->boolean('is_enabled')->default(true);
             $table->boolean('is_personal')->default(false);

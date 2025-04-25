@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
-            
-            $table->foreignId('user_id')->index()->cascadeOnDelete()->constrained('users');
+
+            $table->foreignId('user_id')->index()->constrained('users')->cascadeOnDelete();
             $table->enum('gender', ['man', 'woman', 'unknow'])->default('unknow');
             $table->date('date_of_birth')->nullable();
             $table->float('height', 1)->nullable();

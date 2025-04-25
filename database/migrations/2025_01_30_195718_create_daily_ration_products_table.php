@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('daily_ration_products', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('daily_ration_id')->index()->cascadeOnDelete()->constrained('daily_rations');
-            $table->foreignId('product_id')->index()->constrained('products');
+            $table->foreignId('daily_ration_id')->index()->constrained('daily_rations')->cascadeOnDelete();
+            $table->foreignId('product_id')->index()->constrained('products')->cascadeOnDelete();
             // $table->integer('diet_id')->index()->nullable()->constrained('diets');
             $table->integer('diet_id')->nullable();
             $table->time('time');

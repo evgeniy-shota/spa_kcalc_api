@@ -1,6 +1,8 @@
 <?php
 
 // use App\Database\CustomConnection;
+
+use App\Connections\CustomConnection;
 use Illuminate\Support\Str;
 
 return [
@@ -97,7 +99,6 @@ return [
             'search_path' => 'public',
             'sslmode' => 'prefer',
             // 'connection' => CustomConnection::class,
-
         ],
 
 

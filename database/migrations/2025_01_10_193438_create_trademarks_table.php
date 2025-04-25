@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('trademarks', function (Blueprint $table) {
             $table->id();
-            
+
             $table->string('name', 125);
-            $table->foreignId('user_id')->index()->nullable()->constrained('users');
+            $table->foreignId('user_id')->index()->nullable()->constrained('users')->nullOnDelete();
             $table->string('description', 400)->nullable();
             $table->string('logo_path', 255)->nullable();
             $table->boolean('is_enabled')->default(true);

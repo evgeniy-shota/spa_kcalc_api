@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('favorite_categories', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('user_id')->index()->constrained('users');
-            $table->foreignId('category_id')->index()->constrained('categories');
-            
+            $table->foreignId('user_id')->index()->constrained('users')->cascadeOnDelete();
+            $table->foreignId('category_id')->index()->constrained('categories')->cascadeOnDelete();
+
             $table->timestamps();
         });
     }

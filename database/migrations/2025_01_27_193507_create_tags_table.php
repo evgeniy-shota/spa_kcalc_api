@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('tags', function (Blueprint $table) {
             $table->id();
             
-            $table->foreignId('user_id')->index()->nullable()->constrained('users');
+            $table->foreignId('user_id')->index()->nullable()->constrained('users')->cascadeOnDelete();
             $table->string('name', 100);
             // $table->enum('type', ['product', 'activity'])->default();
             $table->boolean('is_enable')->default(true);

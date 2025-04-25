@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            
-            $table->foreignId('user_id')->index()->nullable()->constrained('users');
-            $table->foreignId('category_group_id')->index()->constrained('category_groups');
+
+            $table->foreignId('user_id')->index()->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignId('category_group_id')->index()->constrained('category_groups')->cascadeOnDelete();
             $table->string('name', 100);
             $table->string('description', 400)->nullable();
             $table->boolean('is_personal')->default(false);
             $table->boolean('is_enabled')->default(true);
-            $table->string('icon_path',255)->nullable();
-            $table->string('thumbnail_image_path',255)->nullable();
+            $table->string('icon_path', 255)->nullable();
+            $table->string('thumbnail_image_path', 255)->nullable();
 
             $table->timestamps();
         });

@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('dishes', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('dish_category_id')->index()->nullOnDelete()->constrained('dish_categories');
-            $table->foreignId('user_id')->index()->nullable()->constrained('users');
+            $table->foreignId('dish_category_id')->index()->nullOnDelete()->constrained('dish_categories')->cascadeOnDelete();
+            $table->foreignId('user_id')->index()->nullable()->constrained('users')->cascadeOnDelete();
             $table->string('name', 255);
             $table->boolean('is_personal')->default(false);
             $table->boolean('is_enabled')->default(true);

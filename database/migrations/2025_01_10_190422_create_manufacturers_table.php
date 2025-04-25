@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('manufacturers', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('user_id')->index()->nullable()->constrained('users');
+            $table->foreignId('user_id')->index()->nullable()->constrained('users')->nullOnDelete();
             $table->string('name', 100);
             $table->string('description', 400)->nullable();
             $table->boolean('is_personal')->default(false);

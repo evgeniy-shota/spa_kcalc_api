@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('activities', function (Blueprint $table) {
             $table->id();
-            
-            $table->foreignId('user_id')->index()->nullable()->constrained('users');
-            $table->foreignId('activity_category_id')->index()->constrained('activity_categories');
+
+            $table->foreignId('user_id')->index()->nullable()->constrained('users')->cascadeOnDelete();
+            $table->foreignId('activity_category_id')->index()->constrained('activity_categories')->nullOnDelete();
             $table->boolean('is_personal')->default(false);
             $table->boolean('is_enabled')->default(true);
             $table->string('name', 255);

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('daily_rations', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('user_id')->index()->cascadeOnDelete()->constrained('users');
+            $table->foreignId('user_id')->index()->constrained('users')->cascadeOnDelete();
             $table->string('description', 255)->nullable();
             $table->date('date');
 

@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('hidden_categories', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('user_id')->cascadeOnDelete()->constrained('users');
-            $table->foreignId('category_id')->cascadeOnDelete()->constrained('categories');
-            
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
+
             $table->timestamps();
         });
     }

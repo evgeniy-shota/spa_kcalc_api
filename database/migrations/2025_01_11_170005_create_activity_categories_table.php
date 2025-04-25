@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('activity_categories', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('user_id')->index()->nullable()->constrained('users');
+            $table->foreignId('user_id')->index()->nullable()->constrained('users')->cascadeOnDelete();
             $table->string('name', 150);
             $table->string('description', 400)->nullable();
             $table->boolean('is_enabled')->default(true);

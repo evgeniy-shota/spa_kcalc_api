@@ -13,19 +13,19 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            
-            $table->foreignId('category_id')->index()->constrained('categories');
-            $table->foreignId('user_id')->nullable()->index()->constrained('users');
+
+            $table->foreignId('category_id')->index()->constrained('categories')->cascadeOnDelete();
+            $table->foreignId('user_id')->nullable()->index()->constrained('users')->nullOnDelete();
             $table->boolean('is_personal')->default(false);
             $table->boolean('is_enabled')->default(true);
             $table->boolean('is_abstract')->default(true);
             $table->string('name', 255);
             $table->string('thumbnail_image_name', 255)->nullable();
-            $table->foreignId('manufacturer_id')->nullable()->constrained('manufacturers');
-            $table->foreignId('country_of_manufacture_id')->nullable()->constrained('country_of_manufactures');
+            $table->foreignId('manufacturer_id')->nullable()->constrained('manufacturers')->nullOnDelete();
+            $table->foreignId('country_of_manufacture_id')->nullable()->constrained('country_of_manufactures')->nullOnDelete();
             $table->integer('trademark_id')->nullable();
             $table->string('description', 400)->nullable();
-            $table->foreignId('type_id')->nullable()->constrained('product_types');
+            $table->foreignId('type_id')->nullable()->constrained('product_types')->nullOnDelete();
             $table->enum('condition', ['solid', 'liquid', 'semi-liquid', 'bulk'])->default('solid');
             $table->enum('state', ['chilled', 'frozen', 'fresh'])->nullable();
             $table->enum('units', ['gr', 'ml'])->default('gr');
@@ -40,7 +40,7 @@ return new class extends Migration
             $table->float('proteins_per_unit', 2)->default(0);
             $table->float('carbohydrates_per_unit', 2)->default(0);
             $table->float('fats_per_unit', 2)->default(0);
-            $table->foreignId('data_source')->nullable()->constrained();
+            $table->foreignId('data_source')->nullable()->constrained()->nullOnDelete();
             $table->json('nutrients_and_vitamins')->nullable();
 
             $table->timestamps();
